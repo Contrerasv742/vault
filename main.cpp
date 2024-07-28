@@ -1,42 +1,72 @@
 #include "main.h"
 
-void help() {
-  std::cout << "Options: " << std::endl; 
-  for (auto command: options) {
+// Helper Variables
+std::unordered_map<std::string, CipherFunction> cipherOptable = {
+  {"caesar", caesar},
+  {"vigenere", vigenere},
+  {"rot13", rot13}
+};
+
+ExtendedVector<std::string> commands = {"encrypt", "decrypt", "help", "exit", "pericos"};
+
+// Helper Functions
+void print_commands() {
+  std::cout << "Commands:" << std::endl;
+  for (auto command: commands) {
     std::cout << "\t+ " << command << std::endl;
   }
 }
+
+void print_ciphers() {
+  std::cout << "Ciphers:" << std::endl;
+  for (auto cipher: cipherOptable) {
+    std::cout << "\t+ " << cipher.first << std::endl;
+  }
+}
+
 void fatal_error(std::string msg) {
   std::cerr << msg << std::endl;
   exit(1);
 }
 
 std::string get_command() {
-  std::string option;
+  std::string command;
   while (true) {
-    std::cout << "Enter a command: " << std::endl; 
-    std::cin >> option; 
+    std::cout << "Enter a command:\n\t";
+    std::cin >> command;
 
-    // Validating Option 
-    if (option.empty() || options.find(option)) {
-      std::cerr << "Invalid Cipher" << std::endl;
+    // Validating Command
+    if (command.empty() || !commands.find(command)) {
+      std::cerr << "Invalid Command" << std::endl;
+      print_commands();
       continue;
     }
-    break;
+
+    if (command == "help") {
+      print_commands();
+      continue;
+    }
+
+    if (command == "exit") {
+      exit(0);
+    }
+
+    break; 
   }
 
-  return option; 
+  return command;
 }
 
-std::string get_option() {
+std::string get_cipher() {
   std::string cipher;
   while (true) {
-    std::cout << "Enter your cipher: ";
+    std::cout << "Enter your cipher:\n\t";
     std::cin >> cipher;
 
     // Validating Cipher
     if (cipher.empty() || cipherOptable.find(cipher) == cipherOptable.end()) {
       std::cerr << "Invalid Cipher" << std::endl;
+      print_ciphers();
       continue;
     }
     break;
@@ -45,31 +75,30 @@ std::string get_option() {
   return cipher;
 }
 
-// TODO: 
-//  Implement Encryption prompts
+int process_command(std::string command) {
+  if (command == "decrypt") {
+    return decrypt();
+  } else if (command == "encrypt") {
+    return encrypt();
+  }
+
+  return 0; 
+}
+
+// TODO:
 //  Manage Encryptions in a local file
 int main() {
-  std::cout << "Hello how can I help you today?" << std::endl; 
+  std::cout << "Hello how can I help you today?" << std::endl;
 
   // Main Loop
   while (true) {
-    // Helper Variables
     std::string command = get_command();
-    std::string option = get_option(); 
+    int rc = process_command(command); 
 
-    // Example usage
-    std::string plaintext = "Hello, World!";
-    std::string key = "secretkey";
-
-    /*
-    for (const auto& entry : cipherOptable) {
-      std::cout << entry.first << ": " 
-        << entry.second(plaintext, key) << std::endl;
+    if (rc != 0) {
+      fatal_error("Error Somewhere!!!!"); 
     }
-    */
-
-    std::cout << option << ": " << cipherOptable[option](plaintext, key);
-  }
+ }
 
   return 0;
 }

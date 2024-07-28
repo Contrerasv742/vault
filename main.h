@@ -9,16 +9,8 @@
 #include <vector> 
 #include "encryption.h"
 
-// Optable for Functions
-using CipherFunction = std::function<std::string(const std::string&, const std::string&)>;
 
-std::unordered_map<std::string, CipherFunction> cipherOptable = {
-  {"caesar", caesar},
-  {"vigenere", vigenere},
-  {"rot13", rot13}
-};
-
-// Helper Variables
+// Helper Template
 template<typename T>
 class ExtendedVector : public std::vector<T> {
 public:
@@ -31,6 +23,22 @@ public:
     }
 };
 
-ExtendedVector<std::string> options = {"encrypt", "decrypt", "help", "exit", "pericos"};
+// Helper Variables
+using CipherFunction = std::function<std::string(const std::string&, const std::string&)>;
+extern std::unordered_map<std::string, CipherFunction> cipherOptable;
+
+extern ExtendedVector<std::string> commands;
+
+// Helper Functions
+//
+std::string get_cipher();
+
+int process_command(std::string command);
+
+void fatal_error(std::string msg);
+
+void print_commands();
+
+void print_ciphers();
 
 #endif //CIPHER_H

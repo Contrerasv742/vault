@@ -1,17 +1,12 @@
-# Compiler
+TARGET = main
+SOURCES = $(wildcard *.cpp)
+OBJECTS = $(SOURCES:.cpp=.o)
+HEADERS = $(wildcard *.h)
 CXX = g++
-
-# Compiler flags
 CXXFLAGS = -Wall -Wextra -std=c++11
 
-# Target executable name
-TARGET = main
-
-# Find all .cpp files in the current directory
-SOURCES = $(wildcard *.cpp)
-
-# Generate a list of object files from the source files
-OBJECTS = $(SOURCES:.cpp=.o)
+# Phony targets
+.PHONY: all clean
 
 # Default target
 all: $(TARGET)
@@ -21,12 +16,17 @@ $(TARGET): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Generic rule for compiling .cpp to .o
-%.o: %.cpp
+%.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean up
 clean:
 	rm -f $(OBJECTS) $(TARGET)
 
-# Phony targets
-.PHONY: all clean
+# Include dependencies
+-include $(OBJECTS:.o=.d)
+
+# Rule to generate a dep file by using the C preprocessor
+# (see man gcc for details on the -MM and -MT options)
+%.d: %.cpp
+	@$(CXX) $(CXXFLAGS) $< -MM -MT $(@:.d=.o) >$@
