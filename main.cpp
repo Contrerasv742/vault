@@ -57,29 +57,13 @@ std::string get_command() {
   return command;
 }
 
-std::string get_cipher() {
-  std::string cipher;
-  while (true) {
-    std::cout << "Enter your cipher:\n\t";
-    std::cin >> cipher;
-
-    // Validating Cipher
-    if (cipher.empty() || cipherOptable.find(cipher) == cipherOptable.end()) {
-      std::cerr << "Invalid Cipher" << std::endl;
-      print_ciphers();
-      continue;
-    }
-    break;
-  }
-
-  return cipher;
-}
-
 int process_command(std::string command) {
   if (command == "decrypt") {
     return decrypt();
   } else if (command == "encrypt") {
     return encrypt();
+  } else if(command == "retrieve") {
+
   }
 
   return 0; 
@@ -88,6 +72,11 @@ int process_command(std::string command) {
 // TODO:
 //  Manage Encryptions in a local file
 int main() {
+  // Testing
+  encrypt();
+
+  exit(0);
+  
   std::cout << "Hello how can I help you today?" << std::endl;
 
   // Main Loop
