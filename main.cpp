@@ -15,6 +15,7 @@ void print_commands() {
   for (auto command: commands) {
     std::cout << "\t+ " << command << std::endl;
   }
+  std::cout << std::endl;
 }
 
 void print_ciphers() {
@@ -22,6 +23,7 @@ void print_ciphers() {
   for (auto cipher: cipherOptable) {
     std::cout << "\t+ " << cipher.first << std::endl;
   }
+  std::cout << std::endl;
 }
 
 void fatal_error(std::string msg) {
@@ -34,6 +36,7 @@ std::string get_command() {
   while (true) {
     std::cout << "Enter a command:\n\t";
     std::cin >> command;
+    std::cout << std::endl;
 
     // Validating Command
     if (command.empty() || !commands.find(command)) {
@@ -73,9 +76,8 @@ int process_command(std::string command) {
 //  Manage Encryptions in a local file
 int main() {
   // Testing
-  encrypt();
-
-  exit(0);
+  // encrypt();
+  // exit(0);
   
   std::cout << "Hello how can I help you today?" << std::endl;
 
