@@ -24,15 +24,13 @@ public:
 };
 
 // Helper Variables
-using CipherFunction = std::function<std::string(const std::string&, const std::string&)>;
+using CipherFunction = std::function<std::string(const std::string&)>;
+
 extern std::unordered_map<std::string, CipherFunction> cipherOptable;
 
 extern ExtendedVector<std::string> commands;
 
 // Helper Functions
-//
-std::string get_cipher();
-
 int process_command(std::string command);
 
 void fatal_error(std::string msg);
