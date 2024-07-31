@@ -76,8 +76,8 @@ int process_command(std::string command) {
 //  Manage Encryptions in a local file
 int main() {
   // Testing
-  // encrypt();
-  // exit(0);
+  encrypt();
+  exit(0);
   
   std::cout << "Hello how can I help you today?" << std::endl;
 
