@@ -1,5 +1,6 @@
 #include "encryption.h"
 #include "main.h"
+#include <cstdlib>
 
 std::string prompt(std::string msg) {
   std::string var;
@@ -9,13 +10,13 @@ std::string prompt(std::string msg) {
 }
 
 int decrypt() {
-  std::string cipher = get_cipher();
+  std::string cipher = prompt("");
   std::string ciphertext = prompt("the encrypted message");
   std::string key = prompt("the key");
 
   // Assuming the cipher functions can handle both encryption and decryption
-  std::string decryption = cipherOptable[cipher](ciphertext, key);
-  std::cout << "Decryption: " << decryption << std::endl;
+  std::string decryption = cipherOptable[cipher](ciphertext);
+  std::cout << "Decryption: " << decryption << "\n\n";
   return 0;
 }
 
@@ -35,26 +36,26 @@ int encrypt() {
 
   // Getting Variables
   std::string plaintext = prompt("a message");
-  std::string key = prompt("a key");
 
   // Encrypting
-  std::string encryption = cipherOptable[cipher](plaintext, key);
+  std::string encryption = cipherOptable[cipher](plaintext);
   std::cout << "Encryption: " << encryption << std::endl; 
 
   return 0; 
 }
 
-// TODO: Address possible integer overflow
-int count(std::string msg) {
-  int total = 0;
-  for (char c: msg) {
-    total += static_cast<char>(c);
-  }
-  return total;
-}
+std::string caesar(const std::string& plaintext) {
+  std::string key = prompt("a shift value");
 
-std::string caesar(const std::string& plaintext, const std::string& key) {
-  int rotation = count(key) % 26;
+  int rotation;
+
+  try {
+    rotation = std::stoi(key); 
+  } catch (const std::exception& e) {
+    std::cerr << "Invalid input. Using shift value of 0." << std::endl;
+    rotation = 0;
+  }
+
   std::string encryption = "";
 
   for (char c : plaintext) {
@@ -63,26 +64,34 @@ std::string caesar(const std::string& plaintext, const std::string& key) {
       char shifted = static_cast<char>((c - base + rotation) % 26 + base);
       encryption += shifted;
     } else {
-      encryption += c;  // Non-alphabetic characters remain unchanged
+      encryption += c;
     }
   }
 
   return encryption;
 }
 
-std::string vigenere(const std::string& plaintext, const std::string& key) {
+std::string vigenere(const std::string& plaintext) {
+  std::string key = prompt("a key");
   std::string encryption = "";
-  
-  for (int i = 0; i < plaintext.length(); i++) {
-    int key_index = i % key.length(); 
-    std::string text(1,plaintext[i]);
-    std::string k(key[i]);
-    encryption += caesar(text, k); 
+
+  for (size_t i = 0; i < plaintext.length(); i++) {
+    char c = plaintext[i];
+    int rotation = static_cast<int>(key[i % key.length()]);
+
+    if (std::isalpha(c)) {
+      char base = std::isupper(c) ? 'A' : 'a';
+      char shifted = static_cast<char>((c + rotation) % 26 + base);
+      encryption += shifted;
+    } else {
+      encryption += c;
+    }
   }
 
   return encryption;
 }
 
-std::string rot13(const std::string& plaintext, const std::string& key) {
-  return "ROT13: " + plaintext + " (key: " + key + ")\n";
+std::string rot13(const std::string& plaintext) {
+  std::string key = prompt("a key");
+  return "ROT13: " + plaintext + " (key: " + key + ")\n\n";
 }
