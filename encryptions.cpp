@@ -1,6 +1,7 @@
 #include "encryption.h"
 #include "main.h"
 #include <cstdlib>
+#include <random>
 
 std::string prompt(std::string msg) {
   std::string var;
@@ -61,7 +62,7 @@ std::string caesar(const std::string& plaintext) {
   for (char c : plaintext) {
     if (std::isalpha(c)) {
       char base = std::isupper(c) ? 'A' : 'a';
-      char shifted = static_cast<char>((c - base + rotation) % 26 + base);
+      char shifted = static_cast<char>((c + rotation - base) % 26 + base);
       encryption += shifted;
     } else {
       encryption += c;
@@ -81,7 +82,7 @@ std::string vigenere(const std::string& plaintext) {
 
     if (std::isalpha(c)) {
       char base = std::isupper(c) ? 'A' : 'a';
-      char shifted = static_cast<char>((c + rotation) % 26 + base);
+      char shifted = static_cast<char>((c + rotation - base) % 26 + base);
       encryption += shifted;
     } else {
       encryption += c;
@@ -92,6 +93,42 @@ std::string vigenere(const std::string& plaintext) {
 }
 
 std::string rot13(const std::string& plaintext) {
-  std::string key = prompt("a key");
-  return "ROT13: " + plaintext + " (key: " + key + ")\n\n";
+  // TODO: Find a way to pass to std::cin after calling to a function
+  return caesar(plaintext);
+}
+
+uint32_t generate_random(uint32_t min, uint32_t max){
+  // Random Number Generator
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  
+  // Create a Distribution
+  std::uniform_int_distribution<> dis(min, max);
+
+  return dis(gen);
+}
+
+std::string rsa(const std::string& plaintext) {
+  // I: Calculate two large primes
+  uint32_t min = 1000000;
+  uint32_t max = min * 10; 
+
+  uint32_t p = generate_random(min, max);
+  uint32_t q = generate_random(min, max);
+    
+  // II: Generate n
+  uint32_t n = p * q;
+
+  // III: compute n of Carmichael totient function
+
+  // IV: choose euler number
+
+  // V: determine d
+
+  // Extra: Printing to observe numbers
+  std::cout << "p: " << p << "\n";
+  std::cout << "q: " << q << "\n";
+  std::cout << "n: " << n << "\n";
+
+  return plaintext + "";
 }
