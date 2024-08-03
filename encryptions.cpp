@@ -108,6 +108,42 @@ uint32_t generate_random(uint32_t min, uint32_t max){
   return dis(gen);
 }
 
+uint64_t gcd(uint64_t a, uint64_t b) {
+    while (b != 0) {
+        uint64_t t = b;
+        b = a % b;
+        a = t;
+    }
+
+    return a;
+}
+
+uint64_t lcm(uint64_t a, uint64_t b) {
+    return (a / gcd(a, b)) * b;
+}
+
+uint64_t carmichael_totient(uint64_t p, uint64_t q) {
+    return lcm(p - 1, q - 1);
+}
+
+uint64_t find_e(uint64_t lambda_n) {
+  const uint64_t common_e[] = {65537, 257, 17};
+
+  for (auto e : common_e) {
+    if (e < lambda_n && gcd(e, lambda_n) == 1) {
+      return e;
+    }
+  }
+
+  for (uint64_t e = 65537; e < lambda_n; e += 2) {
+    if (gcd(e, lambda_n) == 1) {
+      return e;
+    }
+  }
+
+  return 0;
+}
+
 std::string rsa(const std::string& plaintext) {
   // I: Calculate two large primes
   uint32_t min = 1000000;
@@ -119,9 +155,15 @@ std::string rsa(const std::string& plaintext) {
   // II: Generate n
   uint32_t n = p * q;
 
-  // III: compute n of Carmichael totient function
+  // III: compute lambda_n
+  uint64_t lambda_n = carmichael_totient(p, q);
 
   // IV: choose euler number
+  uint64_t e = find_e(lambda_n);
+
+  if (e == 0) {
+    fatal_error("Failed to find a coprime e");
+  }
 
   // V: determine d
 
@@ -129,6 +171,7 @@ std::string rsa(const std::string& plaintext) {
   std::cout << "p: " << p << "\n";
   std::cout << "q: " << q << "\n";
   std::cout << "n: " << n << "\n";
+  std::cout << "λ(n): " << lambda_n << "\n";
 
   return plaintext + "";
 }
