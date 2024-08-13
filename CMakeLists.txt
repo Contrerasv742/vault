@@ -1,30 +1,24 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
+project(encryption VERSION 1.0 LANGUAGES CXX)
 
-# Set the project name
-project(CipherProject)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Specify the C++ standard
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-# Add compiler warnings
-if(MSVC)
-  add_compile_options(/W4)
-else()
-  add_compile_options(-Wall -Wextra)
-endif()
+# Add the src directory to the include path
+include_directories(${CMAKE_SOURCE_DIR}/src)
 
-# Find all .cpp files in the current directory
-file(GLOB SOURCES "*.cpp")
+# Collect all the source files from the src directory
+file(GLOB SOURCES
+    "src/*.cpp"
+    "src/*.h"
+)
 
-# Find all .h files in the current directory
-file(GLOB HEADERS "*.h")
+add_executable(${PROJECT_NAME} ${SOURCES})
 
-# Add an executable target
-add_executable(main ${SOURCES} ${HEADERS})
-
-# If you have any libraries to link against, you can use:
-# target_link_libraries(main PRIVATE your_library)
-
-# If you need to include directories:
-# target_include_directories(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets)

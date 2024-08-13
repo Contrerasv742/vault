@@ -2,6 +2,7 @@
 #include "main.h"
 #include <cstdlib>
 #include <random>
+#include <iomanip>
 
 std::string prompt(std::string msg) {
   std::string var;
@@ -166,12 +167,15 @@ std::string rsa(const std::string& plaintext) {
   }
 
   // V: determine d
+  double d = (1/e); //% lambda_n;
 
   // Extra: Printing to observe numbers
   std::cout << "p: " << p << "\n";
   std::cout << "q: " << q << "\n";
   std::cout << "n: " << n << "\n";
   std::cout << "λ(n): " << lambda_n << "\n";
+  std::cout << "e: " << e << "\n";
+  std::cout << "d: " << std::fixed << std::setprecision(8) << d << "\n";
 
   return plaintext + "";
 }
