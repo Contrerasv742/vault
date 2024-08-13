@@ -9,27 +9,39 @@
 
 EncryptionApp::EncryptionApp(QWidget *parent) : QMainWindow(parent) {
   setWindowTitle("Password Manager");
+
+  loginScreen = new LoginScreen(this);
+  setCentralWidget(loginScreen);
+
+  connect(loginScreen, &LoginScreen::loginSuccessful, this, &EncryptionApp::onLoginSuccessful);
+
+  resize(1000, 1000);
+}
+
+void EncryptionApp::onLoginSuccessful() {
+  loginScreen->hide();
   setupUI();
 }
 
 void EncryptionApp::setupUI() {
-  QGridLayout *layout = new QGridLayout;
+  mainWidget = new QWidget(this);
+  QGridLayout *layout = new QGridLayout(mainWidget);
 
   // Initialize member widgets
-  modeComboBox = new QComboBox(this);
-  cipherComboBox = new QComboBox(this);
-  inputText = new QLineEdit(this);
-  optionalInputText = new QLineEdit(this);
-  outputText = new QTextEdit(this);
+  modeComboBox = new QComboBox(mainWidget);
+  cipherComboBox = new QComboBox(mainWidget);
+  inputText = new QLineEdit(mainWidget);
+  optionalInputText = new QLineEdit(mainWidget);
+  outputText = new QTextEdit(mainWidget);
 
   // Mode ComboBox
-  QLabel *modeLabel = new QLabel("Mode:", this);
+  QLabel *modeLabel = new QLabel("Mode:", mainWidget);
   modeComboBox->addItems({"encrypt", "decrypt"});
   layout->addWidget(modeLabel, 0, 0);
   layout->addWidget(modeComboBox, 0, 1);
 
   // Cipher ComboBox
-  QLabel *cipherLabel = new QLabel("Cipher:", this);
+  QLabel *cipherLabel = new QLabel("Cipher:", mainWidget);
   for (const auto &cipher : cipherOptable) {
     cipherComboBox->addItem(QString::fromStdString(cipher.first));
   }
@@ -37,30 +49,31 @@ void EncryptionApp::setupUI() {
   layout->addWidget(cipherComboBox, 1, 1);
 
   // Input Text
-  QLabel *inputLabel = new QLabel("Input:", this);
+  QLabel *inputLabel = new QLabel("Input:", mainWidget);
   layout->addWidget(inputLabel, 2, 0);
   layout->addWidget(inputText, 2, 1);
 
   // Optional Input Text
-  QLabel *optionalInputLabel = new QLabel("Optional:", this);
+  QLabel *optionalInputLabel = new QLabel("Optional:", mainWidget);
   layout->addWidget(optionalInputLabel, 2, 0);
   layout->addWidget(optionalInputText, 2, 1);
 
   // Output Text
-  QLabel *outputLabel = new QLabel("Output:", this);
+  QLabel *outputLabel = new QLabel("Output:", mainWidget);
   outputText->setReadOnly(true);
   layout->addWidget(outputLabel, 3, 0);
   layout->addWidget(outputText, 3, 1);
 
   // Process Button
-  QPushButton *processButton = new QPushButton("Process", this);
+  QPushButton *processButton = new QPushButton("Process", mainWidget);
   layout->addWidget(processButton, 4, 0, 1, 2);
 
   connect(processButton, &QPushButton::clicked, this, &EncryptionApp::processText);
 
-  QWidget *centralWidget = new QWidget(this);
-  centralWidget->setLayout(layout);
-  setCentralWidget(centralWidget);
+  // TODO: Validate working
+  connect(cipherComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &EncryptionApp::updateOptionalInput);
+
+  setCentralWidget(mainWidget);
 }
 
 void EncryptionApp::styleLabels() {

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QProxyStyle>
 #include <QStyleOption>
+#include "loginScreen.h"
 
 class QComboBox;
 class QLineEdit;
@@ -29,6 +30,7 @@ public:
 
 private slots:
   void processText();
+  void onLoginSuccessful();
 
 private:
   void setupUI();
@@ -36,6 +38,8 @@ private:
   void forceComboBoxDropDown();
   void updateOptionalInput();
 
+  LoginScreen *loginScreen;
+  QWidget *mainWidget;
   QComboBox *modeComboBox;
   QComboBox *cipherComboBox;
   QLineEdit *inputText;

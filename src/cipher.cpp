@@ -137,13 +137,17 @@ std::string rsa(const std::string& plaintext, const std::string& key) {
   // V: determine d
   double d = (1/e); //% lambda_n;
 
-  // Ext, const std::string ra: Printing to observe numbers
-  std::cout << "p: " << p << "\n";
-  std::cout << "q: " << q << "\n";
-  std::cout << "n: " << n << "\n";
-  std::cout << "λ(n): " << lambda_n << "\n";
-  std::cout << "e: " << e << "\n";
-  std::cout << "d: " << std::fixed << std::setprecision(8) << d << "\n";
+  // Extra: Printing to observe numbers
+  std::stringstream ss;
 
-  return "Dick so hard";
+  ss << "p: " << p << "\n";
+  ss << "q: " << q << "\n";
+  ss << "n: " << n << "\n";
+  ss << "λ(n): " << lambda_n << "\n";
+  ss << "e: " << e << "\n";
+  ss << "d: " << std::fixed << std::setprecision(8) << d << "\n";
+
+  std::string output = ss.str();
+
+  return output;
 }

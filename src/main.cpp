@@ -22,9 +22,7 @@ int main(int argc, char *argv[]) {
   setApplicationStyle(app);
 
   EncryptionApp window;
-  window.resize(400, 300);
   window.show();
-
 
   return app.exec();
 }
