@@ -5,6 +5,7 @@
 #include <QProxyStyle>
 #include <QStyleOption>
 #include "loginScreen.h"
+#include "mainpage.h"
 
 class QComboBox;
 class QLineEdit;
@@ -21,30 +22,18 @@ public:
 };
 
 class EncryptionApp : public QMainWindow {
-  // Macro from the core QT header file
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit EncryptionApp(QWidget *parent = nullptr);
-  virtual ~EncryptionApp();
+    explicit EncryptionApp(QWidget *parent = nullptr);
+    virtual ~EncryptionApp();
 
 private slots:
-  void processText();
-  void onLoginSuccessful();
+    void onLoginSuccessful();
 
 private:
-  void setupUI();
-  void styleLabels();
-  void forceComboBoxDropDown();
-  void updateOptionalInput();
-
-  LoginScreen *loginScreen;
-  QWidget *mainWidget;
-  QComboBox *modeComboBox;
-  QComboBox *cipherComboBox;
-  QLineEdit *inputText;
-  QLineEdit *optionalInputText;
-  QTextEdit *outputText;
+    LoginScreen *loginScreen;
+    MainPage *mainPage;
 };
 
 #endif // APP_H

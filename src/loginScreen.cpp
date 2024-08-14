@@ -25,7 +25,7 @@ void LoginScreen::setupUI() {
   mainLayout->addSpacerItem(new QSpacerItem(0, 100, QSizePolicy::Minimum, QSizePolicy::Fixed));
 
   // Title
-  titleLabel = new QLabel("VAULT", this);
+  titleLabel = new QLabel("VAULT⋅⋅⋅", this);
   titleLabel->setStyleSheet("font-size: 48px; font-weight: bold; background-color: none;");
   titleLabel->setAlignment(Qt::AlignCenter);
   mainLayout->addWidget(titleLabel, 0, Qt::AlignHCenter);

@@ -22,3 +22,4 @@ file(GLOB SOURCES
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets)
+target_compile_options(${PROJECT_NAME} PRIVATE -g)
