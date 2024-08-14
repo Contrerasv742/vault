@@ -1,4 +1,3 @@
-// loginscreen.h
 #ifndef LOGINSCREEN_H
 #define LOGINSCREEN_H
 
@@ -11,27 +10,31 @@
 
 class LoginScreen : public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 
-public:
-    explicit LoginScreen(QWidget *parent = nullptr);
+  public:
+  explicit LoginScreen(QWidget *parent = nullptr);
 
-signals:
-    void loginSuccessful();
+  signals:
+  void loginSuccessful();
 
 private slots:
-    void onLoginClicked();
-    void showInputFields();
+  void onLoginClicked();
+  void showInputFields();
+  void cleanupAnimation();
+  void togglePasswordVisibility();
+  QIcon getIconFromPath(const QString &iconName);
 
 private:
-    QLabel *titleLabel;
-    QLineEdit *usernameInput;
-    QLineEdit *passwordInput;
-    QPushButton *loginButton;
-    QVBoxLayout *layout;
+  QLabel *titleLabel;
+  QWidget *inputContainer;
+  QLineEdit *usernameInput;
+  QLineEdit *passwordInput;
+  QPushButton *loginButton;
+  QPushButton *togglePasswordButton;
 
-    void setupUI();
-    void animateTitle();
+  void setupUI();
+  void animateTitle();
 };
 
-#endif //LOGINSCREEN_H
+#endif // LOGINSCREEN_H
