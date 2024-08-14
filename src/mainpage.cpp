@@ -4,12 +4,20 @@
 #include <QFile>
 #include <QPainter>
 #include <QPixmap>
+#include <QFrame>
+#include <QGridLayout>
+#include <QScrollArea>
+#include <qnamespace.h>
+#include <QRegularExpression>
 
 MainPage::MainPage(QWidget *parent) : QWidget(parent), 
-  favoritesScrollArea(nullptr), allPasswordsScrollArea(nullptr)
+  favoritesScrollArea(nullptr), allPasswordsScrollArea(nullptr),
+  favoritesCardCount(0), allPasswordsCardCount(0)
 {
   qDebug() << "MainPage constructor started";
   QHBoxLayout *mainLayout = new QHBoxLayout(this);
+  mainLayout->setSpacing(0);
+  mainLayout->setContentsMargins(0, 0, 0, 0);
 
   leftContainer = new QWidget(this);
   rightContainer = new QWidget(this);
@@ -19,7 +27,13 @@ MainPage::MainPage(QWidget *parent) : QWidget(parent),
     return;
   }
 
+  // Create a vertical separator
+  QFrame *separator = new QFrame(this);
+  separator->setFrameShape(QFrame::VLine);
+  separator->setStyleSheet("QFrame { background-color: white; margin: 10px 0; }");
+
   mainLayout->addWidget(leftContainer, 1);
+  mainLayout->addWidget(separator);
   mainLayout->addWidget(rightContainer, 2);
 
   setupLeftContainer();
@@ -64,6 +78,7 @@ void MainPage::setupLeftContainer()
     "   border: 2px solid #DC8A78;"
     "}"
   );
+  connect(searchBar, &QLineEdit::textChanged, this, &MainPage::filterPasswords);
 
   // Add search icon
   QAction *searchAction = new QAction(searchBar);
@@ -182,33 +197,51 @@ void MainPage::setupRightContainer()
     return;
   }
   QVBoxLayout *rightLayout = new QVBoxLayout(rightContainer);
+  rightLayout->setContentsMargins(20, 20, 20, 20);
+  rightLayout->setSpacing(20);
 
   // Favorites section
   QLabel *favoritesLabel = new QLabel("Favorites", rightContainer);
-  favoritesLabel->setStyleSheet("font-size: 18px; font-weight: bold;");
+  favoritesLabel->setStyleSheet("font-size: 18px; font-weight: bold; color: #FFFFFF;");
   rightLayout->addWidget(favoritesLabel);
 
   favoritesScrollArea = new QScrollArea(rightContainer);
-  QWidget *favoritesWidget = new QWidget(favoritesScrollArea);
-  QVBoxLayout *favoritesLayout = new QVBoxLayout(favoritesWidget);
-
-  favoritesWidget->setLayout(favoritesLayout);
-  favoritesScrollArea->setWidget(favoritesWidget);
   favoritesScrollArea->setWidgetResizable(true);
+  favoritesScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  favoritesScrollArea->setStyleSheet("QScrollArea { border: none; background-color: transparent; }");
+
+  QWidget *favoritesWidget = new QWidget(favoritesScrollArea);
+  favoritesWidget->setStyleSheet("background-color: transparent;");
+  QGridLayout *favoritesLayout = new QGridLayout(favoritesWidget);
+  favoritesLayout->setSpacing(10);
+  favoritesLayout->setColumnStretch(0, 1);
+  favoritesLayout->setColumnStretch(1, 1);
+  favoritesLayout->setColumnStretch(2, 1);
+  favoritesLayout->setAlignment(Qt::AlignTop);
+
+  favoritesScrollArea->setWidget(favoritesWidget);
   rightLayout->addWidget(favoritesScrollArea);
 
   // All passwords section
   QLabel *allPasswordsLabel = new QLabel("All Passwords", rightContainer);
-  allPasswordsLabel->setStyleSheet("font-size: 18px; font-weight: bold;");
+  allPasswordsLabel->setStyleSheet("font-size: 18px; font-weight: bold; color: #FFFFFF;");
   rightLayout->addWidget(allPasswordsLabel);
 
   allPasswordsScrollArea = new QScrollArea(rightContainer);
-  QWidget *allPasswordsWidget = new QWidget(allPasswordsScrollArea);
-  QVBoxLayout *allPasswordsLayout = new QVBoxLayout(allPasswordsWidget);
-
-  allPasswordsWidget->setLayout(allPasswordsLayout);
-  allPasswordsScrollArea->setWidget(allPasswordsWidget);
   allPasswordsScrollArea->setWidgetResizable(true);
+  allPasswordsScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  allPasswordsScrollArea->setStyleSheet("QScrollArea { border: none; background-color: transparent; }");
+
+  QWidget *allPasswordsWidget = new QWidget(allPasswordsScrollArea);
+  allPasswordsWidget->setStyleSheet("background-color: transparent;");
+  QGridLayout *allPasswordsLayout = new QGridLayout(allPasswordsWidget);
+  allPasswordsLayout->setSpacing(10);
+  allPasswordsLayout->setColumnStretch(0, 1);
+  allPasswordsLayout->setColumnStretch(1, 1);
+  allPasswordsLayout->setColumnStretch(2, 1);
+  allPasswordsLayout->setAlignment(Qt::AlignTop);
+
+  allPasswordsScrollArea->setWidget(allPasswordsWidget);
   rightLayout->addWidget(allPasswordsScrollArea);
 
   // Add some example password cards
@@ -232,19 +265,16 @@ void MainPage::createPasswordCard(const QString &companyName, const QString &use
   }
   card->setObjectName("Card_" + companyName);  // Set a unique object name for debugging
   card->setStyleSheet("background-color: #323547; border-radius: 5px; padding: 10px;");
+  card->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  card->setFixedHeight(80);  // Adjust this value as needed
 
   QHBoxLayout *cardLayout = new QHBoxLayout(card);
-  if (!cardLayout) {
-    qCritical() << "Failed to create card layout for" << companyName;
-    return;
-  }
+  cardLayout->setContentsMargins(10, 10, 10, 10);
+  cardLayout->setSpacing(10);
 
   // Company logo (placeholder)
   QLabel *logoLabel = new QLabel(card);
-  if (!logoLabel) {
-    qCritical() << "Failed to create logo label for" << companyName;
-    return;
-  }
+  logoLabel->setFixedSize(32, 32);
   QIcon icon = QIcon::fromTheme("application-x-executable");
   if (icon.isNull()) {
     qWarning() << "Failed to load icon for" << companyName;
@@ -258,48 +288,110 @@ void MainPage::createPasswordCard(const QString &companyName, const QString &use
   QVBoxLayout *infoLayout = new QVBoxLayout();
   QLabel *companyLabel = new QLabel(companyName, card);
   QLabel *usernameLabel = new QLabel(username, card);
-  if (!companyLabel || !usernameLabel) {
-    qCritical() << "Failed to create info labels for" << companyName;
-    return;
-  }
+  companyLabel->setStyleSheet("color: #FFFFFF; font-weight: bold;");
+  usernameLabel->setStyleSheet("color: #AAAAAA;");
+  companyLabel->setFixedHeight(40);
+  usernameLabel->setFixedHeight(40);
   infoLayout->addWidget(companyLabel);
   infoLayout->addWidget(usernameLabel);
-  cardLayout->addLayout(infoLayout);
+  cardLayout->addLayout(infoLayout, 1);
 
   // Copy password button
   QPushButton *copyButton = new QPushButton("Copy", card);
-  if (!copyButton) {
-    qCritical() << "Failed to create copy button for" << companyName;
-    return;
-  }
+  copyButton->setStyleSheet("background-color: #DC8A78; color: #FFFFFF; border: none; padding: 5px 10px; border-radius: 3px;");
+  copyButton->setFixedSize(60, 30);
   cardLayout->addWidget(copyButton);
 
-  qDebug() << "Adding card to layouts for" << companyName;
-
   // Add the card to both favorites and all passwords layouts
-  if (favoritesScrollArea && favoritesScrollArea->widget() && favoritesScrollArea->widget()->layout()) {
-    QBoxLayout* favLayout = qobject_cast<QBoxLayout*>(favoritesScrollArea->widget()->layout());
+  if (favoritesScrollArea && favoritesScrollArea->widget()) {
+    QGridLayout* favLayout = qobject_cast<QGridLayout*>(favoritesScrollArea->widget()->layout());
     if (favLayout) {
-      favLayout->addWidget(card);
-      qDebug() << "Added card to favorites for" << companyName;
-    } else {
-      qWarning() << "Failed to cast favorites layout for" << companyName;
+      int row = favoritesCardCount / 3;
+      int col = favoritesCardCount % 3;
+      favLayout->addWidget(card, row, col);
+      favoritesCardCount++;
+      qDebug() << "Added card to favorites for" << companyName << "at position" << row << col;
     }
-  } else {
-    qWarning() << "Favorites scroll area or its widget or layout is null for" << companyName;
   }
 
-  if (allPasswordsScrollArea && allPasswordsScrollArea->widget() && allPasswordsScrollArea->widget()->layout()) {
-    QBoxLayout* allLayout = qobject_cast<QBoxLayout*>(allPasswordsScrollArea->widget()->layout());
+  if (allPasswordsScrollArea && allPasswordsScrollArea->widget()) {
+    QGridLayout* allLayout = qobject_cast<QGridLayout*>(allPasswordsScrollArea->widget()->layout());
     if (allLayout) {
-      allLayout->addWidget(card);
-      qDebug() << "Added card to all passwords for" << companyName;
-    } else {
-      qWarning() << "Failed to cast all passwords layout for" << companyName;
+      int row = allPasswordsCardCount / 3;
+      int col = allPasswordsCardCount % 3;
+      allLayout->addWidget(card, row, col);
+      allPasswordsCardCount++;
+      qDebug() << "Added card to all passwords for" << companyName << "at position" << row << col;
     }
-  } else {
-    qWarning() << "All passwords scroll area or its widget or layout is null for" << companyName;
   }
+
+  // Add favorite toggle button
+  QPushButton *favoriteButton = new QPushButton(card);
+  favoriteButton->setObjectName("favoriteButton");  // Set an object name for easy finding
+  favoriteButton->setIcon(QIcon("../icons/star-empty.png"));  // Start with empty star
+  favoriteButton->setStyleSheet("background-color: transparent; border: none;");
+  favoriteButton->setFixedSize(24, 24);
+  cardLayout->addWidget(favoriteButton);
+
+  // Set initial favorite status
+  card->setProperty("isFavorite", false);
+
+  connect(favoriteButton, &QPushButton::clicked, this, [this, companyName]() {
+    toggleFavorite(companyName);
+  });
 
   qDebug() << "createPasswordCard finished for" << companyName;
+}
+
+void MainPage::toggleFavorite(const QString &companyName)
+{
+  QWidget *card = findChild<QWidget*>("Card_" + companyName);
+  if (card) {
+    bool isFavorite = card->property("isFavorite").toBool();
+    isFavorite = !isFavorite;
+    card->setProperty("isFavorite", isFavorite);
+
+    // Update the favorite button icon
+    QPushButton *favoriteButton = card->findChild<QPushButton*>("favoriteButton");
+    if (favoriteButton) {
+      favoriteButton->setIcon(QIcon(isFavorite ? "../icons/star-filled.png" : "../icons/star-empty.png"));
+    }
+
+    // Move the card between favorites and all passwords sections
+    QGridLayout *sourceLayout = isFavorite ? 
+      qobject_cast<QGridLayout*>(allPasswordsScrollArea->widget()->layout()) :
+      qobject_cast<QGridLayout*>(favoritesScrollArea->widget()->layout());
+
+    QGridLayout *targetLayout = isFavorite ? 
+      qobject_cast<QGridLayout*>(favoritesScrollArea->widget()->layout()) :
+      qobject_cast<QGridLayout*>(allPasswordsScrollArea->widget()->layout());
+
+    if (sourceLayout && targetLayout) {
+      sourceLayout->removeWidget(card);
+
+      if (isFavorite) {
+        allPasswordsCardCount--;
+        int row = favoritesCardCount / 3;
+        int col = favoritesCardCount % 3;
+        targetLayout->addWidget(card, row, col);
+        favoritesCardCount++;
+      } else {
+        favoritesCardCount--;
+        int row = allPasswordsCardCount / 3;
+        int col = allPasswordsCardCount % 3;
+        targetLayout->addWidget(card, row, col);
+        allPasswordsCardCount++;
+      }
+    }
+  }
+}
+
+void MainPage::filterPasswords(const QString &searchText)
+{
+  QRegularExpression regex("Card_.*");
+  for (QWidget *card : findChildren<QWidget*>(regex)) {
+    bool shouldShow = card->objectName().contains(searchText, Qt::CaseInsensitive) ||
+      card->findChild<QLabel*>()->text().contains(searchText, Qt::CaseInsensitive);
+    card->setVisible(shouldShow);
+  }
 }
