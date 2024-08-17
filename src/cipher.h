@@ -22,7 +22,9 @@ extern std::unordered_map<std::string, CipherFunction> cipherOptable;
 extern ExtendedVector<std::string> commands;
 
 // Helper Methods
-uint32_t generate_random(uint32_t min, uint32_t max);
+bool prime(uint32_t num);
+
+uint32_t generate_random_prime(uint32_t min, uint32_t max);
 
 int encrypt();
 

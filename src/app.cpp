@@ -22,7 +22,7 @@ EncryptionApp::EncryptionApp(QWidget *parent) : QMainWindow(parent) {
     }
     mainPage->hide();
 
-    resize(1200, 800);
+    resize(2000, 1000);
     qDebug() << "EncryptionApp constructor finished";
 }
 

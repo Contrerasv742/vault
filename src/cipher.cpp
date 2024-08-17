@@ -66,7 +66,29 @@ std::string rot13(const std::string& plaintext, const std::string& unused) {
   return caesar(plaintext, "13");
 }
 
-uint32_t generate_random(uint32_t min, uint32_t max){
+
+bool prime(uint32_t num) {
+  return true; 
+}
+
+uint32_t generate_random_prime(uint32_t min, uint32_t max) {
+  /*
+  int num = 6;
+
+  while (!prime(num)) {
+    // Random Number Generator
+    std::random_device rd;
+    std::mt19937 gen(rd());
+
+    // Create a Distribution
+    std::uniform_int_distribution<> dis(min, max);
+
+    num = dis(gen);
+    break; // TODO: Implement Prime Checker
+  }
+
+  */
+
   // Random Number Generator
   std::random_device rd;
   std::mt19937 gen(rd());
@@ -74,7 +96,9 @@ uint32_t generate_random(uint32_t min, uint32_t max){
   // Create a Distribution
   std::uniform_int_distribution<> dis(min, max);
 
-  return dis(gen);
+  int num = dis(gen);
+
+  return num;
 }
 
 uint64_t gcd(uint64_t a, uint64_t b) {
@@ -118,8 +142,8 @@ std::string rsa(const std::string& plaintext, const std::string& key) {
   uint32_t min = 1000000;
   uint32_t max = min * 10; 
 
-  uint32_t p = generate_random(min, max);
-  uint32_t q = generate_random(min, max);
+  uint32_t p = generate_random_prime(min, max);
+  uint32_t q = generate_random_prime(min, max);
 
   // II: Generate n
   uint32_t n = p * q;

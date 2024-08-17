@@ -1,6 +1,8 @@
 #include "main.h"
+#include "cipher.h"
 #include "app.h"
 #include <QApplication>
+#include "parser.h"
 
 void setApplicationStyle(QApplication& app)
 {
@@ -18,6 +20,15 @@ void setApplicationStyle(QApplication& app)
 }
 
 int main(int argc, char *argv[]) {
+  /* Testing */
+
+  Parser parser = Parser("../files/passwords.json");
+
+  parser.view();
+
+  return 0;
+
+  /*
   QApplication app(argc, argv);
   setApplicationStyle(app);
 
@@ -25,4 +36,5 @@ int main(int argc, char *argv[]) {
   window.show();
 
   return app.exec();
+  */
 }
