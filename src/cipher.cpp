@@ -68,27 +68,21 @@ std::string rot13(const std::string& plaintext, const std::string& unused) {
 
 
 bool prime(uint32_t num) {
-  return true; 
+  if (num == 2) return true;
+  if (num < 2 || num % 2 == 0) return false;
+
+  uint32_t sqrt_num = (uint32_t)sqrt(num); 
+  for (uint32_t i = 3; i <= sqrt_num; i+=2) {
+    if (num % i == 0) {
+      return false;
+    }
+  }
+
+  // Prime checker
+  return true;
 }
 
 uint32_t generate_random_prime(uint32_t min, uint32_t max) {
-  /*
-  int num = 6;
-
-  while (!prime(num)) {
-    // Random Number Generator
-    std::random_device rd;
-    std::mt19937 gen(rd());
-
-    // Create a Distribution
-    std::uniform_int_distribution<> dis(min, max);
-
-    num = dis(gen);
-    break; // TODO: Implement Prime Checker
-  }
-
-  */
-
   // Random Number Generator
   std::random_device rd;
   std::mt19937 gen(rd());
@@ -96,7 +90,11 @@ uint32_t generate_random_prime(uint32_t min, uint32_t max) {
   // Create a Distribution
   std::uniform_int_distribution<> dis(min, max);
 
-  int num = dis(gen);
+  // Find a prime number
+  uint32_t num;
+  do {
+    num = dis(gen);
+  } while (!prime(num));
 
   return num;
 }
@@ -137,6 +135,9 @@ uint64_t find_e(uint64_t lambda_n) {
   return 0;
 }
 
+// RSA
+//  + public key  -> shown
+//  + private key -> verifies if the public correct
 std::string rsa(const std::string& plaintext, const std::string& key) {
   // I: Calculate two large primes
   uint32_t min = 1000000;
@@ -159,7 +160,7 @@ std::string rsa(const std::string& plaintext, const std::string& key) {
   }
 
   // V: determine d
-  double d = (1/e); //% lambda_n;
+  double d = (1/e) % lambda_n;
 
   // Extra: Printing to observe numbers
   std::stringstream ss;
@@ -167,6 +168,7 @@ std::string rsa(const std::string& plaintext, const std::string& key) {
   ss << "p: " << p << "\n";
   ss << "q: " << q << "\n";
   ss << "n: " << n << "\n";
+ // 0000 0000 0000 0111
   ss << "λ(n): " << lambda_n << "\n";
   ss << "e: " << e << "\n";
   ss << "d: " << std::fixed << std::setprecision(8) << d << "\n";
