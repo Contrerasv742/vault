@@ -4,7 +4,7 @@ QT_PATH := $(HOME)/Qt/6.7.2/gcc_64
 
 build:
 	mkdir -p build
-	cd build && cmake -DCMAKE_PREFIX_PATH=$(QT_PATH) .. && make
+	cd build && cmake -DCMAKE_PREFIX_PATH=$(QT_PATH) .. && make -j`nproc`
 
 clean:
 	rm -rf build

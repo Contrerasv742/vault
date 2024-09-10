@@ -22,15 +22,14 @@ void setApplicationStyle(QApplication& app)
 int main(int argc, char *argv[]) {
   /* Testing */
 
-  /*
-  // Parser parser = Parser("../files/passwords.json");
-  // parser.view();
+  Parser parser = Parser("../files/passwords.json");
+  parser.view();
 
-  std::string output = rsa("","");
-  std::cout << output << std::endl;
+  // std::string output = rsa("","");
+  // std::cout << output << std::endl;
 
   return 0;
-*/
+/**/
   QApplication app(argc, argv);
   setApplicationStyle(app);
 
