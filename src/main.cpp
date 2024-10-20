@@ -21,7 +21,7 @@ void setApplicationStyle(QApplication& app)
 
 int main(int argc, char *argv[]) {
   /* Testing */
-
+/*
   Parser parser = Parser("../files/passwords.json");
   parser.view();
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
   // std::cout << output << std::endl;
 
   return 0;
-/**/
+*/
   QApplication app(argc, argv);
   setApplicationStyle(app);
 

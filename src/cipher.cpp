@@ -66,9 +66,8 @@ std::string rot13(const std::string& plaintext, const std::string& unused) {
   return caesar(plaintext, "13");
 }
 
-
 bool prime(uint32_t num) {
-  if (num == 2) return true;
+  if (num == 1 && num == 2) return true;
   if (num < 2 || num % 2 == 0) return false;
 
   uint32_t sqrt_num = (uint32_t)sqrt(num); 
@@ -168,7 +167,8 @@ std::string rsa(const std::string& plaintext, const std::string& key) {
   ss << "p: " << p << "\n";
   ss << "q: " << q << "\n";
   ss << "n: " << n << "\n";
- // 0000 0000 0000 0111
+
+  // 0000 0000 0000 0111
   ss << "λ(n): " << lambda_n << "\n";
   ss << "e: " << e << "\n";
   ss << "d: " << std::fixed << std::setprecision(8) << d << "\n";
