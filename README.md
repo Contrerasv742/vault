@@ -10,13 +10,16 @@
 # Encryption Page
 <img src="img/encryption_page.png" width="200" height="100">
 
-# Purpose
-Intended to create a password manager with RSA Encryption to properly store my personal passwords locally. Project will also aid in understanding core encryption algorithms. Additionally, I will learn about making cross platform applications.
-
 # Algorithms
-    ...
+Currently being designed in the backend. Eventually, will be usable in the GUI once most 
+the alogirthms are correctly implemented and password managing is completed.
 
-# Dependencies
+# Purpose
+Intended to create a password manager with RSA Encryption to properly store my personal 
+passwords locally. Project will also aid in understanding core encryption algorithms. 
+Additionally, I will learn about making cross platform applications.
+
+# Tools
 ```bash
 sudo apt install qt6-base-dev qtbase6-dev-tools
 ```
