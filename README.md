@@ -1,14 +1,14 @@
 # Login Page
-<img src="img/login_page.png" width="200" height="100">
+<img src="img/login_page.png" width="auto" height="auto">
 
 # Main Page
 <p float="left">
-  <img src="img/main_page_classic.png" width="250" />
-  <img src="img/main_page_open.png" width="250" />
+  <img src="img/main_page_classic.png" width="auto" />
+  <img src="img/main_page_open.png" width="auto" />
 </p>
 
 # Encryption Page
-<img src="img/encryption_page.png" width="200" height="100">
+<img src="img/encryption_page.png" width="auto" height="auto">
 
 # Algorithms
 Currently being designed in the backend. Eventually, will be usable in the GUI once most 
