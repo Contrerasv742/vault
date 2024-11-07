@@ -10,6 +10,7 @@
 #include <QScrollArea>
 #include <qnamespace.h>
 #include <QRegularExpression>
+#include <QAction>
 
 MainPage::MainPage(QWidget *parent) : QWidget(parent), 
   favoritesScrollArea(nullptr), allPasswordsScrollArea(nullptr),

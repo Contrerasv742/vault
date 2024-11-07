@@ -8,7 +8,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Gui)
 
 # Add the src directory to the include path
 include_directories(${CMAKE_SOURCE_DIR}/src)
@@ -21,5 +21,8 @@ file(GLOB SOURCES
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets)
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    Qt6::Widgets
+    Qt6::Gui
+)
 target_compile_options(${PROJECT_NAME} PRIVATE -g)
