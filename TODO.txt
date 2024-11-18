@@ -1,0 +1,30 @@
+Key Generation:
+
+- Creates an RSA key pair (public/private keys)
+- Generates random AES keys for each password
+
+Encryption Process:
+
+- Each password gets its own AES key (for better security)
+- The password is encrypted using AES-256 (fast and secure)
+- The AES key is then encrypted using RSA (this is called key wrapping)
+- Everything is packaged together in a single payload
+
+Decryption Process:
+
+- The RSA private key decrypts the AES key
+- The decrypted AES key is then used to decrypt the password
+- Padding is removed to get the original password
+
+The advantages of this hybrid approach are:
+
+- RSA is used only for encrypting the small AES key
+- AES handles the actual password encryption (much faster than RSA)
+- Each password gets its own AES key (if one is compromised, others stay safe)
+- The code includes proper padding and IV handling for security
+
+Important security to add:
+- Error handling, secure memory wiping, and key storage protection
+- The RSA private key needs to be stored securely (possibly protected by a master password)
+- Consider adding salt and key derivation functions for the master password
+- Add integrity checks (like HMAC) to detect tampering
