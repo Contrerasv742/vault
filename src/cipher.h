@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <functional> 
+#include <cstdint>
 
 // Helper Template
 template<typename T>
