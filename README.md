@@ -27,7 +27,7 @@ and users to securly store passwords.
 ```
 
 # Compilation
-Easiest:
+Recommended:
 ```bash
 > make
 > cd build
