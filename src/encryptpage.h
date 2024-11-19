@@ -2,16 +2,16 @@
 #ifndef ENCRYPTPAGE_H
 #define ENCRYPTPAGE_H
 
-#include <QWidget>
+#include <QComboBox>
 #include <QLabel>
+#include <QPushButton>
 #include <QSlider>
 #include <QTextEdit>
-#include <QPushButton>
-#include <QComboBox>
+#include <QWidget>
+
 #include "cipher.h"
 
-class EncryptPage : public QWidget
-{
+class EncryptPage : public QWidget {
     Q_OBJECT
 
 public:
@@ -38,4 +38,4 @@ private:
     QString assessPasswordStrength(int length);
 };
 
-#endif // ENCRYPTPAGE_H
+#endif  // ENCRYPTPAGE_H
