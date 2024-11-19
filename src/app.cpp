@@ -1,6 +1,7 @@
 #include "app.h"
-#include <QVBoxLayout>
+
 #include <QDebug>
+#include <QVBoxLayout>
 
 EncryptionApp::EncryptionApp(QWidget *parent) : QMainWindow(parent) {
     qDebug() << "EncryptionApp constructor started";
@@ -13,7 +14,8 @@ EncryptionApp::EncryptionApp(QWidget *parent) : QMainWindow(parent) {
     }
     setCentralWidget(loginScreen);
 
-    connect(loginScreen, &LoginScreen::loginSuccessful, this, &EncryptionApp::onLoginSuccessful);
+    connect(loginScreen, &LoginScreen::loginSuccessful, this,
+            &EncryptionApp::onLoginSuccessful);
 
     mainPage = new MainPage(this);
     if (!mainPage) {
