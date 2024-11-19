@@ -3,8 +3,8 @@
 
 # Main Page
 <p float="left">
-  <img src="img/main_page_classic.png" width="auto" />
-  <img src="img/main_page_open.png" width="auto" />
+    <img src="img/main_page_classic.png" width="auto" />
+    <img src="img/main_page_open.png" width="auto" />
 </p>
 
 # Encryption Page
@@ -23,27 +23,27 @@ and users to securly store passwords.
 
 # Tools
 ```bash
-    > sudo apt install qt6-base-dev
+> sudo apt install qt6-base-dev
 ```
 
 # Compilation
 Easiest:
 ```bash
-    > make
-    > cd build
+> make
+> cd build
 ```
 
 Alternitavely:
 ```bash
-    > mkdir -p build
-    > cd build
-    > cmake ..
-    > make
+> mkdir -p build
+> cd build
+> cmake ..
+> make
 ```
 
 # Execution
 ```bash
-    > ./vault
+> ./vault
 ```
 
 # Dates
