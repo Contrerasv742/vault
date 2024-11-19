@@ -4,11 +4,13 @@
 
 PasswordManager::PasswordManager(const std::string filename)
     : filename_(filename) {
-    std::ifstream file(filename);
+    std::ifstream file(filename, std::ios::in | std::ios::out);
 
     if (!file.is_open()) {
+        std::cout << "Creating file." << std::endl;
         createPasswordFile();
     } else {
+        std::cout << "Grabbing old file information." << std::endl;
         readJSON();
     }
 
@@ -79,6 +81,7 @@ int PasswordManager::createPasswordFile() {
 int PasswordManager::updateFile(const json& data) {
     try {
         std::ofstream file(filename_);
+
         if (!file.is_open()) {
             return -1;
         }
@@ -112,9 +115,9 @@ int PasswordManager::addPassword(const std::string& company,
         }
 
         // Create new password entry
-        json new_password = {{"company", company},
-                             {"username", username},
-                             {"password", password},
+        json new_password = {{"company", password.company_,
+                             {"username", password.username_,
+                             {"password", password.password_,
                              {"created_at", std::time(nullptr)}};
 
         // Ensure metadata exists
@@ -131,10 +134,18 @@ int PasswordManager::addPassword(const std::string& company,
         json_data_["passwords"].push_back(new_password);
 
         return updateFile(NULL);
-
     } catch (const json::exception& e) {
         return -2;
     } catch (const std::exception& e) {
         return -3;
     }
+}
+
+
+int PasswordManager::passwordExists(Password password) {
+    return 0;
+}
+
+int PasswordManager::removePassword(Password password) {
+    return 0;
 }

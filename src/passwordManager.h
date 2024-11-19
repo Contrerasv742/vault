@@ -7,6 +7,18 @@
 
 using json = nlohmann::json;
 
+class Password {
+private:
+    std::string company_;
+    std::string username_;
+    std::string password_;
+
+public:
+    Password(std::string company, std::string username, std::string password) : company_(company), username_(username), password_(password) {};
+    // Encrypt();
+
+};
+
 class PasswordManager {
 private:
     json json_data_;
@@ -25,6 +37,12 @@ public:
                     const std::string& password);
 
     int updateFile(const json& data);
+
+    int passwordExists(std::string filename);
+
+    int passwordExists(Password password);
+
+    int removePassword(Password password);
 };
 
 #endif  // PASSWORDMANAGER_H

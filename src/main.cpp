@@ -31,9 +31,10 @@ int main(int argc, char *argv[]) {
 
     PasswordManager passwords = PasswordManager("passwords.json");
 
-    passwords.addPassword("Google", "Victor", "CheggSack");
-    passwords.addPassword("Pornhub.com", "Victor", "CheggSack");
-    std::cout << passwords.view() << std::endl;
+    passwords.addPassword("Google", "Victor", "agent?3");
+    passwords.addPassword("X.com", "Neel", "Walse");
+
+    // std::cout << passwords.view() << std::endl;
 
     // std::string output = rsa("","");
     // std::cout << output << std::endl;
