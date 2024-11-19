@@ -4,7 +4,7 @@
 
 #include "app.h"
 #include "cipher.h"
-#include "parser.h"
+#include "passwordManager.h"
 
 void setApplicationStyle(QApplication &app) {
     app.setStyleSheet(
@@ -28,14 +28,18 @@ void setApplicationStyle(QApplication &app) {
 
 int main(int argc, char *argv[]) {
     /* Testing */
-    /*
-    Parser parser = Parser("../files/passwords.json");
-    parser.view();
+
+    PasswordManager passwords = PasswordManager("passwords.json");
+
+    passwords.addPassword("Google", "Victor", "CheggSack");
+    passwords.addPassword("Pornhub.com", "Victor", "CheggSack");
+    std::cout << passwords.view() << std::endl;
 
     // std::string output = rsa("","");
     // std::cout << output << std::endl;
 
     return 0;
+    /*
      */
     QApplication app(argc, argv);
     setApplicationStyle(app);

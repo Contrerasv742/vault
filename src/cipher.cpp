@@ -119,13 +119,22 @@ uint64_t carmichael_totient(uint64_t p, uint64_t q) {
 uint64_t find_e(uint64_t lambda_n) {
     const uint64_t common_e[] = {65537, 257, 17};
 
+    // I: common e chosen
     for (auto e : common_e) {
         if (e < lambda_n && gcd(e, lambda_n) == 1) {
             return e;
         }
     }
 
+    // II: e starting from a larger number hoping to find e
     for (uint64_t e = 65537; e < lambda_n; e += 2) {
+        if (gcd(e, lambda_n) == 1) {
+            return e;
+        }
+    }
+
+    // III: Find an e
+    for (uint64_t e = 2; e < lambda_n; e += 3) {
         if (gcd(e, lambda_n) == 1) {
             return e;
         }
@@ -134,9 +143,6 @@ uint64_t find_e(uint64_t lambda_n) {
     return 0;
 }
 
-// RSA
-//  + public key  -> shown
-//  + private key -> verifies if the public correct
 std::string rsa(const std::string &plaintext, const std::string &key) {
     // I: Calculate two large primes
     uint32_t min = 1000000;
@@ -145,7 +151,7 @@ std::string rsa(const std::string &plaintext, const std::string &key) {
     uint32_t p = generate_random_prime(min, max);
     uint32_t q = generate_random_prime(min, max);
 
-    // II: Generate n
+    // II: Generate n (key_length)
     uint32_t n = p * q;
 
     // III: compute lambda_n
