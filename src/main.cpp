@@ -28,18 +28,25 @@ void setApplicationStyle(QApplication &app) {
 
 int main(int argc, char *argv[]) {
     /* Testing */
-
     PasswordManager passwords = PasswordManager("passwords.json");
 
-    passwords.addPassword("Google", "Victor", "agent?3");
-    passwords.addPassword("X.com", "Neel", "Walse");
+    Password google = Password("Google", "Victor", "agent?3");
+    Password x = Password("X.com", "Neel", "Walse");
 
-    // std::cout << passwords.view() << std::endl;
+    passwords.addPassword(google);
+    passwords.addPassword(x);
 
+    std::cout << passwords.view() << std::endl;
+
+    passwords.removePassword(x);
+
+    std::cout << passwords.view() << std::endl;
+    
     // std::string output = rsa("","");
     // std::cout << output << std::endl;
 
     return 0;
+
     /*
      */
     QApplication app(argc, argv);

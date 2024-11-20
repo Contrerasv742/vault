@@ -17,6 +17,15 @@ PasswordManager::PasswordManager(const std::string filename)
     file.close();
 }
 
+Password::Password(std::string company, std::string username,
+                   std::string password) {
+    // Create new password entry
+    password_json_ = {{"company", company},
+                      {"username", username},
+                      {"password", password},
+                      {"created_at", std::time(nullptr)}};
+};
+
 std::string PasswordManager::view() {
     try {
         // Try to read JSON if empty
@@ -105,20 +114,18 @@ int PasswordManager::updateFile(const json& data) {
     }
 }
 
-int PasswordManager::addPassword(const std::string& company,
-                                 const std::string& username,
-                                 const std::string& password) {
+int PasswordManager::addPassword(Password password) {
     try {
         // First read existing data if not already loaded
         if (json_data_.empty()) {
             readJSON();
         }
 
-        // Create new password entry
-        json new_password = {{"company", password.company_,
-                             {"username", password.username_,
-                             {"password", password.password_,
-                             {"created_at", std::time(nullptr)}};
+        // Ensure we don't add duplicates
+        if (passwordExists(password) > 0) {
+            std::cerr << "Attempting to add existing password." << std::endl;
+            return -1;
+        }
 
         // Ensure metadata exists
         if (!json_data_.contains("metadata")) {
@@ -131,7 +138,7 @@ int PasswordManager::addPassword(const std::string& company,
         json_data_["metadata"]["last_modified"] = std::time(nullptr);
 
         // Add new password
-        json_data_["passwords"].push_back(new_password);
+        json_data_["passwords"].push_back(password.readJSON());
 
         return updateFile(NULL);
     } catch (const json::exception& e) {
@@ -141,11 +148,32 @@ int PasswordManager::addPassword(const std::string& company,
     }
 }
 
-
 int PasswordManager::passwordExists(Password password) {
-    return 0;
+    std::string manager_data = json_data_["passwords"].dump();
+    std::string password_data = password.readJSON().dump();
+
+    int index = manager_data.find(password_data);
+    int found = !(index == std::string::npos);
+
+    return (found) ? index : -1;
 }
 
-int PasswordManager::removePassword(Password password) {
-    return 0;
+int PasswordManager::removePassword(Password password) { 
+    int index = passwordExists(password);
+
+    if (index < 0) {
+        std::cerr << "Password not in password manager." << std::endl;
+        return -1;
+    }
+
+    std::string manager_data = json_data_["passwords"].dump();
+    std::string password_data = password.readJSON().dump();
+
+    int password_len = password_data.length();
+
+    manager_data.erase(index, password_len);
+
+    updateFile(NULL);
+
+    return 0; 
 }
