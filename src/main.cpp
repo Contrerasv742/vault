@@ -1,7 +1,5 @@
 #include "main.h"
-
 #include <QApplication>
-
 #include "app.h"
 #include "cipher.h"
 #include "passwordManager.h"
@@ -38,6 +36,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << passwords.view() << std::endl;
 
+    passwords.removePassword(google);
     passwords.removePassword(x);
 
     std::cout << passwords.view() << std::endl;

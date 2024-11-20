@@ -153,27 +153,48 @@ int PasswordManager::passwordExists(Password password) {
     std::string password_data = password.readJSON().dump();
 
     int index = manager_data.find(password_data);
-    int found = !(index == std::string::npos);
+    int exists = !(index == std::string::npos);
 
-    return (found) ? index : -1;
+    return (exists) ? index : -1;
 }
 
-int PasswordManager::removePassword(Password password) { 
-    int index = passwordExists(password);
+int PasswordManager::removePassword(Password password) {
+    try {
+        // First check if password exists
+        if (passwordExists(password) < 0) {
+            std::cerr << "Password not in password manager." << std::endl;
+            return -1;
+        }
 
-    if (index < 0) {
-        std::cerr << "Password not in password manager." << std::endl;
+        // Find and remove the matching password
+        json password_json = password.readJSON();
+        auto& passwords = json_data_["passwords"];
+        
+        // Find the password entry that matches
+        auto it = std::find_if(passwords.begin(), passwords.end(),
+            [&password_json](const json& entry) {
+                return entry["company"] == password_json["company"] &&
+                       entry["username"] == password_json["username"] &&
+                       entry["password"] == password_json["password"];
+            });
+
+        if (it != passwords.end()) {
+            // Remove the password
+            passwords.erase(it);
+            
+            // Update last modified timestamp
+            json_data_["metadata"]["last_modified"] = std::time(nullptr);
+            
+            // Save changes to file
+            return updateFile(json_data_);
+        }
+
         return -1;
+    } catch (const json::exception& e) {
+        std::cerr << "JSON error: " << e.what() << std::endl;
+        return -2;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return -3;
     }
-
-    std::string manager_data = json_data_["passwords"].dump();
-    std::string password_data = password.readJSON().dump();
-
-    int password_len = password_data.length();
-
-    manager_data.erase(index, password_len);
-
-    updateFile(NULL);
-
-    return 0; 
 }
