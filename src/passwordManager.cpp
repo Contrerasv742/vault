@@ -42,10 +42,13 @@ std::string PasswordManager::view() {
 int PasswordManager::readJSON() {
     try {
         std::ifstream file(filename_);
+
         if (!file.is_open()) {
             return -1;
         }
+
         json_data_ = json::parse(file);
+
         return 0;
     } catch (const json::parse_error& e) {
         // If file can't be parsed, create new structure
@@ -61,20 +64,11 @@ int PasswordManager::readJSON() {
 int PasswordManager::createPasswordFile() {
     try {
         // Create initial JSON structure
-        json data = json::parse(R"(
-            {
-                "metadata": {
-                    "version": "1.0",
-                    "created_at": null,
-                    "last_modified": null
-                },
-                "passwords": []
-            }
-        )");
-
-        // Update dynamic fields
-        data["metadata"]["created_at"] = std::time(nullptr);
-        data["metadata"]["last_modified"] = std::time(nullptr);
+        json data = {{"metadata",
+                      {{"version", "1.0"},
+                       {"created_at", std::time(nullptr)},
+                       {"last_modified", std::time(nullptr)}}},
+                     {"passwords", json::array()}};
 
         // Save to class member
         json_data_ = data;
@@ -103,6 +97,9 @@ int PasswordManager::updateFile(const json& data) {
             output["metadata"] = {{"version", "1.0"},
                                   {"created_at", std::time(nullptr)},
                                   {"last_modified", std::time(nullptr)}};
+        } else {
+            // Update last modified timestamp
+            json_data_["metadata"]["last_modified"] = std::time(nullptr);
         }
 
         file << output.dump(4);
@@ -149,47 +146,44 @@ int PasswordManager::addPassword(Password password) {
 }
 
 int PasswordManager::passwordExists(Password password) {
-    std::string manager_data = json_data_["passwords"].dump();
-    std::string password_data = password.readJSON().dump();
+    auto& passwords = json_data_["passwords"];
+    json entry_json = password.readJSON();  // Changed std::string to json
 
-    int index = manager_data.find(password_data);
-    int exists = !(index == std::string::npos);
+    auto it = std::find_if(
+            passwords.begin(), passwords.end(),
+            [&entry_json](const json& entry) {  // Changed capture variable name
+                return entry["company"] == entry_json["company"] &&
+                       entry["username"] == entry_json["username"] &&
+                       entry["password"] == entry_json["password"];
+            });
 
-    return (exists) ? index : -1;
+    return !(it == passwords.end());
 }
 
 int PasswordManager::removePassword(Password password) {
     try {
-        // First check if password exists
-        if (passwordExists(password) < 0) {
+        auto& passwords = json_data_["passwords"];
+        json entry_json = password.readJSON();
+
+        auto it = std::find_if(
+                passwords.begin(), passwords.end(),
+                [&entry_json](
+                        const json& entry) {  // Changed capture variable name
+                    return entry["company"] == entry_json["company"] &&
+                           entry["username"] == entry_json["username"] &&
+                           entry["password"] == entry_json["password"];
+                });
+
+        if (it == passwords.end()) {
             std::cerr << "Password not in password manager." << std::endl;
             return -1;
         }
 
-        // Find and remove the matching password
-        json password_json = password.readJSON();
-        auto& passwords = json_data_["passwords"];
-        
-        // Find the password entry that matches
-        auto it = std::find_if(passwords.begin(), passwords.end(),
-            [&password_json](const json& entry) {
-                return entry["company"] == password_json["company"] &&
-                       entry["username"] == password_json["username"] &&
-                       entry["password"] == password_json["password"];
-            });
+        // Remove the password
+        passwords.erase(it);
 
-        if (it != passwords.end()) {
-            // Remove the password
-            passwords.erase(it);
-            
-            // Update last modified timestamp
-            json_data_["metadata"]["last_modified"] = std::time(nullptr);
-            
-            // Save changes to file
-            return updateFile(json_data_);
-        }
-
-        return -1;
+        // Save changes to file
+        return updateFile(json_data_);
     } catch (const json::exception& e) {
         std::cerr << "JSON error: " << e.what() << std::endl;
         return -2;

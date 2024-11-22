@@ -1,4 +1,3 @@
-
 #ifndef PASSWORDMANAGER_H
 #define PASSWORDMANAGER_H
 

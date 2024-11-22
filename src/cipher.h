@@ -16,11 +16,11 @@ public:
     }
 };
 
-// Update CipherFunction to accept two parameters
 using CipherFunction =
         std::function<std::string(const std::string &, const std::string &)>;
 
 extern std::unordered_map<std::string, CipherFunction> cipherOptable;
+
 extern ExtendedVector<std::string> commands;
 
 // Helper Methods
@@ -77,5 +77,9 @@ std::string rsa(const std::string &plaintext, const std::string &key);
  * @return e
  * */
 uint64_t find_e(uint64_t lambda_n);
+
+std::string rsa_encrypt(uint64_t e, uint64_t n, const std::string& msg); 
+
+std::string rsa_decrypt(uint64_t d, uint64_t n, const std::string& encrypted_msg); 
 
 #endif  // ENCRYPTION_H

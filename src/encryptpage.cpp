@@ -61,10 +61,8 @@ void EncryptPage::setupUI() {
     sliderLayout->addStretch();
 
     encryptionAlgorithmComboBox = new QComboBox(this);
-    encryptionAlgorithmComboBox->addItems(QStringList() << "caesar"
-                                                        << "vigenere"
-                                                        << "rot13"
-                                                        << "rsa");
+    encryptionAlgorithmComboBox->addItems(
+            QStringList() << "caesar" << "vigenere" << "rot13" << "rsa");
     encryptionAlgorithmComboBox->setStyleSheet(
             "QComboBox {"
             "   background-color: #323547;"

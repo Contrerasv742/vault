@@ -2,7 +2,7 @@
 #include <QApplication>
 #include "app.h"
 #include "cipher.h"
-#include "passwordManager.h"
+#include "test.h"
 
 void setApplicationStyle(QApplication &app) {
     app.setStyleSheet(
@@ -25,24 +25,8 @@ void setApplicationStyle(QApplication &app) {
 }
 
 int main(int argc, char *argv[]) {
-    /* Testing */
-    PasswordManager passwords = PasswordManager("passwords.json");
 
-    Password google = Password("Google", "Victor", "agent?3");
-    Password x = Password("X.com", "Neel", "Walse");
-
-    passwords.addPassword(google);
-    passwords.addPassword(x);
-
-    std::cout << passwords.view() << std::endl;
-
-    passwords.removePassword(google);
-    passwords.removePassword(x);
-
-    std::cout << passwords.view() << std::endl;
-    
-    // std::string output = rsa("","");
-    // std::cout << output << std::endl;
+    rsaTest();
 
     return 0;
 

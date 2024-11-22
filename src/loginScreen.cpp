@@ -99,8 +99,7 @@ void LoginScreen::setupUI() {
     QIcon closedEyeIcon = this->getIconFromPath("eye-closed.png");
     if (closedEyeIcon.isNull()) {
         qWarning() << "Failed to load closed eye icon";
-        togglePasswordButton->setText(
-                "👁");  // Fallback to unicode eye symbol
+        togglePasswordButton->setText("👁");  // Fallback to unicode eye symbol
     } else {
         togglePasswordButton->setIcon(closedEyeIcon);
     }
