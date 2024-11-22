@@ -24,25 +24,40 @@ int passwordManagerTest() {
     return 0;
 }
 
-int rsaTest() {
+int rsaDebugTest() {
     RSA rsa = RSA();
-
-    std::string message = "Hello";
-    // cpp_int e = 65537;
-    // cpp_int d = 18446744073709551615;
-    // cpp_int n = 22244133162893;
     
-    try {
-        // Encrypt
-        std::string encrypted = rsa.rsa_encrypt(message);
-        std::cout << "Encrypted: " << encrypted << std::endl;
+    // Test different message lengths
+    std::vector<std::string> test_messages = {
+        "A",      // Single character
+        "Hello",  // Short message
+        "Hello, World! 123" // Longer message with special chars
+    };
+    
+    for (const auto& message : test_messages) {
+        std::cout << "\nTesting message: \"" << message << "\"\n";
+        std::cout << "Message length: " << message.length() << "\n";
         
-        // Decrypt
-        std::string decrypted = rsa.rsa_decrypt(encrypted);
-        std::cout << "Decrypted: " << decrypted << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        try {
+            // Encrypt
+            std::string encrypted = rsa.rsa_encrypt(message);
+            std::cout << "Encrypted (space-separated blocks): " << encrypted << "\n";
+            
+            // Decrypt
+            std::string decrypted = rsa.rsa_decrypt(encrypted);
+            std::cout << "Decrypted: \"" << decrypted << "\"\n";
+            
+            // Verify
+            if (message == decrypted) {
+                std::cout << "✓ Test passed - successful encryption/decryption\n";
+            } else {
+                std::cout << "✗ Test failed - decrypted message doesn't match original\n";
+            }
+            
+        } catch (const std::exception& e) {
+            std::cout << "✗ Test failed with error: " << e.what() << "\n";
+        }
     }
-
+    
     return 0;
 }

@@ -26,7 +26,7 @@ void setApplicationStyle(QApplication &app) {
 
 int main(int argc, char *argv[]) {
 
-    rsaTest();
+    rsaDebugTest();
 
     return 0;
 

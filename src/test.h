@@ -3,6 +3,6 @@
 
 int passwordManagerTest(); 
 
-int rsaTest(); 
+int rsaDebugTest();
 
 #endif // TEST_H

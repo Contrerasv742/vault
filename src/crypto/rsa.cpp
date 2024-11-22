@@ -115,19 +115,28 @@ cpp_int RSA::find_e(cpp_int lambda_n) {
 }
 
 cpp_int RSA::mod_inverse(cpp_int a, cpp_int m) {
-    if(gcd(a, m) > 1){
-
-        // modulo inverse does not exist
-        return -1;
+        cpp_int m0 = m;
+    cpp_int y = 0, x = 1;
+    
+    if (m == 1)
+        return 0;
+    
+    while (a > 1) {
+        cpp_int q = a / m;
+        cpp_int t = m;
+        
+        m = a % m;
+        a = t;
+        t = y;
+        
+        y = x - q * y;
+        x = t;
     }
-
-    for (int x = 1; x < m; x++) {
-        if (((a % m) * (x % m)) % m == 1) {
-            return x;
-        }
-    }
-
-    return -1;
+    
+    if (x < 0)
+        x += m0;
+    
+    return x;
 }
 
 cpp_int RSA::mod_pow(cpp_int base, cpp_int exponent, cpp_int modulus) {
