@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "test.h"
-#include "cipher.h"
+#include "crypto/rsa.h"
 #include "passwordManager.h"
 
 int passwordManagerTest() {
@@ -25,21 +25,20 @@ int passwordManagerTest() {
 }
 
 int rsaTest() {
-    std::string output = rsa("","");
-    std::cout << output << std::endl;
+    RSA rsa = RSA();
 
     std::string message = "Hello";
-    uint64_t e = 65537;  // public exponent
-    uint64_t d = 18446744073709551615;
-    uint64_t n = 22244133162893;
+    // cpp_int e = 65537;
+    // cpp_int d = 18446744073709551615;
+    // cpp_int n = 22244133162893;
     
     try {
         // Encrypt
-        std::string encrypted = rsa_encrypt(e, n, message);
+        std::string encrypted = rsa.rsa_encrypt(message);
         std::cout << "Encrypted: " << encrypted << std::endl;
         
         // Decrypt
-        std::string decrypted = rsa_decrypt(d, n, encrypted);
+        std::string decrypted = rsa.rsa_decrypt(encrypted);
         std::cout << "Decrypted: " << decrypted << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;

@@ -1,5 +1,5 @@
-#ifndef ENCRYPTION_H
-#define ENCRYPTION_H
+#ifndef CIPHER_H
+#define CIPHER_H
 
 #include <cstdint>
 #include <functional>
@@ -17,17 +17,13 @@ public:
 };
 
 using CipherFunction =
-        std::function<std::string(const std::string &, const std::string &)>;
+std::function<std::string(const std::string &, const std::string &)>;
 
 extern std::unordered_map<std::string, CipherFunction> cipherOptable;
 
 extern ExtendedVector<std::string> commands;
 
 // Helper Methods
-bool prime(uint32_t num);
-
-uint32_t generate_random_prime(uint32_t min, uint32_t max);
-
 int encrypt();
 
 int decrypt();
@@ -58,28 +54,8 @@ std::string vigenere(const std::string &plaintext, const std::string &key);
  * */
 std::string rot13(const std::string &plaintext, const std::string &unused);
 
-/* @param plaintext (unused)
- * @param key (unused)
- * @algorithm:
- *      generate two keys:
- *          public key: shown
- *          private key: verifies if the public correct
- *      TODO: Continue algorithm...
- * @return string (unused)
- * */
-std::string rsa(const std::string &plaintext, const std::string &key);
 
-// RSA Helper Functions
+// TODO: Created in own file
+std::string rsa(const std::string &plaintext, const std::string &shift);
 
-/* @param lamba_n
- * @algorithm:
- *      (1 < e < lambda_n) && (gcd(e,lambda_n) == 1)
- * @return e
- * */
-uint64_t find_e(uint64_t lambda_n);
-
-std::string rsa_encrypt(uint64_t e, uint64_t n, const std::string& msg); 
-
-std::string rsa_decrypt(uint64_t d, uint64_t n, const std::string& encrypted_msg); 
-
-#endif  // ENCRYPTION_H
+#endif  // CIPHER_H

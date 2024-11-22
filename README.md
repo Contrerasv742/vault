@@ -23,7 +23,11 @@ and users to securly store passwords.
 
 # Tools
 ```bash
+# QT Tools
 > sudo apt install qt6-base-dev
+
+# Boost multiprecision library
+> sudo apt-get install libboost-all-dev
 ```
 
 # Compilation

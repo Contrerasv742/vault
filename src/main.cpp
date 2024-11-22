@@ -1,7 +1,7 @@
 #include "main.h"
 #include <QApplication>
-#include "app.h"
-#include "cipher.h"
+#include "ui/app.h"
+#include "crypto/cipher.h"
 #include "test.h"
 
 void setApplicationStyle(QApplication &app) {
