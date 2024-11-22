@@ -152,7 +152,7 @@ cpp_int RSA::mod_pow(cpp_int base, cpp_int exponent, cpp_int modulus) {
     return result;
 }
 
-std::string RSA::rsa_encrypt(const std::string& msg) {
+std::string RSA::encrypt(const std::string& msg) {
     std::vector<cpp_int> encrypted;
     
     // Process each character
@@ -176,7 +176,7 @@ std::string RSA::rsa_encrypt(const std::string& msg) {
     return result;
 }
 
-std::string RSA::rsa_decrypt(const std::string& encrypted_msg) {
+std::string RSA::decrypt(const std::string& encrypted_msg) {
     std::string result;
     std::stringstream ss(encrypted_msg);
     cpp_int num;

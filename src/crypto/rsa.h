@@ -22,9 +22,9 @@ public:
      * */
     RSA();
 
-    std::string rsa_encrypt(const std::string& msg);
+    std::string encrypt(const std::string& msg);
 
-    std::string rsa_decrypt(const std::string& encrypted_msg);
+    std::string decrypt(const std::string& encrypted_msg);
 
     // RSA Helper Functions
     bool prime(cpp_int num);
@@ -47,6 +47,12 @@ public:
     cpp_int mod_inverse(cpp_int a, cpp_int m);
 
     cpp_int mod_pow(cpp_int base, cpp_int exponent, cpp_int modulus);
+
+    cpp_int get_n() {return n;};
+
+    cpp_int get_e() {return e;};
+
+    cpp_int get_d() {return d;};
 };
 
 #endif // RSA_H

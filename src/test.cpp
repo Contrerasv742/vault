@@ -29,7 +29,7 @@ int rsaDebugTest() {
     
     // Test different message lengths
     std::vector<std::string> test_messages = {
-        "A",      // Single character
+        "CheggSack",      // Single character
         "Hello",  // Short message
         "Hello, World! 123" // Longer message with special chars
     };
@@ -40,11 +40,11 @@ int rsaDebugTest() {
         
         try {
             // Encrypt
-            std::string encrypted = rsa.rsa_encrypt(message);
+            std::string encrypted = rsa.encrypt(message);
             std::cout << "Encrypted (space-separated blocks): " << encrypted << "\n";
             
             // Decrypt
-            std::string decrypted = rsa.rsa_decrypt(encrypted);
+            std::string decrypted = rsa.decrypt(encrypted);
             std::cout << "Decrypted: \"" << decrypted << "\"\n";
             
             // Verify
