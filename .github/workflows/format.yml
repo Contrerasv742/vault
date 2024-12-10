@@ -23,11 +23,14 @@ jobs:
 
     - name: Check code formatting
       run: |
-        # Find all C++ files and run clang-format
-        find . \( -name '*.cpp' -o -name '*.h' -o -name '*.hpp' -o -name '*.cc' -o -name '*.hh' \) \
-          -not -path "./build/*" \
-          -not -path "./external/*" \
+        # Find all C++ files recursively and run clang-format
+        find src \
+          \( -name '*.cpp' -o -name '*.h' -o -name '*.hpp' -o -name '*.cc' -o -name '*.hh' \) \
+          -not -path "*/build/*" \
+          -not -path "*/external/*" \
+          -type f \
           -exec sh -c '
+            echo "Checking {}..."
             clang-format -style=file {} > {}.formatted
             diff -u {} {}.formatted || (echo "::error::Formatting differs for {}"; exit 1)
             rm {}.formatted
@@ -37,6 +40,6 @@ jobs:
       if: failure()
       run: |
         echo "::error::Code formatting check failed!"
-        echo "Please run: clang-format -i <file> on the affected files"
-        echo "Or run: find . -regex '.*\.\(cpp\|hpp\|h\|cc\)' -exec clang-format -style=file -i {} \;"
+        echo "Please run: make format"
+        echo "Or run: find src -type f -name '*.[ch]pp' -exec clang-format -style=file -i {} \;"
         exit 1

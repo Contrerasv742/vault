@@ -1,3 +1,4 @@
+# TODO: add windows and macOs support
 name: Build and Test
 on:
   push:
@@ -13,14 +14,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]  # Add windows-latest if you need Windows builds
+        os: [ubuntu-latest]
         build_type: [Debug, Release]
         compiler:
           - {
               cc: "gcc",
               cxx: "g++"
             }
-          # Add clang if you want to test with it
           - {
               cc: "clang",
               cxx: "clang++"
