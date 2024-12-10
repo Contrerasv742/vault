@@ -1,0 +1,42 @@
+name: Code Format Check
+on:
+  push:
+    branches:
+      - '**'  # Matches all branches
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install clang-format
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang-format
+
+    - name: Verify clang-format version
+      run: clang-format --version
+
+    - name: Check code formatting
+      run: |
+        # Find all C++ files and run clang-format
+        find . \( -name '*.cpp' -o -name '*.h' -o -name '*.hpp' -o -name '*.cc' -o -name '*.hh' \) \
+          -not -path "./build/*" \
+          -not -path "./external/*" \
+          -exec sh -c '
+            clang-format -style=file {} > {}.formatted
+            diff -u {} {}.formatted || (echo "::error::Formatting differs for {}"; exit 1)
+            rm {}.formatted
+          ' \;
+
+    - name: Format Status
+      if: failure()
+      run: |
+        echo "::error::Code formatting check failed!"
+        echo "Please run: clang-format -i <file> on the affected files"
+        echo "Or run: find . -regex '.*\.\(cpp\|hpp\|h\|cc\)' -exec clang-format -style=file -i {} \;"
+        exit 1
