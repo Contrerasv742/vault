@@ -1,0 +1,37 @@
+---
+# Use Google as base style
+BasedOnStyle: Google
+
+# Change indentation to 4 spaces
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+AccessModifierOffset: -4
+
+# Keep other Google styling defaults
+BreakBeforeBraces: Attach
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: true
+DerivePointerAlignment: true
+PointerAlignment: Left
+ColumnLimit: 80
+IncludeBlocks: Preserve
+
+# For better readability with 4-space indent
+ContinuationIndentWidth: 8
+IndentCaseLabels: true
+MaxEmptyLinesToKeep: 1
+NamespaceIndentation: None
+
+# For consistent spacing
+SpaceAfterCStyleCast: false
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 2
+SpacesInContainerLiterals: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+---
