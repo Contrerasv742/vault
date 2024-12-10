@@ -1,8 +1,8 @@
 #ifndef TEST_H
 #define TEST_H
 
-int passwordManagerTest(); 
+int passwordManagerTest();
 
 int rsaDebugTest();
 
-#endif // TEST_H
+#endif  // TEST_H

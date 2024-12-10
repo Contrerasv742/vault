@@ -2,11 +2,13 @@
 #include <fstream>
 #include <iostream>
 
-
-std::string Password::decryptPassword() { 
-    rsa_.get_e() = cpp_int(password_json_["public_key"]["e"].get<std::string>());
-    rsa_.get_n() = cpp_int(password_json_["public_key"]["n"].get<std::string>());
-    rsa_.get_d() = cpp_int(password_json_["private_key"]["d"].get<std::string>());
+std::string Password::decryptPassword() {
+    rsa_.get_e() =
+            cpp_int(password_json_["public_key"]["e"].get<std::string>());
+    rsa_.get_n() =
+            cpp_int(password_json_["public_key"]["n"].get<std::string>());
+    rsa_.get_d() =
+            cpp_int(password_json_["private_key"]["d"].get<std::string>());
 
     return rsa_.decrypt(password_json_["password"]);
 }
@@ -36,15 +38,10 @@ Password::Password(std::string company, std::string username,
                       {"password", rsa_.encrypt(password)},
                       {"created_at", std::time(nullptr)},
                       // Store public key components for future decryption
-                        {"public_key", {
-                            {"e", rsa_.get_e().str()},
-                            {"n", rsa_.get_n().str()}
-                        }},
-                        {"private_key", {
-                            {"d", rsa_.get_d().str()},
-                            {"n", rsa_.get_n().str()}
-                        }}
-                    };
+                      {"public_key",
+                       {{"e", rsa_.get_e().str()}, {"n", rsa_.get_n().str()}}},
+                      {"private_key",
+                       {{"d", rsa_.get_d().str()}, {"n", rsa_.get_n().str()}}}};
 };
 
 std::string PasswordManager::view() {
@@ -102,29 +99,26 @@ int PasswordManager::createPasswordFile() {
     }
 }
 
-
 int PasswordManager::createKeyFile() {
     try {
         std::string master_file_name = filename_ + ".key";
-        std::ifstream key_file(master_file_name);
+        std::ofstream key_file(master_file_name);
 
         if (key_file.good()) {
             return -1;
         }
 
-        json key_data = {
-                {"d", master_rsa_.get_d().str()},
-                {"e", master_rsa_.get_e().str()},
-                {"n", master_rsa_.get_n().str()}
-            };
+        json key_data = {{"d", master_rsa_.get_d().str()},
+                         {"e", master_rsa_.get_e().str()},
+                         {"n", master_rsa_.get_n().str()}};
 
         key_file << key_data.dump(4);
 
         return 0;
 
-    } catch (std::exception &e) {
+    } catch (std::exception& e) {
         return -1;
-    } 
+    }
 }
 
 int PasswordManager::updateFile(const json& data) {
