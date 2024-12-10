@@ -7,27 +7,21 @@
 },
 {
   "directory": "/home/kuso/Projects/vault/build",
-  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/app.cpp.o -c /home/kuso/Projects/vault/src/app.cpp",
-  "file": "/home/kuso/Projects/vault/src/app.cpp",
-  "output": "CMakeFiles/vault.dir/src/app.cpp.o"
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/crypto/cipher.cpp.o -c /home/kuso/Projects/vault/src/crypto/cipher.cpp",
+  "file": "/home/kuso/Projects/vault/src/crypto/cipher.cpp",
+  "output": "CMakeFiles/vault.dir/src/crypto/cipher.cpp.o"
 },
 {
   "directory": "/home/kuso/Projects/vault/build",
-  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/cipher.cpp.o -c /home/kuso/Projects/vault/src/cipher.cpp",
-  "file": "/home/kuso/Projects/vault/src/cipher.cpp",
-  "output": "CMakeFiles/vault.dir/src/cipher.cpp.o"
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/crypto/random.cpp.o -c /home/kuso/Projects/vault/src/crypto/random.cpp",
+  "file": "/home/kuso/Projects/vault/src/crypto/random.cpp",
+  "output": "CMakeFiles/vault.dir/src/crypto/random.cpp.o"
 },
 {
   "directory": "/home/kuso/Projects/vault/build",
-  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/encryptpage.cpp.o -c /home/kuso/Projects/vault/src/encryptpage.cpp",
-  "file": "/home/kuso/Projects/vault/src/encryptpage.cpp",
-  "output": "CMakeFiles/vault.dir/src/encryptpage.cpp.o"
-},
-{
-  "directory": "/home/kuso/Projects/vault/build",
-  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/loginScreen.cpp.o -c /home/kuso/Projects/vault/src/loginScreen.cpp",
-  "file": "/home/kuso/Projects/vault/src/loginScreen.cpp",
-  "output": "CMakeFiles/vault.dir/src/loginScreen.cpp.o"
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/crypto/rsa.cpp.o -c /home/kuso/Projects/vault/src/crypto/rsa.cpp",
+  "file": "/home/kuso/Projects/vault/src/crypto/rsa.cpp",
+  "output": "CMakeFiles/vault.dir/src/crypto/rsa.cpp.o"
 },
 {
   "directory": "/home/kuso/Projects/vault/build",
@@ -37,14 +31,38 @@
 },
 {
   "directory": "/home/kuso/Projects/vault/build",
-  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/mainpage.cpp.o -c /home/kuso/Projects/vault/src/mainpage.cpp",
-  "file": "/home/kuso/Projects/vault/src/mainpage.cpp",
-  "output": "CMakeFiles/vault.dir/src/mainpage.cpp.o"
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/passwordManager.cpp.o -c /home/kuso/Projects/vault/src/passwordManager.cpp",
+  "file": "/home/kuso/Projects/vault/src/passwordManager.cpp",
+  "output": "CMakeFiles/vault.dir/src/passwordManager.cpp.o"
 },
 {
   "directory": "/home/kuso/Projects/vault/build",
-  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/parser.cpp.o -c /home/kuso/Projects/vault/src/parser.cpp",
-  "file": "/home/kuso/Projects/vault/src/parser.cpp",
-  "output": "CMakeFiles/vault.dir/src/parser.cpp.o"
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/test.cpp.o -c /home/kuso/Projects/vault/src/test.cpp",
+  "file": "/home/kuso/Projects/vault/src/test.cpp",
+  "output": "CMakeFiles/vault.dir/src/test.cpp.o"
+},
+{
+  "directory": "/home/kuso/Projects/vault/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/ui/app.cpp.o -c /home/kuso/Projects/vault/src/ui/app.cpp",
+  "file": "/home/kuso/Projects/vault/src/ui/app.cpp",
+  "output": "CMakeFiles/vault.dir/src/ui/app.cpp.o"
+},
+{
+  "directory": "/home/kuso/Projects/vault/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/ui/encryptpage.cpp.o -c /home/kuso/Projects/vault/src/ui/encryptpage.cpp",
+  "file": "/home/kuso/Projects/vault/src/ui/encryptpage.cpp",
+  "output": "CMakeFiles/vault.dir/src/ui/encryptpage.cpp.o"
+},
+{
+  "directory": "/home/kuso/Projects/vault/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/ui/loginScreen.cpp.o -c /home/kuso/Projects/vault/src/ui/loginScreen.cpp",
+  "file": "/home/kuso/Projects/vault/src/ui/loginScreen.cpp",
+  "output": "CMakeFiles/vault.dir/src/ui/loginScreen.cpp.o"
+},
+{
+  "directory": "/home/kuso/Projects/vault/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/kuso/Projects/vault/build/vault_autogen/include -I/home/kuso/Projects/vault/src -I/home/kuso/Projects/vault/build/_deps/json-src/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -std=gnu++17 -g -fPIC -o CMakeFiles/vault.dir/src/ui/mainpage.cpp.o -c /home/kuso/Projects/vault/src/ui/mainpage.cpp",
+  "file": "/home/kuso/Projects/vault/src/ui/mainpage.cpp",
+  "output": "CMakeFiles/vault.dir/src/ui/mainpage.cpp.o"
 }
 ]

@@ -1,10 +1,8 @@
 #include "main.h"
-
 #include <QApplication>
-
-#include "app.h"
-#include "cipher.h"
-#include "parser.h"
+#include "crypto/cipher.h"
+#include "test.h"
+#include "ui/app.h"
 
 void setApplicationStyle(QApplication &app) {
     app.setStyleSheet(
@@ -27,15 +25,11 @@ void setApplicationStyle(QApplication &app) {
 }
 
 int main(int argc, char *argv[]) {
-    /* Testing */
-    /*
-    Parser parser = Parser("../files/passwords.json");
-    parser.view();
-
-    // std::string output = rsa("","");
-    // std::cout << output << std::endl;
+    rsaDebugTest();
 
     return 0;
+
+    /*
      */
     QApplication app(argc, argv);
     setApplicationStyle(app);

@@ -90,66 +90,52 @@ CMakeFiles/vault.dir/vault_autogen/mocs_compilation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/vault_autogen/mocs_compilation.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/build/vault_autogen/mocs_compilation.cpp -o CMakeFiles/vault.dir/vault_autogen/mocs_compilation.cpp.s
 
-CMakeFiles/vault.dir/src/app.cpp.o: CMakeFiles/vault.dir/flags.make
-CMakeFiles/vault.dir/src/app.cpp.o: /home/kuso/Projects/vault/src/app.cpp
-CMakeFiles/vault.dir/src/app.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/vault.dir/src/app.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/app.cpp.o -MF CMakeFiles/vault.dir/src/app.cpp.o.d -o CMakeFiles/vault.dir/src/app.cpp.o -c /home/kuso/Projects/vault/src/app.cpp
+CMakeFiles/vault.dir/src/crypto/cipher.cpp.o: CMakeFiles/vault.dir/flags.make
+CMakeFiles/vault.dir/src/crypto/cipher.cpp.o: /home/kuso/Projects/vault/src/crypto/cipher.cpp
+CMakeFiles/vault.dir/src/crypto/cipher.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/vault.dir/src/crypto/cipher.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/crypto/cipher.cpp.o -MF CMakeFiles/vault.dir/src/crypto/cipher.cpp.o.d -o CMakeFiles/vault.dir/src/crypto/cipher.cpp.o -c /home/kuso/Projects/vault/src/crypto/cipher.cpp
 
-CMakeFiles/vault.dir/src/app.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/app.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/app.cpp > CMakeFiles/vault.dir/src/app.cpp.i
+CMakeFiles/vault.dir/src/crypto/cipher.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/crypto/cipher.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/crypto/cipher.cpp > CMakeFiles/vault.dir/src/crypto/cipher.cpp.i
 
-CMakeFiles/vault.dir/src/app.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/app.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/app.cpp -o CMakeFiles/vault.dir/src/app.cpp.s
+CMakeFiles/vault.dir/src/crypto/cipher.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/crypto/cipher.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/crypto/cipher.cpp -o CMakeFiles/vault.dir/src/crypto/cipher.cpp.s
 
-CMakeFiles/vault.dir/src/cipher.cpp.o: CMakeFiles/vault.dir/flags.make
-CMakeFiles/vault.dir/src/cipher.cpp.o: /home/kuso/Projects/vault/src/cipher.cpp
-CMakeFiles/vault.dir/src/cipher.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/vault.dir/src/cipher.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/cipher.cpp.o -MF CMakeFiles/vault.dir/src/cipher.cpp.o.d -o CMakeFiles/vault.dir/src/cipher.cpp.o -c /home/kuso/Projects/vault/src/cipher.cpp
+CMakeFiles/vault.dir/src/crypto/random.cpp.o: CMakeFiles/vault.dir/flags.make
+CMakeFiles/vault.dir/src/crypto/random.cpp.o: /home/kuso/Projects/vault/src/crypto/random.cpp
+CMakeFiles/vault.dir/src/crypto/random.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/vault.dir/src/crypto/random.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/crypto/random.cpp.o -MF CMakeFiles/vault.dir/src/crypto/random.cpp.o.d -o CMakeFiles/vault.dir/src/crypto/random.cpp.o -c /home/kuso/Projects/vault/src/crypto/random.cpp
 
-CMakeFiles/vault.dir/src/cipher.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/cipher.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/cipher.cpp > CMakeFiles/vault.dir/src/cipher.cpp.i
+CMakeFiles/vault.dir/src/crypto/random.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/crypto/random.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/crypto/random.cpp > CMakeFiles/vault.dir/src/crypto/random.cpp.i
 
-CMakeFiles/vault.dir/src/cipher.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/cipher.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/cipher.cpp -o CMakeFiles/vault.dir/src/cipher.cpp.s
+CMakeFiles/vault.dir/src/crypto/random.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/crypto/random.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/crypto/random.cpp -o CMakeFiles/vault.dir/src/crypto/random.cpp.s
 
-CMakeFiles/vault.dir/src/encryptpage.cpp.o: CMakeFiles/vault.dir/flags.make
-CMakeFiles/vault.dir/src/encryptpage.cpp.o: /home/kuso/Projects/vault/src/encryptpage.cpp
-CMakeFiles/vault.dir/src/encryptpage.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/vault.dir/src/encryptpage.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/encryptpage.cpp.o -MF CMakeFiles/vault.dir/src/encryptpage.cpp.o.d -o CMakeFiles/vault.dir/src/encryptpage.cpp.o -c /home/kuso/Projects/vault/src/encryptpage.cpp
+CMakeFiles/vault.dir/src/crypto/rsa.cpp.o: CMakeFiles/vault.dir/flags.make
+CMakeFiles/vault.dir/src/crypto/rsa.cpp.o: /home/kuso/Projects/vault/src/crypto/rsa.cpp
+CMakeFiles/vault.dir/src/crypto/rsa.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/vault.dir/src/crypto/rsa.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/crypto/rsa.cpp.o -MF CMakeFiles/vault.dir/src/crypto/rsa.cpp.o.d -o CMakeFiles/vault.dir/src/crypto/rsa.cpp.o -c /home/kuso/Projects/vault/src/crypto/rsa.cpp
 
-CMakeFiles/vault.dir/src/encryptpage.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/encryptpage.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/encryptpage.cpp > CMakeFiles/vault.dir/src/encryptpage.cpp.i
+CMakeFiles/vault.dir/src/crypto/rsa.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/crypto/rsa.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/crypto/rsa.cpp > CMakeFiles/vault.dir/src/crypto/rsa.cpp.i
 
-CMakeFiles/vault.dir/src/encryptpage.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/encryptpage.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/encryptpage.cpp -o CMakeFiles/vault.dir/src/encryptpage.cpp.s
-
-CMakeFiles/vault.dir/src/loginScreen.cpp.o: CMakeFiles/vault.dir/flags.make
-CMakeFiles/vault.dir/src/loginScreen.cpp.o: /home/kuso/Projects/vault/src/loginScreen.cpp
-CMakeFiles/vault.dir/src/loginScreen.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/vault.dir/src/loginScreen.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/loginScreen.cpp.o -MF CMakeFiles/vault.dir/src/loginScreen.cpp.o.d -o CMakeFiles/vault.dir/src/loginScreen.cpp.o -c /home/kuso/Projects/vault/src/loginScreen.cpp
-
-CMakeFiles/vault.dir/src/loginScreen.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/loginScreen.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/loginScreen.cpp > CMakeFiles/vault.dir/src/loginScreen.cpp.i
-
-CMakeFiles/vault.dir/src/loginScreen.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/loginScreen.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/loginScreen.cpp -o CMakeFiles/vault.dir/src/loginScreen.cpp.s
+CMakeFiles/vault.dir/src/crypto/rsa.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/crypto/rsa.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/crypto/rsa.cpp -o CMakeFiles/vault.dir/src/crypto/rsa.cpp.s
 
 CMakeFiles/vault.dir/src/main.cpp.o: CMakeFiles/vault.dir/flags.make
 CMakeFiles/vault.dir/src/main.cpp.o: /home/kuso/Projects/vault/src/main.cpp
 CMakeFiles/vault.dir/src/main.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/vault.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/vault.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/main.cpp.o -MF CMakeFiles/vault.dir/src/main.cpp.o.d -o CMakeFiles/vault.dir/src/main.cpp.o -c /home/kuso/Projects/vault/src/main.cpp
 
 CMakeFiles/vault.dir/src/main.cpp.i: cmake_force
@@ -160,56 +146,118 @@ CMakeFiles/vault.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/main.cpp -o CMakeFiles/vault.dir/src/main.cpp.s
 
-CMakeFiles/vault.dir/src/mainpage.cpp.o: CMakeFiles/vault.dir/flags.make
-CMakeFiles/vault.dir/src/mainpage.cpp.o: /home/kuso/Projects/vault/src/mainpage.cpp
-CMakeFiles/vault.dir/src/mainpage.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/vault.dir/src/mainpage.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/mainpage.cpp.o -MF CMakeFiles/vault.dir/src/mainpage.cpp.o.d -o CMakeFiles/vault.dir/src/mainpage.cpp.o -c /home/kuso/Projects/vault/src/mainpage.cpp
+CMakeFiles/vault.dir/src/passwordManager.cpp.o: CMakeFiles/vault.dir/flags.make
+CMakeFiles/vault.dir/src/passwordManager.cpp.o: /home/kuso/Projects/vault/src/passwordManager.cpp
+CMakeFiles/vault.dir/src/passwordManager.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/vault.dir/src/passwordManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/passwordManager.cpp.o -MF CMakeFiles/vault.dir/src/passwordManager.cpp.o.d -o CMakeFiles/vault.dir/src/passwordManager.cpp.o -c /home/kuso/Projects/vault/src/passwordManager.cpp
 
-CMakeFiles/vault.dir/src/mainpage.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/mainpage.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/mainpage.cpp > CMakeFiles/vault.dir/src/mainpage.cpp.i
+CMakeFiles/vault.dir/src/passwordManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/passwordManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/passwordManager.cpp > CMakeFiles/vault.dir/src/passwordManager.cpp.i
 
-CMakeFiles/vault.dir/src/mainpage.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/mainpage.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/mainpage.cpp -o CMakeFiles/vault.dir/src/mainpage.cpp.s
+CMakeFiles/vault.dir/src/passwordManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/passwordManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/passwordManager.cpp -o CMakeFiles/vault.dir/src/passwordManager.cpp.s
 
-CMakeFiles/vault.dir/src/parser.cpp.o: CMakeFiles/vault.dir/flags.make
-CMakeFiles/vault.dir/src/parser.cpp.o: /home/kuso/Projects/vault/src/parser.cpp
-CMakeFiles/vault.dir/src/parser.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/vault.dir/src/parser.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/parser.cpp.o -MF CMakeFiles/vault.dir/src/parser.cpp.o.d -o CMakeFiles/vault.dir/src/parser.cpp.o -c /home/kuso/Projects/vault/src/parser.cpp
+CMakeFiles/vault.dir/src/test.cpp.o: CMakeFiles/vault.dir/flags.make
+CMakeFiles/vault.dir/src/test.cpp.o: /home/kuso/Projects/vault/src/test.cpp
+CMakeFiles/vault.dir/src/test.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/vault.dir/src/test.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/test.cpp.o -MF CMakeFiles/vault.dir/src/test.cpp.o.d -o CMakeFiles/vault.dir/src/test.cpp.o -c /home/kuso/Projects/vault/src/test.cpp
 
-CMakeFiles/vault.dir/src/parser.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/parser.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/parser.cpp > CMakeFiles/vault.dir/src/parser.cpp.i
+CMakeFiles/vault.dir/src/test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/test.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/test.cpp > CMakeFiles/vault.dir/src/test.cpp.i
 
-CMakeFiles/vault.dir/src/parser.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/parser.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/parser.cpp -o CMakeFiles/vault.dir/src/parser.cpp.s
+CMakeFiles/vault.dir/src/test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/test.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/test.cpp -o CMakeFiles/vault.dir/src/test.cpp.s
+
+CMakeFiles/vault.dir/src/ui/app.cpp.o: CMakeFiles/vault.dir/flags.make
+CMakeFiles/vault.dir/src/ui/app.cpp.o: /home/kuso/Projects/vault/src/ui/app.cpp
+CMakeFiles/vault.dir/src/ui/app.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/vault.dir/src/ui/app.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/ui/app.cpp.o -MF CMakeFiles/vault.dir/src/ui/app.cpp.o.d -o CMakeFiles/vault.dir/src/ui/app.cpp.o -c /home/kuso/Projects/vault/src/ui/app.cpp
+
+CMakeFiles/vault.dir/src/ui/app.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/ui/app.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/ui/app.cpp > CMakeFiles/vault.dir/src/ui/app.cpp.i
+
+CMakeFiles/vault.dir/src/ui/app.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/ui/app.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/ui/app.cpp -o CMakeFiles/vault.dir/src/ui/app.cpp.s
+
+CMakeFiles/vault.dir/src/ui/encryptpage.cpp.o: CMakeFiles/vault.dir/flags.make
+CMakeFiles/vault.dir/src/ui/encryptpage.cpp.o: /home/kuso/Projects/vault/src/ui/encryptpage.cpp
+CMakeFiles/vault.dir/src/ui/encryptpage.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/vault.dir/src/ui/encryptpage.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/ui/encryptpage.cpp.o -MF CMakeFiles/vault.dir/src/ui/encryptpage.cpp.o.d -o CMakeFiles/vault.dir/src/ui/encryptpage.cpp.o -c /home/kuso/Projects/vault/src/ui/encryptpage.cpp
+
+CMakeFiles/vault.dir/src/ui/encryptpage.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/ui/encryptpage.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/ui/encryptpage.cpp > CMakeFiles/vault.dir/src/ui/encryptpage.cpp.i
+
+CMakeFiles/vault.dir/src/ui/encryptpage.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/ui/encryptpage.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/ui/encryptpage.cpp -o CMakeFiles/vault.dir/src/ui/encryptpage.cpp.s
+
+CMakeFiles/vault.dir/src/ui/loginScreen.cpp.o: CMakeFiles/vault.dir/flags.make
+CMakeFiles/vault.dir/src/ui/loginScreen.cpp.o: /home/kuso/Projects/vault/src/ui/loginScreen.cpp
+CMakeFiles/vault.dir/src/ui/loginScreen.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/vault.dir/src/ui/loginScreen.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/ui/loginScreen.cpp.o -MF CMakeFiles/vault.dir/src/ui/loginScreen.cpp.o.d -o CMakeFiles/vault.dir/src/ui/loginScreen.cpp.o -c /home/kuso/Projects/vault/src/ui/loginScreen.cpp
+
+CMakeFiles/vault.dir/src/ui/loginScreen.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/ui/loginScreen.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/ui/loginScreen.cpp > CMakeFiles/vault.dir/src/ui/loginScreen.cpp.i
+
+CMakeFiles/vault.dir/src/ui/loginScreen.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/ui/loginScreen.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/ui/loginScreen.cpp -o CMakeFiles/vault.dir/src/ui/loginScreen.cpp.s
+
+CMakeFiles/vault.dir/src/ui/mainpage.cpp.o: CMakeFiles/vault.dir/flags.make
+CMakeFiles/vault.dir/src/ui/mainpage.cpp.o: /home/kuso/Projects/vault/src/ui/mainpage.cpp
+CMakeFiles/vault.dir/src/ui/mainpage.cpp.o: CMakeFiles/vault.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/vault.dir/src/ui/mainpage.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/vault.dir/src/ui/mainpage.cpp.o -MF CMakeFiles/vault.dir/src/ui/mainpage.cpp.o.d -o CMakeFiles/vault.dir/src/ui/mainpage.cpp.o -c /home/kuso/Projects/vault/src/ui/mainpage.cpp
+
+CMakeFiles/vault.dir/src/ui/mainpage.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/vault.dir/src/ui/mainpage.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuso/Projects/vault/src/ui/mainpage.cpp > CMakeFiles/vault.dir/src/ui/mainpage.cpp.i
+
+CMakeFiles/vault.dir/src/ui/mainpage.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/vault.dir/src/ui/mainpage.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuso/Projects/vault/src/ui/mainpage.cpp -o CMakeFiles/vault.dir/src/ui/mainpage.cpp.s
 
 # Object files for target vault
 vault_OBJECTS = \
 "CMakeFiles/vault.dir/vault_autogen/mocs_compilation.cpp.o" \
-"CMakeFiles/vault.dir/src/app.cpp.o" \
-"CMakeFiles/vault.dir/src/cipher.cpp.o" \
-"CMakeFiles/vault.dir/src/encryptpage.cpp.o" \
-"CMakeFiles/vault.dir/src/loginScreen.cpp.o" \
+"CMakeFiles/vault.dir/src/crypto/cipher.cpp.o" \
+"CMakeFiles/vault.dir/src/crypto/random.cpp.o" \
+"CMakeFiles/vault.dir/src/crypto/rsa.cpp.o" \
 "CMakeFiles/vault.dir/src/main.cpp.o" \
-"CMakeFiles/vault.dir/src/mainpage.cpp.o" \
-"CMakeFiles/vault.dir/src/parser.cpp.o"
+"CMakeFiles/vault.dir/src/passwordManager.cpp.o" \
+"CMakeFiles/vault.dir/src/test.cpp.o" \
+"CMakeFiles/vault.dir/src/ui/app.cpp.o" \
+"CMakeFiles/vault.dir/src/ui/encryptpage.cpp.o" \
+"CMakeFiles/vault.dir/src/ui/loginScreen.cpp.o" \
+"CMakeFiles/vault.dir/src/ui/mainpage.cpp.o"
 
 # External object files for target vault
 vault_EXTERNAL_OBJECTS =
 
 vault: CMakeFiles/vault.dir/vault_autogen/mocs_compilation.cpp.o
-vault: CMakeFiles/vault.dir/src/app.cpp.o
-vault: CMakeFiles/vault.dir/src/cipher.cpp.o
-vault: CMakeFiles/vault.dir/src/encryptpage.cpp.o
-vault: CMakeFiles/vault.dir/src/loginScreen.cpp.o
+vault: CMakeFiles/vault.dir/src/crypto/cipher.cpp.o
+vault: CMakeFiles/vault.dir/src/crypto/random.cpp.o
+vault: CMakeFiles/vault.dir/src/crypto/rsa.cpp.o
 vault: CMakeFiles/vault.dir/src/main.cpp.o
-vault: CMakeFiles/vault.dir/src/mainpage.cpp.o
-vault: CMakeFiles/vault.dir/src/parser.cpp.o
+vault: CMakeFiles/vault.dir/src/passwordManager.cpp.o
+vault: CMakeFiles/vault.dir/src/test.cpp.o
+vault: CMakeFiles/vault.dir/src/ui/app.cpp.o
+vault: CMakeFiles/vault.dir/src/ui/encryptpage.cpp.o
+vault: CMakeFiles/vault.dir/src/ui/loginScreen.cpp.o
+vault: CMakeFiles/vault.dir/src/ui/mainpage.cpp.o
 vault: CMakeFiles/vault.dir/build.make
 vault: /usr/lib/x86_64-linux-gnu/libQt6Widgets.so.6.4.2
 vault: /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2
@@ -217,7 +265,7 @@ vault: /usr/lib/x86_64-linux-gnu/libGLX.so
 vault: /usr/lib/x86_64-linux-gnu/libOpenGL.so
 vault: /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
 vault: CMakeFiles/vault.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable vault"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable vault"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/vault.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

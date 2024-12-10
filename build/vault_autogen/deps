@@ -3,20 +3,26 @@ vault_autogen/timestamp: \
 	/home/kuso/Projects/vault/build/CMakeFiles/3.28.3/CMakeCXXCompiler.cmake \
 	/home/kuso/Projects/vault/build/CMakeFiles/3.28.3/CMakeSystem.cmake \
 	/home/kuso/Projects/vault/build/vault_autogen/moc_predefs.h \
-	/home/kuso/Projects/vault/src/app.cpp \
-	/home/kuso/Projects/vault/src/app.h \
-	/home/kuso/Projects/vault/src/cipher.cpp \
-	/home/kuso/Projects/vault/src/cipher.h \
-	/home/kuso/Projects/vault/src/encryptpage.cpp \
-	/home/kuso/Projects/vault/src/encryptpage.h \
-	/home/kuso/Projects/vault/src/loginScreen.cpp \
-	/home/kuso/Projects/vault/src/loginScreen.h \
+	/home/kuso/Projects/vault/src/crypto/cipher.cpp \
+	/home/kuso/Projects/vault/src/crypto/cipher.h \
+	/home/kuso/Projects/vault/src/crypto/random.cpp \
+	/home/kuso/Projects/vault/src/crypto/random.h \
+	/home/kuso/Projects/vault/src/crypto/rsa.cpp \
+	/home/kuso/Projects/vault/src/crypto/rsa.h \
 	/home/kuso/Projects/vault/src/main.cpp \
 	/home/kuso/Projects/vault/src/main.h \
-	/home/kuso/Projects/vault/src/mainpage.cpp \
-	/home/kuso/Projects/vault/src/mainpage.h \
-	/home/kuso/Projects/vault/src/parser.cpp \
-	/home/kuso/Projects/vault/src/parser.h \
+	/home/kuso/Projects/vault/src/passwordManager.cpp \
+	/home/kuso/Projects/vault/src/passwordManager.h \
+	/home/kuso/Projects/vault/src/test.cpp \
+	/home/kuso/Projects/vault/src/test.h \
+	/home/kuso/Projects/vault/src/ui/app.cpp \
+	/home/kuso/Projects/vault/src/ui/app.h \
+	/home/kuso/Projects/vault/src/ui/encryptpage.cpp \
+	/home/kuso/Projects/vault/src/ui/encryptpage.h \
+	/home/kuso/Projects/vault/src/ui/loginScreen.cpp \
+	/home/kuso/Projects/vault/src/ui/loginScreen.h \
+	/home/kuso/Projects/vault/src/ui/mainpage.cpp \
+	/home/kuso/Projects/vault/src/ui/mainpage.h \
 	/usr/include/alloca.h \
 	/usr/include/asm-generic/errno-base.h \
 	/usr/include/asm-generic/errno.h \

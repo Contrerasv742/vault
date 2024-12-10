@@ -6,7 +6,9 @@
 
 // Helper Functions
 int process_command(std::string command);
+
 void print_commands();
+
 void print_ciphers();
 
 #endif  // CIPHER_H

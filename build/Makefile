@@ -200,101 +200,77 @@ vault_autogen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault_autogen.dir/build.make CMakeFiles/vault_autogen.dir/build
 .PHONY : vault_autogen/fast
 
-src/app.o: src/app.cpp.o
-.PHONY : src/app.o
+src/crypto/cipher.o: src/crypto/cipher.cpp.o
+.PHONY : src/crypto/cipher.o
 
 # target to build an object file
-src/app.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/app.cpp.o
-.PHONY : src/app.cpp.o
+src/crypto/cipher.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/crypto/cipher.cpp.o
+.PHONY : src/crypto/cipher.cpp.o
 
-src/app.i: src/app.cpp.i
-.PHONY : src/app.i
+src/crypto/cipher.i: src/crypto/cipher.cpp.i
+.PHONY : src/crypto/cipher.i
 
 # target to preprocess a source file
-src/app.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/app.cpp.i
-.PHONY : src/app.cpp.i
+src/crypto/cipher.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/crypto/cipher.cpp.i
+.PHONY : src/crypto/cipher.cpp.i
 
-src/app.s: src/app.cpp.s
-.PHONY : src/app.s
+src/crypto/cipher.s: src/crypto/cipher.cpp.s
+.PHONY : src/crypto/cipher.s
 
 # target to generate assembly for a file
-src/app.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/app.cpp.s
-.PHONY : src/app.cpp.s
+src/crypto/cipher.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/crypto/cipher.cpp.s
+.PHONY : src/crypto/cipher.cpp.s
 
-src/cipher.o: src/cipher.cpp.o
-.PHONY : src/cipher.o
+src/crypto/random.o: src/crypto/random.cpp.o
+.PHONY : src/crypto/random.o
 
 # target to build an object file
-src/cipher.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/cipher.cpp.o
-.PHONY : src/cipher.cpp.o
+src/crypto/random.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/crypto/random.cpp.o
+.PHONY : src/crypto/random.cpp.o
 
-src/cipher.i: src/cipher.cpp.i
-.PHONY : src/cipher.i
+src/crypto/random.i: src/crypto/random.cpp.i
+.PHONY : src/crypto/random.i
 
 # target to preprocess a source file
-src/cipher.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/cipher.cpp.i
-.PHONY : src/cipher.cpp.i
+src/crypto/random.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/crypto/random.cpp.i
+.PHONY : src/crypto/random.cpp.i
 
-src/cipher.s: src/cipher.cpp.s
-.PHONY : src/cipher.s
+src/crypto/random.s: src/crypto/random.cpp.s
+.PHONY : src/crypto/random.s
 
 # target to generate assembly for a file
-src/cipher.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/cipher.cpp.s
-.PHONY : src/cipher.cpp.s
+src/crypto/random.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/crypto/random.cpp.s
+.PHONY : src/crypto/random.cpp.s
 
-src/encryptpage.o: src/encryptpage.cpp.o
-.PHONY : src/encryptpage.o
+src/crypto/rsa.o: src/crypto/rsa.cpp.o
+.PHONY : src/crypto/rsa.o
 
 # target to build an object file
-src/encryptpage.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/encryptpage.cpp.o
-.PHONY : src/encryptpage.cpp.o
+src/crypto/rsa.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/crypto/rsa.cpp.o
+.PHONY : src/crypto/rsa.cpp.o
 
-src/encryptpage.i: src/encryptpage.cpp.i
-.PHONY : src/encryptpage.i
-
-# target to preprocess a source file
-src/encryptpage.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/encryptpage.cpp.i
-.PHONY : src/encryptpage.cpp.i
-
-src/encryptpage.s: src/encryptpage.cpp.s
-.PHONY : src/encryptpage.s
-
-# target to generate assembly for a file
-src/encryptpage.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/encryptpage.cpp.s
-.PHONY : src/encryptpage.cpp.s
-
-src/loginScreen.o: src/loginScreen.cpp.o
-.PHONY : src/loginScreen.o
-
-# target to build an object file
-src/loginScreen.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/loginScreen.cpp.o
-.PHONY : src/loginScreen.cpp.o
-
-src/loginScreen.i: src/loginScreen.cpp.i
-.PHONY : src/loginScreen.i
+src/crypto/rsa.i: src/crypto/rsa.cpp.i
+.PHONY : src/crypto/rsa.i
 
 # target to preprocess a source file
-src/loginScreen.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/loginScreen.cpp.i
-.PHONY : src/loginScreen.cpp.i
+src/crypto/rsa.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/crypto/rsa.cpp.i
+.PHONY : src/crypto/rsa.cpp.i
 
-src/loginScreen.s: src/loginScreen.cpp.s
-.PHONY : src/loginScreen.s
+src/crypto/rsa.s: src/crypto/rsa.cpp.s
+.PHONY : src/crypto/rsa.s
 
 # target to generate assembly for a file
-src/loginScreen.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/loginScreen.cpp.s
-.PHONY : src/loginScreen.cpp.s
+src/crypto/rsa.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/crypto/rsa.cpp.s
+.PHONY : src/crypto/rsa.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -320,53 +296,149 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/mainpage.o: src/mainpage.cpp.o
-.PHONY : src/mainpage.o
+src/passwordManager.o: src/passwordManager.cpp.o
+.PHONY : src/passwordManager.o
 
 # target to build an object file
-src/mainpage.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/mainpage.cpp.o
-.PHONY : src/mainpage.cpp.o
+src/passwordManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/passwordManager.cpp.o
+.PHONY : src/passwordManager.cpp.o
 
-src/mainpage.i: src/mainpage.cpp.i
-.PHONY : src/mainpage.i
+src/passwordManager.i: src/passwordManager.cpp.i
+.PHONY : src/passwordManager.i
 
 # target to preprocess a source file
-src/mainpage.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/mainpage.cpp.i
-.PHONY : src/mainpage.cpp.i
+src/passwordManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/passwordManager.cpp.i
+.PHONY : src/passwordManager.cpp.i
 
-src/mainpage.s: src/mainpage.cpp.s
-.PHONY : src/mainpage.s
+src/passwordManager.s: src/passwordManager.cpp.s
+.PHONY : src/passwordManager.s
 
 # target to generate assembly for a file
-src/mainpage.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/mainpage.cpp.s
-.PHONY : src/mainpage.cpp.s
+src/passwordManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/passwordManager.cpp.s
+.PHONY : src/passwordManager.cpp.s
 
-src/parser.o: src/parser.cpp.o
-.PHONY : src/parser.o
+src/test.o: src/test.cpp.o
+.PHONY : src/test.o
 
 # target to build an object file
-src/parser.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/parser.cpp.o
-.PHONY : src/parser.cpp.o
+src/test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/test.cpp.o
+.PHONY : src/test.cpp.o
 
-src/parser.i: src/parser.cpp.i
-.PHONY : src/parser.i
+src/test.i: src/test.cpp.i
+.PHONY : src/test.i
 
 # target to preprocess a source file
-src/parser.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/parser.cpp.i
-.PHONY : src/parser.cpp.i
+src/test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/test.cpp.i
+.PHONY : src/test.cpp.i
 
-src/parser.s: src/parser.cpp.s
-.PHONY : src/parser.s
+src/test.s: src/test.cpp.s
+.PHONY : src/test.s
 
 # target to generate assembly for a file
-src/parser.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/parser.cpp.s
-.PHONY : src/parser.cpp.s
+src/test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/test.cpp.s
+.PHONY : src/test.cpp.s
+
+src/ui/app.o: src/ui/app.cpp.o
+.PHONY : src/ui/app.o
+
+# target to build an object file
+src/ui/app.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/ui/app.cpp.o
+.PHONY : src/ui/app.cpp.o
+
+src/ui/app.i: src/ui/app.cpp.i
+.PHONY : src/ui/app.i
+
+# target to preprocess a source file
+src/ui/app.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/ui/app.cpp.i
+.PHONY : src/ui/app.cpp.i
+
+src/ui/app.s: src/ui/app.cpp.s
+.PHONY : src/ui/app.s
+
+# target to generate assembly for a file
+src/ui/app.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/ui/app.cpp.s
+.PHONY : src/ui/app.cpp.s
+
+src/ui/encryptpage.o: src/ui/encryptpage.cpp.o
+.PHONY : src/ui/encryptpage.o
+
+# target to build an object file
+src/ui/encryptpage.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/ui/encryptpage.cpp.o
+.PHONY : src/ui/encryptpage.cpp.o
+
+src/ui/encryptpage.i: src/ui/encryptpage.cpp.i
+.PHONY : src/ui/encryptpage.i
+
+# target to preprocess a source file
+src/ui/encryptpage.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/ui/encryptpage.cpp.i
+.PHONY : src/ui/encryptpage.cpp.i
+
+src/ui/encryptpage.s: src/ui/encryptpage.cpp.s
+.PHONY : src/ui/encryptpage.s
+
+# target to generate assembly for a file
+src/ui/encryptpage.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/ui/encryptpage.cpp.s
+.PHONY : src/ui/encryptpage.cpp.s
+
+src/ui/loginScreen.o: src/ui/loginScreen.cpp.o
+.PHONY : src/ui/loginScreen.o
+
+# target to build an object file
+src/ui/loginScreen.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/ui/loginScreen.cpp.o
+.PHONY : src/ui/loginScreen.cpp.o
+
+src/ui/loginScreen.i: src/ui/loginScreen.cpp.i
+.PHONY : src/ui/loginScreen.i
+
+# target to preprocess a source file
+src/ui/loginScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/ui/loginScreen.cpp.i
+.PHONY : src/ui/loginScreen.cpp.i
+
+src/ui/loginScreen.s: src/ui/loginScreen.cpp.s
+.PHONY : src/ui/loginScreen.s
+
+# target to generate assembly for a file
+src/ui/loginScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/ui/loginScreen.cpp.s
+.PHONY : src/ui/loginScreen.cpp.s
+
+src/ui/mainpage.o: src/ui/mainpage.cpp.o
+.PHONY : src/ui/mainpage.o
+
+# target to build an object file
+src/ui/mainpage.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/ui/mainpage.cpp.o
+.PHONY : src/ui/mainpage.cpp.o
+
+src/ui/mainpage.i: src/ui/mainpage.cpp.i
+.PHONY : src/ui/mainpage.i
+
+# target to preprocess a source file
+src/ui/mainpage.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/ui/mainpage.cpp.i
+.PHONY : src/ui/mainpage.cpp.i
+
+src/ui/mainpage.s: src/ui/mainpage.cpp.s
+.PHONY : src/ui/mainpage.s
+
+# target to generate assembly for a file
+src/ui/mainpage.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/src/ui/mainpage.cpp.s
+.PHONY : src/ui/mainpage.cpp.s
 
 vault_autogen/mocs_compilation.o: vault_autogen/mocs_compilation.cpp.o
 .PHONY : vault_autogen/mocs_compilation.o
@@ -407,27 +479,36 @@ help:
 	@echo "... vault_autogen"
 	@echo "... vault_autogen_timestamp_deps"
 	@echo "... vault"
-	@echo "... src/app.o"
-	@echo "... src/app.i"
-	@echo "... src/app.s"
-	@echo "... src/cipher.o"
-	@echo "... src/cipher.i"
-	@echo "... src/cipher.s"
-	@echo "... src/encryptpage.o"
-	@echo "... src/encryptpage.i"
-	@echo "... src/encryptpage.s"
-	@echo "... src/loginScreen.o"
-	@echo "... src/loginScreen.i"
-	@echo "... src/loginScreen.s"
+	@echo "... src/crypto/cipher.o"
+	@echo "... src/crypto/cipher.i"
+	@echo "... src/crypto/cipher.s"
+	@echo "... src/crypto/random.o"
+	@echo "... src/crypto/random.i"
+	@echo "... src/crypto/random.s"
+	@echo "... src/crypto/rsa.o"
+	@echo "... src/crypto/rsa.i"
+	@echo "... src/crypto/rsa.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/mainpage.o"
-	@echo "... src/mainpage.i"
-	@echo "... src/mainpage.s"
-	@echo "... src/parser.o"
-	@echo "... src/parser.i"
-	@echo "... src/parser.s"
+	@echo "... src/passwordManager.o"
+	@echo "... src/passwordManager.i"
+	@echo "... src/passwordManager.s"
+	@echo "... src/test.o"
+	@echo "... src/test.i"
+	@echo "... src/test.s"
+	@echo "... src/ui/app.o"
+	@echo "... src/ui/app.i"
+	@echo "... src/ui/app.s"
+	@echo "... src/ui/encryptpage.o"
+	@echo "... src/ui/encryptpage.i"
+	@echo "... src/ui/encryptpage.s"
+	@echo "... src/ui/loginScreen.o"
+	@echo "... src/ui/loginScreen.i"
+	@echo "... src/ui/loginScreen.s"
+	@echo "... src/ui/mainpage.o"
+	@echo "... src/ui/mainpage.i"
+	@echo "... src/ui/mainpage.s"
 	@echo "... vault_autogen/mocs_compilation.o"
 	@echo "... vault_autogen/mocs_compilation.i"
 	@echo "... vault_autogen/mocs_compilation.s"

@@ -1,10 +1,12 @@
-#ifndef ENCRYPTION_H
-#define ENCRYPTION_H
+#ifndef CIPHER_H
+#define CIPHER_H
 
+#include <algorithm>
 #include <cstdint>
 #include <functional>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 // Helper Template
 template <typename T>
@@ -16,29 +18,45 @@ public:
     }
 };
 
-// Update CipherFunction to accept two parameters
 using CipherFunction =
         std::function<std::string(const std::string &, const std::string &)>;
 
 extern std::unordered_map<std::string, CipherFunction> cipherOptable;
+
 extern ExtendedVector<std::string> commands;
 
 // Helper Methods
-bool prime(uint32_t num);
-
-uint32_t generate_random_prime(uint32_t min, uint32_t max);
-
 int encrypt();
 
 int decrypt();
 
 // Encryption Algorithms
+/* @param plaintext     mesage to encrypt
+ * @param key           shift value
+ * @algorithm:
+ *     shifts plaintext (key) number of times
+ * @return encrypted message
+ * */
 std::string caesar(const std::string &plaintext, const std::string &shift);
 
+/* @param plaintext mesage to encrypt
+ * @param key       string converted to rotation values
+ * @algorithm:
+ *      uses key to generate a shift (similar to caesar)
+ * @return encrypted message
+ * */
 std::string vigenere(const std::string &plaintext, const std::string &key);
 
+// Encryption Algorithms
+/* @param plaintext     mesage to encrypt
+ * @param key           (Unused)
+ * @algorithm:
+ *      cesar cypher with shift = 13
+ * @return encrypted message
+ * */
 std::string rot13(const std::string &plaintext, const std::string &unused);
 
-std::string rsa(const std::string &plaintext, const std::string &key);
+// TODO: Created in own file
+std::string rsa(const std::string &plaintext, const std::string &shift);
 
-#endif  // ENCRYPTION_H
+#endif  // CIPHER_H

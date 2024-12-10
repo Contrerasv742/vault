@@ -101,12 +101,12 @@ CMakeFiles/vault.dir/all: CMakeFiles/vault_autogen_timestamp_deps.dir/all
 CMakeFiles/vault.dir/all: CMakeFiles/vault_autogen.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault.dir/build.make CMakeFiles/vault.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target vault"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13 "Built target vault"
 .PHONY : CMakeFiles/vault.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/vault.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kuso/Projects/vault/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kuso/Projects/vault/build/CMakeFiles 14
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/vault.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/kuso/Projects/vault/build/CMakeFiles 0
 .PHONY : CMakeFiles/vault.dir/rule
@@ -153,7 +153,7 @@ CMakeFiles/vault_autogen_timestamp_deps.dir/clean:
 CMakeFiles/vault_autogen.dir/all: CMakeFiles/vault_autogen_timestamp_deps.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault_autogen.dir/build.make CMakeFiles/vault_autogen.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/vault_autogen.dir/build.make CMakeFiles/vault_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=11 "Built target vault_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kuso/Projects/vault/build/CMakeFiles --progress-num=14 "Built target vault_autogen"
 .PHONY : CMakeFiles/vault_autogen.dir/all
 
 # Build rule for subdir invocation for target.
