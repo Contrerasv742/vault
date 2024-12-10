@@ -1,0 +1,3 @@
+/home/kuso/Projects/vault/build/_deps/json-subbuild/CMakeFiles/json-populate.dir
+/home/kuso/Projects/vault/build/_deps/json-subbuild/CMakeFiles/edit_cache.dir
+/home/kuso/Projects/vault/build/_deps/json-subbuild/CMakeFiles/rebuild_cache.dir
