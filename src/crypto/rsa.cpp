@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <random>
 
+// PKC: Public asyptometric cryptography
 RSA::RSA() {
     // I: Calculate two large unique primes
     cpp_int min = 1000000;

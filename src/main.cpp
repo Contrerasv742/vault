@@ -25,11 +25,11 @@ void setApplicationStyle(QApplication &app) {
 }
 
 int main(int argc, char *argv[]) {
+    /*
     rsaDebugTest();
 
     return 0;
 
-    /*
      */
     QApplication app(argc, argv);
     setApplicationStyle(app);
