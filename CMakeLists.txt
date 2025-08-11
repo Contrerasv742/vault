@@ -1,23 +1,17 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 4.0.0)
 project(vault VERSION 1.0 LANGUAGES CXX)
 
 # Basic configuration
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Find Qt packages
 find_package(Qt6 REQUIRED COMPONENTS Widgets Gui)
-
-# Find Boost Multiprecision package
-find_package(Boost REQUIRED)
-
-# Include directories
-include_directories(${CMAKE_SOURCE_DIR}/src)
-include_directories(${Boost_INCLUDE_DIRS})
 
 # Fetch JSON parser library
 include(FetchContent)
@@ -28,21 +22,35 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(json)
 
-# Explicitly list source files instead of using glob
-file(GLOB_RECURSE SOURCES
-    "${CMAKE_SOURCE_DIR}/src/*.cpp"
-    "${CMAKE_SOURCE_DIR}/src/crypto/*.cpp"
-    "${CMAKE_SOURCE_DIR}/src/ui/*.cpp"
+# Include Source and Header Files
+set(SOURCES
+    src/main.cpp
+    src/passwordManager.cpp
+    src/test.cpp
+    src/crypto/cipher.cpp
+    src/crypto/rsa.cpp
+    src/crypto/random.cpp
+    src/ui/app.cpp
+    src/ui/mainpage.cpp
+    src/ui/loginScreen.cpp
+    src/ui/encryptpage.cpp
 )
 
-file(GLOB_RECURSE HEADERS
-    "${CMAKE_SOURCE_DIR}/src/*.h"
-    "${CMAKE_SOURCE_DIR}/src/crypto/*.h"
-    "${CMAKE_SOURCE_DIR}/src/ui/*.h"
+set(HEADERS
+    src/main.h
+    src/passwordManager.h
+    src/test.h
+    src/crypto/cipher.h
+    src/crypto/random.h
+    src/crypto/rsa.h
+    src/ui/encryptpage.h
+    src/ui/app.h
+    src/ui/mainpage.h
+    src/ui/loginScreen.h
 )
-
-# Create the executable
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+
+target_include_directories(${PROJECT_NAME} PRIVATE src)
 
 # Link libraries
 target_link_libraries(${PROJECT_NAME} PRIVATE 
@@ -52,7 +60,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 
 # Add debug symbols
-target_compile_options(${PROJECT_NAME} PRIVATE -g)
+# target_compile_options(${PROJECT_NAME} PRIVATE -g)
 
 # Installation rules
 install(TARGETS ${PROJECT_NAME}

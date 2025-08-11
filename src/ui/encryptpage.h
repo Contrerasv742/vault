@@ -9,8 +9,6 @@
 #include <QTextEdit>
 #include <QWidget>
 
-#include "../crypto/cipher.h"
-
 class EncryptPage : public QWidget {
     Q_OBJECT
 

@@ -1,42 +1,44 @@
 #include "passwordManager.h"
 #include <fstream>
 #include <iostream>
+#include <print>
+using namespace std;
 
-std::string Password::decryptPassword() {
+string Password::decryptPassword() {
     rsa_.get_e() =
-            cpp_int(password_json_["public_key"]["e"].get<std::string>());
+            cpp_int(password_json_["public_key"]["e"].get<string>());
     rsa_.get_n() =
-            cpp_int(password_json_["public_key"]["n"].get<std::string>());
+            cpp_int(password_json_["public_key"]["n"].get<string>());
     rsa_.get_d() =
-            cpp_int(password_json_["private_key"]["d"].get<std::string>());
+            cpp_int(password_json_["private_key"]["d"].get<string>());
 
     return rsa_.decrypt(password_json_["password"]);
 }
 
-PasswordManager::PasswordManager(const std::string filename)
+PasswordManager::PasswordManager(const string filename)
     : filename_(filename) {
-    std::ifstream file(filename, std::ios::in | std::ios::out);
+    ifstream file(filename, ios::in | ios::out);
 
     if (!file.is_open()) {
-        std::cout << "Creating file." << std::endl;
+        println("Creating file."); 
         createPasswordFile();
     } else {
-        std::cout << "Grabbing old file information." << std::endl;
+        println("Grabbing old file information.");
         readJSON();
     }
 
     file.close();
 }
 
-Password::Password(std::string company, std::string username,
-                   std::string password) {
+Password::Password(string company, string username,
+                   string password) {
     rsa_ = RSA();
 
     // Create new password entry
     password_json_ = {{"company", company},
                       {"username", username},
                       {"password", rsa_.encrypt(password)},
-                      {"created_at", std::time(nullptr)},
+                      {"created_at", time(nullptr)},
                       // Store public key components for future decryption
                       {"public_key",
                        {{"e", rsa_.get_e().str()}, {"n", rsa_.get_n().str()}}},
@@ -44,7 +46,7 @@ Password::Password(std::string company, std::string username,
                        {{"d", rsa_.get_d().str()}, {"n", rsa_.get_n().str()}}}};
 };
 
-std::string PasswordManager::view() {
+string PasswordManager::view() {
     try {
         // Try to read JSON if empty
         if (json_data_.empty()) {
@@ -52,14 +54,14 @@ std::string PasswordManager::view() {
         }
 
         return json_data_.dump(4);
-    } catch (const std::exception& e) {
-        return "Error attempting to read json data" + std::string(e.what());
+    } catch (const exception& e) {
+        return "Error attempting to read json data" + string(e.what());
     }
 }
 
 int PasswordManager::readJSON() {
     try {
-        std::ifstream file(filename_);
+        ifstream file(filename_);
 
         if (!file.is_open()) {
             return -1;
@@ -72,8 +74,8 @@ int PasswordManager::readJSON() {
         // If file can't be parsed, create new structure
         json_data_ = {{"metadata",
                        {{"version", "1.0"},
-                        {"created_at", std::time(nullptr)},
-                        {"last_modified", std::time(nullptr)}}},
+                        {"created_at", time(nullptr)},
+                        {"last_modified", time(nullptr)}}},
                       {"passwords", json::array()}};
         return -2;
     }
@@ -84,8 +86,8 @@ int PasswordManager::createPasswordFile() {
         // Create initial JSON structure
         json data = {{"metadata",
                       {{"version", "1.0"},
-                       {"created_at", std::time(nullptr)},
-                       {"last_modified", std::time(nullptr)}}},
+                       {"created_at", time(nullptr)},
+                       {"last_modified", time(nullptr)}}},
                      {"passwords", json::array()}};
 
         // Save to class member
@@ -94,15 +96,15 @@ int PasswordManager::createPasswordFile() {
         return updateFile(data);
     } catch (const json::parse_error& e) {
         return -2;  // JSON parsing error
-    } catch (const std::exception& e) {
+    } catch (const exception& e) {
         return -3;  // Other errors
     }
 }
 
 int PasswordManager::createKeyFile() {
     try {
-        std::string master_file_name = filename_ + ".key";
-        std::ofstream key_file(master_file_name);
+        string master_file_name = filename_ + ".key";
+        ofstream key_file(master_file_name);
 
         if (key_file.good()) {
             return -1;
@@ -116,14 +118,14 @@ int PasswordManager::createKeyFile() {
 
         return 0;
 
-    } catch (std::exception& e) {
+    } catch (exception& e) {
         return -1;
     }
 }
 
 int PasswordManager::updateFile(const json& data) {
     try {
-        std::ofstream file(filename_);
+        ofstream file(filename_);
 
         if (!file.is_open()) {
             return -1;
@@ -135,18 +137,18 @@ int PasswordManager::updateFile(const json& data) {
         // Ensure metadata exists
         if (!output.contains("metadata")) {
             output["metadata"] = {{"version", "1.0"},
-                                  {"created_at", std::time(nullptr)},
-                                  {"last_modified", std::time(nullptr)}};
+                                  {"created_at", time(nullptr)},
+                                  {"last_modified", time(nullptr)}};
         } else {
             // Update last modified timestamp
-            json_data_["metadata"]["last_modified"] = std::time(nullptr);
+            json_data_["metadata"]["last_modified"] = time(nullptr);
         }
 
         file << output.dump(4);
         file.close();
         return 0;
 
-    } catch (const std::exception& e) {
+    } catch (const exception& e) {
         return -2;
     }
 }
@@ -160,19 +162,19 @@ int PasswordManager::addPassword(Password password) {
 
         // Ensure we don't add duplicates
         if (passwordExists(password) > 0) {
-            std::cerr << "Attempting to add existing password." << std::endl;
+            cerr << "Attempting to add existing password." << endl;
             return -1;
         }
 
         // Ensure metadata exists
         if (!json_data_.contains("metadata")) {
             json_data_["metadata"] = {{"version", "1.0"},
-                                      {"created_at", std::time(nullptr)},
-                                      {"last_modified", std::time(nullptr)}};
+                                      {"created_at", time(nullptr)},
+                                      {"last_modified", time(nullptr)}};
         }
 
         // Update metadata
-        json_data_["metadata"]["last_modified"] = std::time(nullptr);
+        json_data_["metadata"]["last_modified"] = time(nullptr);
 
         // Add new password
         json_data_["passwords"].push_back(password.readJSON());
@@ -180,16 +182,16 @@ int PasswordManager::addPassword(Password password) {
         return updateFile(NULL);
     } catch (const json::exception& e) {
         return -2;
-    } catch (const std::exception& e) {
+    } catch (const exception& e) {
         return -3;
     }
 }
 
 int PasswordManager::passwordExists(Password password) {
     auto& passwords = json_data_["passwords"];
-    json entry_json = password.readJSON();  // Changed std::string to json
+    json entry_json = password.readJSON();  // Changed string to json
 
-    auto it = std::find_if(
+    auto it = find_if(
             passwords.begin(), passwords.end(),
             [&entry_json](const json& entry) {  // Changed capture variable name
                 return entry["company"] == entry_json["company"] &&
@@ -205,7 +207,7 @@ int PasswordManager::removePassword(Password password) {
         auto& passwords = json_data_["passwords"];
         json entry_json = password.readJSON();
 
-        auto it = std::find_if(
+        auto it = find_if(
                 passwords.begin(), passwords.end(),
                 [&entry_json](
                         const json& entry) {  // Changed capture variable name
@@ -215,7 +217,7 @@ int PasswordManager::removePassword(Password password) {
                 });
 
         if (it == passwords.end()) {
-            std::cerr << "Password not in password manager." << std::endl;
+            cerr << "Password not in password manager." << endl;
             return -1;
         }
 
@@ -225,10 +227,10 @@ int PasswordManager::removePassword(Password password) {
         // Save changes to file
         return updateFile(json_data_);
     } catch (const json::exception& e) {
-        std::cerr << "JSON error: " << e.what() << std::endl;
+        cerr << "JSON error: " << e.what() << endl;
         return -2;
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+    } catch (const exception& e) {
+        cerr << "Error: " << e.what() << endl;
         return -3;
     }
 }
