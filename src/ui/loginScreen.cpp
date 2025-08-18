@@ -13,7 +13,7 @@
 LoginScreen::LoginScreen(QWidget *parent) : QWidget(parent) {
     setupUI();
     QTimer::singleShot(100, this, &LoginScreen::animateTitle);
-    QTimer::singleShot(3000, this, &LoginScreen::showInputFields);
+    QTimer::singleShot(800, this, &LoginScreen::showInputFields);
 }
 
 void LoginScreen::setupUI() {

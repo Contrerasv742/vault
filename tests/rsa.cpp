@@ -1,9 +1,8 @@
-#include <iostream>
 #include <print>
 
 #include "crypto/rsa.h"
-#include "passwordManager.h"
-#include "test.h"
+#include "parser/passwordManager.h"
+#include "rsa.h"
 using namespace std;
 
 int passwordManagerTest() {

@@ -1,6 +1,8 @@
 #include "mainpage.h"
 
+#include <qcoreevent.h>
 #include <qnamespace.h>
+#include <qtimer.h>
 
 #include <QAction>
 #include <QDebug>
@@ -13,6 +15,10 @@
 #include <QRegularExpression>
 #include <QScrollArea>
 #include <algorithm>
+#include <map>
+#include <string>
+
+using namespace std;
 
 MainPage::MainPage(QWidget *parent)
     : QWidget(parent),
@@ -36,12 +42,14 @@ MainPage::MainPage(QWidget *parent)
     // Create a vertical separator
     QFrame *separator = new QFrame(this);
     separator->setFrameShape(QFrame::VLine);
+    separator->setFixedWidth(1);
     separator->setStyleSheet(
-            "QFrame { background-color: white; margin: 10px 0; opacity: 0.5}");
+            "QFrame { background-color: white; margin: 10px 0; opacity: 0.1; }"
+    );
 
     mainLayout->addWidget(leftContainer, 1);
     mainLayout->addWidget(separator);
-    mainLayout->addWidget(rightContainer, 2);
+    mainLayout->addWidget(rightContainer, 3);
 
     // Setting up containers
     setupLeftContainer();
@@ -172,34 +180,33 @@ void MainPage::setupLeftContainer() {
     searchBar = new QLineEdit(leftContainer);
     searchBar->setPlaceholderText("Search");
     searchBar->setStyleSheet(
-            "QLineEdit {"
-            "   background-color: #2C2F33;"
-            "   color: #FFFFFF;"
-            "   border: none;"
-            "   padding: 5px;"
-            "   padding-left: 30px;"  // Make room for the icon
-            "   border-radius: 15px;"
-            "   min-height: 30px;"
-            "}"
-            "QLineEdit:focus {"
-            "   outline: none;"
-            "   border: 2px solid #DC8A78;"
-            "}");
+        "QLineEdit {"
+        "   background-color: #2C2F33;"
+        "   color: #FFFFFF;"
+        "   border: none;"
+        "   padding: 5px;"
+        "   padding-left: 30px;"
+        "   border-radius: 15px;"
+        "   min-height: 30px;"
+        "}"
+        "QLineEdit:focus {"
+        "   outline: none;"
+        "   border: 2px solid #DC8A78;"
+        "}"
+    );
     connect(searchBar, &QLineEdit::textChanged, this,
             &MainPage::filterPasswords);
 
     // Add search icon
     QAction *searchAction = new QAction(searchBar);
-    QIcon searchIcon("../icons/search.png");  // Make sure you have this icon
+    QIcon searchIcon("../icons/search.png");
     searchAction->setIcon(searchIcon);
     searchBar->addAction(searchAction, QLineEdit::LeadingPosition);
 
     leftLayout->addWidget(searchBar);
 
-    // Options button
-    optionsButton =
-            createStyledButton("Options", "options.png",
-                               true);  // The false parameter hides the text
+    // Options button (false parameter hides the text)
+    optionsButton = createStyledButton("Options", "options.png", true);
     optionsButton->setStyleSheet(optionsButton->styleSheet() +
                                  "QPushButton { padding-right: 15px; }");
     leftLayout->addWidget(optionsButton);
@@ -209,20 +216,29 @@ void MainPage::setupLeftContainer() {
     QVBoxLayout *optionsLayout = new QVBoxLayout(optionsWidget);
     optionsLayout->setAlignment(Qt::AlignLeft);
     optionsLayout->setContentsMargins(0, 0, 0, 0);
-    optionsLayout->setSpacing(10);  // Increased from 5
+    optionsLayout->setSpacing(10);
 
-    QStringList options = {"Decrypt", "Encrypt", "Passwords", "Secure Notes"};
-    QStringList icons = {"open-lock.png", "closed-lock.png", "password.png",
-                         "notepad.png"};
-    for (int i = 0; i < options.size(); ++i) {
-        QPushButton *optionButton = createStyledButton(options[i], icons[i]);
-        optionsLayout->addWidget(optionButton);
+    // Nav-Bar Map Containing: {btn-name, btn-icon-name}
+    map<string, string> nav_buttons {
+        {"Decrypt", "open-lock.png"},
+        {"Encrypt", "closed-lock.png"},
+        {"Passwords", "password.png"},
+        {"Secure Notes", "notepad.png"},
+    };
 
-        if (options[i] == "Encrypt") {
-            connect(optionButton, &QPushButton::clicked, this,
+    // Create all the buttons for the nav-bar
+    for (const auto& pair: nav_buttons) {
+        const QString btn_name = QString::fromStdString(pair.first);
+        const QString icon_name = QString::fromStdString(pair.second);
+
+        QPushButton *nav_button = createStyledButton(btn_name, icon_name);
+        optionsLayout->addWidget(nav_button );
+
+        if (btn_name == "Encrypt") {
+            connect(nav_button , &QPushButton::clicked, this,
                     &MainPage::showEncryptView);
-        } else if (options[i] == "Passwords") {
-            connect(optionButton, &QPushButton::clicked, this,
+        } else if (btn_name == "Passwords") {
+            connect(nav_button , &QPushButton::clicked, this,
                     &MainPage::showPasswordView);
         }
     }
@@ -230,7 +246,6 @@ void MainPage::setupLeftContainer() {
     optionsWidget->setLayout(optionsLayout);
     optionsWidget->hide();
     leftLayout->addWidget(optionsWidget);
-
     leftLayout->addStretch();
 
     connect(optionsButton, &QPushButton::clicked, this,
@@ -244,30 +259,31 @@ QPushButton *MainPage::createStyledButton(const QString &text,
                                           bool showText) {
     QPushButton *button = new QPushButton();
     button->setStyleSheet(
-            QString("QPushButton {"
-                    "   background-color: transparent;"
-                    "   color: #FFFFFF;"
-                    "   border: 2px solid #FFFFFF;"
-                    "   border-radius: 20px;"
-                    "   padding: 10px;"
-                    "   text-align: left;"
-                    "   font-weight: bold;"
-                    "   min-width: 150px;"
-                    "   min-height: 30px;"
-                    "}"
-                    "QPushButton:hover {"
-                    "   background-color: #DC8A78;"
-                    "}"));
+        QString("QPushButton {"
+            "   background-color: transparent;"
+            "   color: #FFFFFF;"
+            "   border: 2px solid #FFFFFF;"
+            "   border-radius: 20px;"
+            "   padding: 10px;"
+            "   text-align: left;"
+            "   font-weight: bold;"
+            "   min-width: 150px;"
+            "   min-height: 30px;"
+            "}"
+            "QPushButton:hover {"
+            "   background-color: #DC8A78;"
+            "}"
+        )
+    );
 
     // Create a horizontal layout for the button
     QHBoxLayout *buttonLayout = new QHBoxLayout(button);
-    buttonLayout->setContentsMargins(10, 10, 10,
-                                     10);  // Increased from 5, 5, 5, 5
-    buttonLayout->setSpacing(15);          // Increased from 10
+    buttonLayout->setContentsMargins(10, 10, 10, 10);
+    buttonLayout->setSpacing(15);
 
     // Add the icon
     QLabel *iconLabel = new QLabel(button);
-    iconLabel->setFixedSize(30, 30);  // Increased from 20, 20
+    iconLabel->setFixedSize(30, 30);
     iconLabel->setStyleSheet("QLabel { background-color: none; }");
     QString iconPath = QString("../icons/%1").arg(iconName);
     if (QFile::exists(iconPath)) {
@@ -287,8 +303,9 @@ QPushButton *MainPage::createStyledButton(const QString &text,
 
         iconLabel->setPixmap(transparentPixmap);
     } else {
+        // Hide the label if icon is not found
         qWarning() << "Icon not found:" << iconPath;
-        iconLabel->hide();  // Hide the label if icon is not found
+        iconLabel->hide();  
     }
     buttonLayout->addWidget(iconLabel);
 
@@ -345,65 +362,124 @@ void MainPage::createPasswordCard(const QString &companyName,
         qCritical() << "Failed to create card widget";
         return;
     }
-    card->setObjectName("Card_" +
-                        companyName);  // Set a unique object name for debugging
-    card->setStyleSheet(
-            "background-color: #323547; border-radius: 5px; padding: 10px;");
+    
+    // Set a unique object name for debugging
+    card->setObjectName(companyName + "_Password_Card");  
+    card->setStyleSheet("background-color: #323547; border-radius: 5px; padding: 15px;");
     card->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    card->setFixedHeight(80);  // Adjust this value as needed
+    card->setFixedHeight(180);
 
-    QHBoxLayout *cardLayout = new QHBoxLayout(card);
+    // Main vertical layout for the card
+    QVBoxLayout *cardLayout = new QVBoxLayout(card);
     cardLayout->setContentsMargins(10, 10, 10, 10);
     cardLayout->setSpacing(10);
 
-    // Company logo (placeholder)
+    // Top section: Company logo (centered) - favorite button positioned absolutely
+    QHBoxLayout *topLayout = new QHBoxLayout();
+    topLayout->setSpacing(10);
+
+    // Add stretch to center the logo
+    topLayout->addStretch();
+
+    // Company logo
     QLabel *logoLabel = new QLabel(card);
-    logoLabel->setFixedSize(32, 32);
+    logoLabel->setFixedSize(48, 48); 
     QString logoPath = QString("../icons/%1.png").arg(companyName.toLower());
     if (QFile::exists(logoPath)) {
         QPixmap originalPixmap(logoPath);
         QPixmap scaledPixmap = originalPixmap.scaled(
-                32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
         // Create a new transparent pixmap
-        QPixmap finalPixmap(32, 32);
+        QPixmap finalPixmap(48, 48);
         finalPixmap.fill(Qt::transparent);
 
         // Paint the scaled pixmap centered on the transparent pixmap
         QPainter painter(&finalPixmap);
-        painter.drawPixmap((32 - scaledPixmap.width()) / 2,
-                           (32 - scaledPixmap.height()) / 2, scaledPixmap);
+        painter.drawPixmap((48 - scaledPixmap.width()) / 2,
+                           (48 - scaledPixmap.height()) / 2, scaledPixmap);
 
         logoLabel->setPixmap(finalPixmap);
     } else {
         qWarning() << "Failed to load logo for" << companyName;
         logoLabel->setText(companyName.left(1));
         logoLabel->setStyleSheet(
-                "background-color: #DC8A78; color: white; border-radius: 16px; "
-                "font-weight: bold; qproperty-alignment: AlignCenter;");
+                "background-color: #DC8A78; color: white; border-radius: 24px; "
+                "font-weight: bold; font-size: 20px; qproperty-alignment: AlignCenter;");
     }
-    cardLayout->addWidget(logoLabel);
+    
+    topLayout->addWidget(logoLabel);
 
-    // Company name and username
-    QVBoxLayout *infoLayout = new QVBoxLayout();
+    // Add stretch to center the logo
+    topLayout->addStretch();
+
+    cardLayout->addLayout(topLayout);
+
+    // Favorite toggle button (absolutely positioned at top right)
+    QPushButton *favoriteButton = new QPushButton(card);
+    favoriteButton->setObjectName("favoriteButton");
+    favoriteButton->setIcon(QIcon("../icons/empty-star.png"));
+    favoriteButton->setStyleSheet("background-color: transparent; border: none;");
+    favoriteButton->setFixedSize(24, 24);
+
+    // Position the favorite btn absolutely in the top-right corner
+    // This will be called after the card is fully constructed
+    QTimer::singleShot(0, [favoriteButton, card]() {
+        // 10px from top, 10px from right (24px width + 10px margin)
+        favoriteButton->move(card->width(), 10); 
+    });
+
+    // Handle resize events to keep the button positioned correctly
+    QObject *resizeHandler = new QObject(card);
+    card->installEventFilter(resizeHandler);
+    QObject::connect(resizeHandler, &QObject::destroyed, [](){ /* cleanup if needed */ });
+    
+    // Override event filter for resize handling
+    auto eventFilter = [favoriteButton, card](QObject *obj, QEvent *event) -> bool {
+        if (event->type() == QEvent::Resize) {
+            favoriteButton->move(card->width() - 34, 10);
+        }
+        return false; // Don't consume the event
+    };
+    
+    // Store the lambda in the object for proper cleanup
+    resizeHandler->setProperty("eventFilter", QVariant::fromValue(eventFilter));
+
+    // Middle section: Company name
+    QHBoxLayout *nameLayout = new QHBoxLayout();
+    nameLayout->addStretch(); // Center the company name
+
     QLabel *companyLabel = new QLabel(companyName, card);
+    companyLabel->setStyleSheet("color: #FFFFFF; font-weight: bold; font-size: 16px;");
+    nameLayout->addWidget(companyLabel);
+    nameLayout->addStretch(); // Center the company name
+    
+    cardLayout->addLayout(nameLayout);
+
+    // Add stretch to push bottom content down
+    cardLayout->addStretch();
+
+    // Bottom section: Username and copy button
+    QHBoxLayout *bottomLayout = new QHBoxLayout();
+    bottomLayout->setSpacing(10);
+
+    // Username
     QLabel *usernameLabel = new QLabel(username, card);
-    companyLabel->setStyleSheet("color: #FFFFFF; font-weight: bold;");
-    usernameLabel->setStyleSheet("color: #AAAAAA;");
-    companyLabel->setFixedHeight(40);
-    usernameLabel->setFixedHeight(40);
-    infoLayout->addWidget(companyLabel);
-    infoLayout->addWidget(usernameLabel);
-    cardLayout->addLayout(infoLayout, 1);
+    usernameLabel->setStyleSheet("color: #AAAAAA; font-size: 12px;");
+    bottomLayout->addWidget(usernameLabel);
+
+    // Add stretch to push copy button to the right
+    bottomLayout->addStretch();
 
     // Copy password button
     QPushButton *copyButton = new QPushButton("Copy", card);
     copyButton->setStyleSheet(
             "background-color: #DC8A78; color: #FFFFFF; border: none; padding: "
-            "5px "
-            "10px; border-radius: 3px;");
-    copyButton->setFixedSize(60, 30);
-    cardLayout->addWidget(copyButton);
+            "8px 12px; border-radius: 4px; font-weight: bold;");
+    copyButton->setFixedHeight(30);
+    bottomLayout->addWidget(copyButton);
+
+    cardLayout->addLayout(bottomLayout);
 
     // Add the card to both favorites and all passwords layouts
     if (favoritesScrollArea && favoritesScrollArea->widget()) {
@@ -427,17 +503,6 @@ void MainPage::createPasswordCard(const QString &companyName,
             qDebug() << "Added card to all passwords for" << companyName;
         }
     }
-
-    // Add favorite toggle button
-    QPushButton *favoriteButton = new QPushButton(card);
-    favoriteButton->setObjectName(
-            "favoriteButton");  // Set an object name for easy finding
-    favoriteButton->setIcon(
-            QIcon("../icons/empty-star.png"));  // Start with empty star
-    favoriteButton->setStyleSheet(
-            "background-color: transparent; border: none;");
-    favoriteButton->setFixedSize(24, 24);
-    cardLayout->addWidget(favoriteButton);
 
     // Set initial favorite status
     card->setProperty("isFavorite", false);
@@ -475,8 +540,8 @@ void MainPage::reorderCards(QGridLayout *layout) {
 
     qDebug() << "Collected" << cards.size() << "cards";
 
-    // Sort cards alphabetically based on company name, with empty names at the
-    // end
+    // Sort cards alphabetically based on company name, 
+    // with empty names at the end
     std::stable_sort(cards.begin(), cards.end(),
                      [](const QPair<QWidget *, QString> &a,
                         const QPair<QWidget *, QString> &b) {

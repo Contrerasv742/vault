@@ -24,9 +24,8 @@ FetchContent_MakeAvailable(json)
 
 # Include Source and Header Files
 set(SOURCES
-    src/main.cpp
-    src/passwordManager.cpp
-    src/test.cpp
+    src/app/main.cpp
+    src/parser/passwordManager.cpp
     src/crypto/cipher.cpp
     src/crypto/rsa.cpp
     src/crypto/random.cpp
@@ -34,12 +33,13 @@ set(SOURCES
     src/ui/mainpage.cpp
     src/ui/loginScreen.cpp
     src/ui/encryptpage.cpp
+
+    tests/rsa.cpp
 )
 
 set(HEADERS
-    src/main.h
-    src/passwordManager.h
-    src/test.h
+    src/app/main.h
+    src/parser/passwordManager.h
     src/crypto/cipher.h
     src/crypto/random.h
     src/crypto/rsa.h
@@ -47,6 +47,8 @@ set(HEADERS
     src/ui/app.h
     src/ui/mainpage.h
     src/ui/loginScreen.h
+
+    tests/rsa.h
 )
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
