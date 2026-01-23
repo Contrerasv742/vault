@@ -12,19 +12,16 @@ import (
 )
 
 const (
-	primary = ""
-	accent = "#8CDEDF"
+	primary		= ""
+	accent		= "#00ADAD"
 
-	title = "#7494EA"
-	highlight = "#E71D36"
+	light 		= "#F3F3F4"
+	dark 		=  subtext
 
-
-	text = "#F3F3F4"
-	subtext = "#30323D"
-	selected_text = ""
-	background_text = ""
-
-	dark = "#30323D"
+	text		= "#F3F3F4"
+	subtext		= "#5F5F5F"
+	title 		= "#677DB7"
+	highlight 	= "#E71D36"
 )
 
 var (
@@ -34,45 +31,45 @@ var (
 
 	subtitleStyle = lipgloss.NewStyle().
 			Foreground(lipgloss.Color(accent)).
-			MarginBottom(2)
+			MarginBottom(1)
 
 	normalStyle = lipgloss.NewStyle().
-			Foreground(lipgloss.Color("#F3F3F4"))
+			Foreground(lipgloss.Color(light))
 
 	selectedStyle = lipgloss.NewStyle().
-			Foreground(lipgloss.Color("#999AC6")).
+			Foreground(lipgloss.Color(primary)).
 			Bold(true)
 
 	helpStyle = lipgloss.NewStyle().
-			Foreground(lipgloss.Color("#8AA399")).
+			Foreground(lipgloss.Color(dark)).
 			MarginTop(1)
 
 	boxStyle = lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
-			BorderForeground(lipgloss.Color("63"))
+			BorderForeground(lipgloss.Color("61"))
 
 	mainContainerStyle = lipgloss.NewStyle()
 
 	passwordPanelStyle = lipgloss.NewStyle().
 			Border(lipgloss.NormalBorder()).
-			BorderForeground(lipgloss.Color("#D5F9DE"))
+			BorderForeground(lipgloss.Color(accent))
 
 	detailPanelStyle = lipgloss.NewStyle().
 			Border(lipgloss.NormalBorder()).
-			BorderForeground(lipgloss.Color("#D5F9DE"))
+			BorderForeground(lipgloss.Color(accent))
 
 	inputStyle = lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
-			Foreground(lipgloss.Color("#8FA6CD"))
+			Foreground(lipgloss.Color(primary))
 
 	buttonStyle = lipgloss.NewStyle().
-			Background(lipgloss.Color("#FF6B00")).
-			Foreground(lipgloss.Color("#000000")).
+			Background(lipgloss.Color(highlight)).
+			Foreground(lipgloss.Color(dark)).
 			Bold(true)
 
 	buttonInactiveStyle = lipgloss.NewStyle().
 				Border(lipgloss.RoundedBorder()).
-				BorderForeground(lipgloss.Color("#444444"))
+				BorderForeground(lipgloss.Color(dark))
 )
 
 const split_ratio = 0.3
