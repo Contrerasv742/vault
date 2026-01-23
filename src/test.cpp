@@ -3,6 +3,7 @@
 #include "crypto/rsa.h"
 #include "passwordManager.h"
 #include "test.h"
+using namespace std;
 
 int passwordManagerTest() {
     /* Testing */
@@ -14,12 +15,12 @@ int passwordManagerTest() {
     passwords.addPassword(google);
     passwords.addPassword(x);
 
-    std::cout << passwords.view() << std::endl;
+    cout << passwords.view() << endl;
 
     passwords.removePassword(google);
     passwords.removePassword(x);
 
-    std::cout << passwords.view() << std::endl;
+    cout << passwords.view() << endl;
 
     return 0;
 }
@@ -28,37 +29,37 @@ int rsaDebugTest() {
     RSA rsa = RSA();
 
     // Test different message lengths
-    std::vector<std::string> test_messages = {
+    vector<string> test_messages = {
             "CheggSack",         // Single character
             "Hello",             // Short message
             "Hello, World! 123"  // Longer message with special chars
     };
 
     for (const auto& message : test_messages) {
-        std::cout << "\nTesting message: \"" << message << "\"\n";
-        std::cout << "Message length: " << message.length() << "\n";
+        cout << "\nTesting message: \"" << message << "\"\n";
+        cout << "Message length: " << message.length() << "\n";
 
         try {
             // Encrypt
-            std::string encrypted = rsa.encrypt(message);
-            std::cout << "Encrypted (space-separated blocks): " << encrypted
+            string encrypted = rsa.encrypt(message);
+            cout << "Encrypted (space-separated blocks): " << encrypted
                       << "\n";
 
             // Decrypt
-            std::string decrypted = rsa.decrypt(encrypted);
-            std::cout << "Decrypted: \"" << decrypted << "\"\n";
+            string decrypted = rsa.decrypt(encrypted);
+            cout << "Decrypted: \"" << decrypted << "\"\n";
 
             // Verify
             if (message == decrypted) {
-                std::cout
+                cout
                         << "✓ Test passed - successful encryption/decryption\n";
             } else {
-                std::cout << "✗ Test failed - decrypted message doesn't match "
+                cout << "✗ Test failed - decrypted message doesn't match "
                              "original\n";
             }
 
-        } catch (const std::exception& e) {
-            std::cout << "✗ Test failed with error: " << e.what() << "\n";
+        } catch (const exception& e) {
+            cout << "✗ Test failed with error: " << e.what() << "\n";
         }
     }
 

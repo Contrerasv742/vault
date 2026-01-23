@@ -1,4 +1,5 @@
 #include "random.h"
+#include <random>
 
 cpp_int RandomGenerator::generate(const cpp_int& min, const cpp_int& max) {
     static std::random_device rd;

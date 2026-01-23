@@ -1,19 +1,17 @@
 #include <cstdlib>
-#include <iomanip>
 #include <iostream>
-#include <random>
 #include <unordered_map>
-
-#include "cipher.h"
+#include "crypto/cipher.h"
+using namespace std;
 
 // Initialize the global variables defined in the header
-std::unordered_map<std::string, CipherFunction> cipherOptable;
+unordered_map<string, CipherFunction> cipherOptable;
 
-ExtendedVector<std::string> commands = {"encrypt", "decrypt", "help", "exit"};
+ExtendedVector<string> commands = {"encrypt", "decrypt", "help", "exit"};
 
 // Helper function definition
-void fatal_error(std::string msg) {
-    std::cerr << msg << std::endl;
+void fatal_error(string msg) {
+    cerr << msg << endl;
     exit(1);
 }
 
@@ -27,21 +25,21 @@ void init_cipher_table() {
     };
 }
 
-std::string caesar(const std::string &plaintext, const std::string &shift) {
+string caesar(const string &plaintext, const string &shift) {
     int rotation;
 
     try {
-        rotation = std::stoi(shift);
-    } catch (const std::exception &e) {
-        std::cerr << "Invalid input. Using shift value of 0." << std::endl;
+        rotation = stoi(shift);
+    } catch (const exception &e) {
+        cerr << "Invalid input. Using shift value of 0." << endl;
         rotation = 0;
     }
 
-    std::string encryption = "";
+    string encryption = "";
 
     for (char c : plaintext) {
-        if (std::isalpha(c)) {
-            char base = std::isupper(c) ? 'A' : 'a';
+        if (isalpha(c)) {
+            char base = isupper(c) ? 'A' : 'a';
             char shifted = static_cast<char>((c + rotation - base) % 26 + base);
             encryption += shifted;
         } else {
@@ -52,15 +50,15 @@ std::string caesar(const std::string &plaintext, const std::string &shift) {
     return encryption;
 }
 
-std::string vigenere(const std::string &plaintext, const std::string &key) {
-    std::string encryption = "";
+string vigenere(const string &plaintext, const string &key) {
+    string encryption = "";
 
     for (size_t i = 0; i < plaintext.length(); i++) {
         char c = plaintext[i];
         int rotation = static_cast<int>(key[i % key.length()]);
 
-        if (std::isalpha(c)) {
-            char base = std::isupper(c) ? 'A' : 'a';
+        if (isalpha(c)) {
+            char base = isupper(c) ? 'A' : 'a';
             char shifted = static_cast<char>((c + rotation - base) % 26 + base);
             encryption += shifted;
         } else {
@@ -71,10 +69,10 @@ std::string vigenere(const std::string &plaintext, const std::string &key) {
     return encryption;
 }
 
-std::string rot13(const std::string &plaintext, const std::string &unused) {
+string rot13(const string &plaintext, const string &unused) {
     return caesar(plaintext, "13");
 }
 
-std::string rsa(const std::string &plaintext, const std::string &unused) {
+string rsa(const string &plaintext, const string &unused) {
     return "Buns.\n";
 }

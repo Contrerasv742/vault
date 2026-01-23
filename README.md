@@ -16,7 +16,7 @@
 # Algorithms
 
 Currently being designed and tested in the backend. Eventually, will be usable 
-in the GUI once most the alogirthms are correctly implemented and password 
+in the GUI once most the algorithms are correctly implemented and password 
 managing is completed and well tested.
 
 # Purpose
@@ -24,9 +24,11 @@ managing is completed and well tested.
 Create a password manager with RSA Encryption to properly store my personal 
 passwords locally. Project will also aid in understanding core encryption algorithms. 
 Additionally, I will learn about making cross platform applications, allowing me
-and users to securly store passwords.
+and users to securely store passwords.
 
-# Tools
+# Dependencies
+
+In order for Vault run, these must be installed
 
 ```bash
 > sudo apt install qt6-base-dev
@@ -41,13 +43,13 @@ Recommended:
 > cd build
 ```
 
-Alternitavely:
+Alternatively:
 
 ```bash
 > mkdir -p build
 > cd build
 > cmake ..
-> make
+> make -j`nproc`
 ```
 
 # Execution
