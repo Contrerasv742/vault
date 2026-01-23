@@ -12,16 +12,20 @@ import (
 )
 
 const (
-	primary		= ""
-	accent		= "#00ADAD"
-
-	light 		= "#F3F3F4"
-	dark 		=  subtext
+	primary		= "#00ADAD"
+	accent		= "#00FFFF"
 
 	text		= "#F3F3F4"
 	subtext		= "#5F5F5F"
-	title 		= "#677DB7"
-	highlight 	= "#E71D36"
+	title 		= primary
+	highlight 	= "#D65F86"
+
+	light 		= "#F3F3F4"
+	dark 		=  subtext
+	red			= "#D65F86"
+	orange		= "#FF5F00"
+	green		= "#D5F9DE"
+	perrywinkle	= "#677DB7"
 )
 
 var (
@@ -46,7 +50,7 @@ var (
 
 	boxStyle = lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
-			BorderForeground(lipgloss.Color("61"))
+			BorderForeground(lipgloss.Color(accent))
 
 	mainContainerStyle = lipgloss.NewStyle()
 
@@ -458,7 +462,7 @@ func (m model) viewMain() string {
 		lipgloss.Center,
 		content,
 		lipgloss.WithWhitespaceChars(" "),
-		lipgloss.WithWhitespaceForeground(lipgloss.Color("#000000")),
+		lipgloss.WithWhitespaceForeground(lipgloss.Color(dark)),
 	)
 }
 
@@ -468,7 +472,7 @@ func (m model) renderDetailPanel(entry passwordEntry, width int) string {
 	
 	// Entry name as title
 	entryTitle := lipgloss.NewStyle().
-		Foreground(lipgloss.Color(accent)).
+		Foreground(lipgloss.Color(red)).
 		Bold(true).
 		Render(entry.name)
 	b.WriteString(entryTitle + "\n\n")
@@ -501,7 +505,7 @@ func (m model) renderDetailPanel(entry passwordEntry, width int) string {
 			Render("URL:")
 		b.WriteString(urlLabel + "\n")
 		b.WriteString(lipgloss.NewStyle().
-			Foreground(lipgloss.Color("#D5F9DE")).
+			Foreground(lipgloss.Color(green)).
 			Render(entry.url) + "\n")
 	}
 	
@@ -513,7 +517,7 @@ func (m model) renderDetailPanel(entry passwordEntry, width int) string {
 }
 
 func (m model) viewAdd() string {
-	header := titleStyle.Render("+ Add New Password") + "\n"
+	header := titleStyle.Render("Add New Password") + "\n"
 
 	var b strings.Builder
 
@@ -529,20 +533,18 @@ func (m model) viewAdd() string {
 	b.WriteString(normalStyle.Render("URL (optional):") + "\n")
 	b.WriteString(inputStyle.Render(m.urlInput.View()) + "\n\n")
 
-	// Buttons
-	saveBtn := buttonStyle.Render("Save")
-	if m.focusIndex != 4 {
-		saveBtn = buttonInactiveStyle.Render(" Save ")
-	}
-	
-	cancelBtn := buttonInactiveStyle.Render(" Cancel ")
-	
-	buttons := lipgloss.JoinHorizontal(lipgloss.Left, saveBtn, "  ", cancelBtn)
-	b.WriteString(buttons + "\n")
+	form := boxStyle.Width(m.width/2).Render(b.String())
 
-	form := boxStyle.Width(m.width - 40).Render(b.String())
+	key := lipgloss.NewStyle().Foreground(lipgloss.Color(text))
+	act := lipgloss.NewStyle().Foreground(lipgloss.Color(subtext))
+	sep := key.Render("\t")
 
-	help := helpStyle.Render("tab: next field • enter: save • esc: cancel")
+	help := helpStyle.Render(
+		key.Render("tab") + act.Render(" next/field") + sep +
+		key.Render("enter") + act.Render(" save") + sep +
+		key.Render("esc") + act.Render(" cancel") + sep +
+		key.Render("↑/↓") + act.Render(" navigate"),
+	)
 
 	content := lipgloss.JoinVertical(
 		lipgloss.Center,
@@ -559,7 +561,7 @@ func (m model) viewAdd() string {
 		lipgloss.Center,
 		content,
 		lipgloss.WithWhitespaceChars(" "),
-		lipgloss.WithWhitespaceForeground(lipgloss.Color("#000000")),
+		lipgloss.WithWhitespaceForeground(lipgloss.Color(dark)),
 	)
 }
 
@@ -573,10 +575,10 @@ func (m model) viewEntry() string {
 
 	var b strings.Builder
 
-	b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(subtext)).Render("Username/Email:") + "\n")
+	b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(primary)).Render("Username/Email:") + "\n")
 	b.WriteString(normalStyle.Render(e.username) + "\n\n")
 
-	b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(subtext)).Render("Password:") + "\n")
+	b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(primary)).Render("Password:") + "\n")
 	if m.showPassword {
 		b.WriteString(normalStyle.Render(e.password) + "\n")
 	} else {
@@ -585,11 +587,11 @@ func (m model) viewEntry() string {
 	b.WriteString("\n")
 
 	if e.url != "" {
-		b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(subtext)).Render("URL:") + "\n")
+		b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(primary)).Render("URL:") + "\n")
 		b.WriteString(normalStyle.Render(e.url) + "\n\n")
 	}
 
-	details := boxStyle.Width(m.width - 30).Render(b.String())
+	details := boxStyle.Width(m.width/3).Render(b.String())
 
 
 	key := lipgloss.NewStyle().Foreground(lipgloss.Color(text))
@@ -617,7 +619,7 @@ func (m model) viewEntry() string {
 		lipgloss.Center,
 		content,
 		lipgloss.WithWhitespaceChars(" "),
-		lipgloss.WithWhitespaceForeground(lipgloss.Color("#000000")),
+		lipgloss.WithWhitespaceForeground(lipgloss.Color(dark)),
 	)
 }
 
