@@ -27,22 +27,19 @@ const (
 	periwinkle	= lipgloss.Color("#677DB7")
 )
 
-// Pages/Container
+// Panels/Container
 var (
 	mainContainerStyle = lipgloss.NewStyle()
 
-	passwordPanelStyle = lipgloss.NewStyle().
+	panelStyle = lipgloss.NewStyle().
 			Border(lipgloss.NormalBorder()).
 			BorderForeground(accent)
 
-	detailPanelStyle = lipgloss.NewStyle().
-			Border(lipgloss.NormalBorder()).
-			BorderForeground(accent).
+	passwordPanelStyle = panelStyle
+
+	detailPanelStyle = panelStyle.
 			Padding(0, 2)
 
-	helpStyle = lipgloss.NewStyle().
-			Foreground(dark).
-			MarginTop(1)
 )
 
 // Components
@@ -62,9 +59,7 @@ var (
 			Foreground(primary).
 			Bold(true)
 
-	boxStyle = lipgloss.NewStyle().
-			Border(lipgloss.NormalBorder()).
-			BorderForeground(accent)
+	boxStyle = panelStyle
 
 	inputStyle = lipgloss.NewStyle().
 			Border(lipgloss.NormalBorder()).
@@ -88,11 +83,28 @@ var (
 
 
 // Help
-var (
-	key = lipgloss.NewStyle().Foreground(text)
-	act = lipgloss.NewStyle().Foreground(subtext)
-	sep = key.Render("\t")
-)
+type helpItem struct {
+	key    string
+	action string
+}
+
+func renderHelp(items []helpItem) string {
+	key := lipgloss.NewStyle().Foreground(text)
+	act := lipgloss.NewStyle().Foreground(subtext)
+	sep := key.Render("\t")
+	
+	var help []string
+	for _, item := range items {
+		help = append(help, key.Render(item.key) + act.Render( " " +
+			item.action))
+	}
+
+	helpStyle := lipgloss.NewStyle().
+			Foreground(dark).
+			MarginTop(1)
+
+	return helpStyle.Render(strings.Join(help, sep))
+}
 
 const (
 	// Layout ratios and margins
@@ -447,12 +459,12 @@ func (m model) viewMain() string {
 		Foreground(text).
 		Render(fmt.Sprintf("Total Passwords: %d | Last Updated: Today", len(m.entries)))
 
-	help := helpStyle.Render(
-		key.Render("a") + act.Render(" add password") + sep +
-		key.Render("enter") + act.Render(" details") + sep +
-		key.Render("q") + act.Render(" quit") + sep +
-		key.Render("↑/↓") + act.Render(" navigate"),
-	)
+	help := renderHelp([]helpItem{
+		{"a", "add password"},
+		{"enter", "detail"},
+		{"q", "quit"},
+		{"↑/↓", "navigate"},
+	})
 
 	// Calculate widths for split view
 	usableWidth := m.width - mainMargin
@@ -591,7 +603,7 @@ func (m model) viewAdd() string {
 	b.WriteString(urlLabel + "\n")
 	b.WriteString(m.urlInput.View() + "\n")
 
-	// Calculate proper width - use fixed width that works well
+	// Calculate proper width
 	formWidth := defaultFormWidth
 	if m.width < formWidthThreshold {
 		formWidth = m.width - formWidthOffset
@@ -602,12 +614,12 @@ func (m model) viewAdd() string {
 		Padding(1, 2).
 		Render(b.String())
 
-	help := helpStyle.Render(
-		key.Render("tab") + act.Render(" next/field") + sep +
-		key.Render("enter") + act.Render(" save") + sep +
-		key.Render("esc") + act.Render(" cancel") + sep +
-		key.Render("↑/↓") + act.Render(" navigate"),
-	)
+	help := renderHelp([]helpItem{
+		{"tab", "next/field"},
+		{"enter", "save"},
+		{"esc", "cancel"},
+		{"↑/↓", "navigate"},
+	})
 
 	content := lipgloss.JoinVertical(
 		lipgloss.Center,
@@ -665,11 +677,11 @@ func (m model) viewEntry() string {
 		Padding(1, 2).
 		Render(b.String())
 
-	help := helpStyle.Render(
-		key.Render("s") + act.Render(" show/hide") + sep +
-		key.Render("e") + act.Render(" edit") + sep +
-		key.Render("esc") + act.Render(" back"),
-	)
+	help := renderHelp([]helpItem{
+		{"s", "show/hide"},
+		{"e", "edit"},
+		{"esc", "back"},
+	})
 
 	content := lipgloss.JoinVertical(
 		lipgloss.Center,
