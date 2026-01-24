@@ -30,16 +30,12 @@ const (
 // Panels/Container
 var (
 	mainContainerStyle = lipgloss.NewStyle()
-
 	panelStyle = lipgloss.NewStyle().
 			Border(lipgloss.NormalBorder()).
 			BorderForeground(accent)
-
 	passwordPanelStyle = panelStyle
-
 	detailPanelStyle = panelStyle.
 			Padding(0, 2)
-
 )
 
 // Components
@@ -47,20 +43,15 @@ var (
 	titleStyle = lipgloss.NewStyle().
 			Bold(true).
 			Foreground(title)
-
 	subtitleStyle = lipgloss.NewStyle().
 			Foreground(accent).
 			MarginBottom(1)
-
 	normalStyle = lipgloss.NewStyle().
 			Foreground(light)
-
 	selectedStyle = lipgloss.NewStyle().
 			Foreground(primary).
 			Bold(true)
-
 	boxStyle = panelStyle
-
 	inputStyle = lipgloss.NewStyle().
 			Border(lipgloss.NormalBorder()).
 			Foreground(primary)
@@ -71,11 +62,9 @@ var (
 	usernameLabel = lipgloss.NewStyle().
 		Foreground(accent).
 		Render("Username:")
-
 	passwordLabel = lipgloss.NewStyle().
 		Foreground(accent).
 		Render("Password:")
-
 	urlLabel = lipgloss.NewStyle().
 		Foreground(accent).
 		Render("URL:")
@@ -99,9 +88,7 @@ func renderHelp(items []helpItem) string {
 			item.action))
 	}
 
-	helpStyle := lipgloss.NewStyle().
-			Foreground(dark).
-			MarginTop(1)
+	helpStyle := lipgloss.NewStyle().Foreground(dark).MarginTop(1)
 
 	return helpStyle.Render(strings.Join(help, sep))
 }
