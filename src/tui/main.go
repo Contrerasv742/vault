@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/charmbracelet/bubbles/key"
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
@@ -12,71 +11,139 @@ import (
 )
 
 const (
-	primary		= "#00ADAD"
-	accent		= "#00FFFF"
+	primary		= lipgloss.Color("#00ADAD")
+	accent		= lipgloss.Color("#00FFFF")
 
-	text		= "#F3F3F4"
-	subtext		= "#5F5F5F"
+	text		= lipgloss.Color("#F3F3F4")
+	subtext		= lipgloss.Color("#5F5F5F")
 	title 		= primary
-	highlight 	= "#D65F86"
+	highlight 	= lipgloss.Color("#D65F86")
 
-	light 		= "#F3F3F4"
-	dark 		=  subtext
-	red			= "#D65F86"
-	orange		= "#FF5F00"
-	green		= "#D5F9DE"
-	perrywinkle	= "#677DB7"
+	light 		= lipgloss.Color("#F3F3F4")
+	dark 		= subtext
+	red			= lipgloss.Color("#D65F86")
+	orange		= lipgloss.Color("#FF5F00")
+	green		= lipgloss.Color("#D5F9DE")
+	periwinkle	= lipgloss.Color("#677DB7")
 )
 
+// Pages/Container
 var (
-	titleStyle = lipgloss.NewStyle().
-			Bold(true).
-			Foreground(lipgloss.Color(title))
-
-	subtitleStyle = lipgloss.NewStyle().
-			Foreground(lipgloss.Color(accent)).
-			MarginBottom(1)
-
-	normalStyle = lipgloss.NewStyle().
-			Foreground(lipgloss.Color(light))
-
-	selectedStyle = lipgloss.NewStyle().
-			Foreground(lipgloss.Color(primary)).
-			Bold(true)
-
-	helpStyle = lipgloss.NewStyle().
-			Foreground(lipgloss.Color(dark)).
-			MarginTop(1)
-
-	boxStyle = lipgloss.NewStyle().
-			Border(lipgloss.RoundedBorder()).
-			BorderForeground(lipgloss.Color(accent))
-
 	mainContainerStyle = lipgloss.NewStyle()
 
 	passwordPanelStyle = lipgloss.NewStyle().
 			Border(lipgloss.NormalBorder()).
-			BorderForeground(lipgloss.Color(accent))
+			BorderForeground(accent)
 
 	detailPanelStyle = lipgloss.NewStyle().
 			Border(lipgloss.NormalBorder()).
-			BorderForeground(lipgloss.Color(accent))
+			BorderForeground(accent).
+			Padding(0, 2)
 
-	inputStyle = lipgloss.NewStyle().
-			Border(lipgloss.RoundedBorder()).
-			Foreground(lipgloss.Color(primary))
-
-	buttonStyle = lipgloss.NewStyle().
-			Background(lipgloss.Color(highlight)).
-			Foreground(lipgloss.Color(dark)).
-			Bold(true)
-
-	buttonInactiveStyle = lipgloss.NewStyle().
-				Border(lipgloss.RoundedBorder()).
-				BorderForeground(lipgloss.Color(dark))
+	helpStyle = lipgloss.NewStyle().
+			Foreground(dark).
+			MarginTop(1)
 )
 
-const split_ratio = 0.3
+// Components
+var (
+	titleStyle = lipgloss.NewStyle().
+			Bold(true).
+			Foreground(title)
+
+	subtitleStyle = lipgloss.NewStyle().
+			Foreground(accent).
+			MarginBottom(1)
+
+	normalStyle = lipgloss.NewStyle().
+			Foreground(light)
+
+	selectedStyle = lipgloss.NewStyle().
+			Foreground(primary).
+			Bold(true)
+
+	boxStyle = lipgloss.NewStyle().
+			Border(lipgloss.NormalBorder()).
+			BorderForeground(accent)
+
+	inputStyle = lipgloss.NewStyle().
+			Border(lipgloss.NormalBorder()).
+			Foreground(primary)
+)
+
+// Labels
+var (
+	usernameLabel = lipgloss.NewStyle().
+		Foreground(accent).
+		Render("Username:")
+
+	passwordLabel = lipgloss.NewStyle().
+		Foreground(accent).
+		Render("Password:")
+
+	urlLabel = lipgloss.NewStyle().
+		Foreground(accent).
+		Render("URL:")
+)
+
+
+// Help
+var (
+	key = lipgloss.NewStyle().Foreground(text)
+	act = lipgloss.NewStyle().Foreground(subtext)
+	sep = key.Render("\t")
+)
+
+const (
+	// Layout ratios and margins
+	splitRatio			= 0.3
+	mainMargin			= 5
+	listHeightOffset	= 10
+	minListHeight		= 10
+	
+	// Container borders and padding
+	listBorder 			= 4
+	listPadding 		= 2
+	detailBorder 		= 4
+	detailPadding 		= 4
+	mainContainerBorder = 4
+	
+	// Additional padding values
+	listHeightPadding 	= 4
+	listTotalOverhead	= 6  // listBorder + listPadding
+	
+	// Input field sizing
+	defaultInputWidth	= 40
+	maxInputWidth		= 60
+	minInputWidth		= 30
+	inputWidthOffset	= 40
+	
+	// Form sizing
+	defaultFormWidth	= 60
+	formWidthThreshold	= 80
+	formWidthOffset		= 20
+	
+	// Detail view sizing
+	defaultDetailWidth	= 60
+	detailWidthThreshold= 80
+	detailWidthOffset	= 20
+	
+	// Password masking
+	maskedPasswordLength= 12
+	
+	// Text input limits
+	serviceCharLimit	= 50
+	usernameCharLimit	= 100
+	passwordCharLimit	= 200
+	urlCharLimit		= 200
+	
+	// Focus navigation
+	maxFocusIndex		= 4
+	numInputFields		= 4
+	
+	// List delegate
+	listItemSpacing		= 1
+)
 
 type screen int
 
@@ -143,18 +210,18 @@ func initialModel() model {
 	
 	// Style for normal (unselected) items
 	passwordList.Styles.NormalTitle = passwordList.Styles.NormalTitle.
-		Foreground(lipgloss.Color(text))
+		Foreground(text)
 	
 	// Style for selected item
 	passwordList.Styles.SelectedTitle = passwordList.Styles.SelectedTitle.
-		Foreground(lipgloss.Color(highlight)).
-		BorderForeground(lipgloss.Color(highlight))
+		Foreground(highlight).
+		BorderForeground(highlight)
 	
 	passwordList.Styles.SelectedDesc = passwordList.Styles.SelectedDesc. 
-		Foreground(lipgloss.Color(highlight)).
-		BorderForeground(lipgloss.Color(highlight))
+		Foreground(highlight).
+		BorderForeground(highlight)
 
-	passwordList.SetSpacing(1) // Space between items
+	passwordList.SetSpacing(listItemSpacing)
 	
 	l := list.New(entries, passwordList, 0, 0)
 	l.Title = "Passwords"
@@ -163,36 +230,36 @@ func initialModel() model {
 	l.SetShowHelp(false)
 
 	// Initialize text inputs for add screen
-	si := textinput.New()
-	si.Placeholder = "e.g., GitHub, Gmail, etc."
-	si.Focus()
-	si.CharLimit = 50
-	si.Width = 40
+	serviceInput := textinput.New()
+	serviceInput.Placeholder = "e.g., GitHub, Gmail, etc."
+	serviceInput.Focus()
+	serviceInput.CharLimit = serviceCharLimit
+	serviceInput.Width = defaultInputWidth
 
-	ui := textinput.New()
-	ui.Placeholder = "username or email"
-	ui.CharLimit = 100
-	ui.Width = 40
+	usernameInput := textinput.New()
+	usernameInput.Placeholder = "username or email"
+	usernameInput.CharLimit = usernameCharLimit
+	usernameInput.Width = defaultInputWidth
 
-	pi := textinput.New()
-	pi.Placeholder = "password"
-	pi.EchoMode = textinput.EchoPassword
-	pi.CharLimit = 200
-	pi.Width = 40
+	passwordInput := textinput.New()
+	passwordInput.Placeholder = "password"
+	passwordInput.EchoMode = textinput.EchoPassword
+	passwordInput.CharLimit = passwordCharLimit
+	passwordInput.Width = defaultInputWidth
 
-	urli := textinput.New()
-	urli.Placeholder = "https://..."
-	urli.CharLimit = 200
-	urli.Width = 40
+	urlInput := textinput.New()
+	urlInput.Placeholder = "https://... (optional)"
+	urlInput.CharLimit = urlCharLimit
+	urlInput.Width = defaultInputWidth
 
 	return model{
 		currentScreen: mainScreen,
 		list:          l,
 		entries:       entries,
-		serviceInput:  si,
-		usernameInput: ui,
-		passwordInput: pi,
-		urlInput:      urli,
+		serviceInput:  serviceInput,
+		usernameInput: usernameInput,
+		passwordInput: passwordInput,
+		urlInput:      urlInput,
 		focusIndex:    0,
 		showPassword:  false,
 		currentIndex:  0,  // Initialize to first item
@@ -210,20 +277,34 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.height = msg.Height
 		
 		// Calculate usable space with margins
-		usableWidth := msg.Width - 5
-		usableHeight := msg.Height - 5
+		usableWidth := msg.Width - mainMargin
+		usableHeight := msg.Height - mainMargin
 		
-		// Split the width: 60% for list, 40% for detail panel
-		listWidth := int(float64(usableWidth) * split_ratio)
+		// Split the width by splitRatio
+		listWidth := int(float64(usableWidth) * splitRatio)
 		
 		// Size the list to take up most of the available space
 		// Leave room for header, stats, and help text
-		listHeight := usableHeight - 10
-		if listHeight < 10 {
-			listHeight = 10
+		listHeight := usableHeight - listHeightOffset
+		if listHeight < minListHeight {
+			listHeight = minListHeight
 		}
 		
 		m.list.SetSize(listWidth, listHeight)
+		
+		// Update input widths based on terminal size
+		inputWidth := msg.Width - inputWidthOffset
+		if inputWidth > maxInputWidth {
+			inputWidth = maxInputWidth
+		}
+		if inputWidth < minInputWidth {
+			inputWidth = minInputWidth
+		}
+		m.serviceInput.Width = inputWidth
+		m.usernameInput.Width = inputWidth
+		m.passwordInput.Width = inputWidth
+		m.urlInput.Width = inputWidth
+		
 		return m, nil
 
 	case tea.KeyMsg:
@@ -278,14 +359,14 @@ func (m model) updateAdd(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 		} else {
 			m.focusIndex++
 		}
-		if m.focusIndex > 4 {
+		if m.focusIndex > maxFocusIndex {
 			m.focusIndex = 0
 		} else if m.focusIndex < 0 {
-			m.focusIndex = 4
+			m.focusIndex = maxFocusIndex
 		}
 
-		cmds := make([]tea.Cmd, 5)
-		for i := 0; i <= 3; i++ {
+		cmds := make([]tea.Cmd, maxFocusIndex+1)
+		for i := 0; i <= numInputFields-1; i++ {
 			if i == m.focusIndex {
 				switch i {
 				case 0:
@@ -312,26 +393,13 @@ func (m model) updateAdd(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 		}
 		return m, tea.Batch(cmds...)
 	case "enter":
-		if m.focusIndex == 4 { // Save button
+		if m.focusIndex == maxFocusIndex { // Save button
 			m.currentScreen = mainScreen
 			m.focusIndex = 0
 			// In real app, save the entry here
 		}
 		return m, nil
 	}
-
-	// Update input widths based on terminal size
-	inputWidth := m.width - 40
-	if inputWidth > 60 {
-		inputWidth = 60
-	}
-	if inputWidth < 30 {
-		inputWidth = 30
-	}
-	m.serviceInput.Width = inputWidth
-	m.usernameInput.Width = inputWidth
-	m.passwordInput.Width = inputWidth
-	m.urlInput.Width = inputWidth
 
 	var cmd tea.Cmd
 	switch m.focusIndex {
@@ -376,47 +444,38 @@ func (m model) viewMain() string {
 		subtitleStyle.Render("Secure Password Manager")
 
 	stats := lipgloss.NewStyle().
-		Foreground(lipgloss.Color(text)).
+		Foreground(text).
 		Render(fmt.Sprintf("Total Passwords: %d | Last Updated: Today", len(m.entries)))
-
-	key := lipgloss.NewStyle().Foreground(lipgloss.Color(text))
-	act := lipgloss.NewStyle().Foreground(lipgloss.Color(subtext))
-	// sep := key.Render(" • ")
-	sep := key.Render("\t")
 
 	help := helpStyle.Render(
 		key.Render("a") + act.Render(" add password") + sep +
-		key.Render("enter") + act.Render(" fullscreen") + sep +
+		key.Render("enter") + act.Render(" details") + sep +
 		key.Render("q") + act.Render(" quit") + sep +
 		key.Render("↑/↓") + act.Render(" navigate"),
 	)
 
 	// Calculate widths for split view
-	usableWidth := m.width - 5
+	usableWidth := m.width - mainMargin
+	mainInnerWidth := usableWidth - mainContainerBorder
 	
-	// Main container has border (2 chars per side = 4 total) and padding (0 from style)
-	mainInnerWidth := usableWidth - 4
+	// Calculate width based on sub-container overhead
+	listOverhead 	:= listBorder + listPadding
+	detailOverhead 	:= detailBorder + detailPadding
+	contentWidth 	:= mainInnerWidth - (listOverhead + detailOverhead)
 	
-	// Each subcontainer overhead:
-	// List: border(4) + padding left/right(1+1=2) = 6
-	// Detail: border(4) + padding left/right(2+2=4) = 8
-	// Total overhead: 6 + 8 = 14
-	
-	contentWidth := mainInnerWidth - 14
-	
-	// Split 60/40
-	listContentWidth := int(float64(contentWidth) * split_ratio)
+	// Split by splitRatio
+	listContentWidth := int(float64(contentWidth) * splitRatio)
 	detailContentWidth := contentWidth - listContentWidth
 	
 	// These are the TOTAL widths including borders and padding
-	// Lipgloss .Width() sets the TOTAL width, not content width
-	listTotalWidth := listContentWidth + 6
-	detailTotalWidth := detailContentWidth + 8
+	// Lipgloss.Width() sets the TOTAL width, not content width
+	listTotalWidth := listContentWidth + listTotalOverhead
+	detailTotalWidth := detailContentWidth + detailPadding * 2
 	
 	// Create the list with its own border
 	listContent := passwordPanelStyle.
 		Width(listTotalWidth).
-		Height(m.list.Height() + 4). // Add height for border + padding
+		Height(m.list.Height() + listPadding * 2).
 		Render(m.list.View())
 	
 	// Create the detail panel on the right
@@ -429,7 +488,7 @@ func (m model) viewMain() string {
 		// Empty detail panel if no selection
 		detailPanel = detailPanelStyle.
 			Width(detailTotalWidth).
-			Height(m.list.Height() + 4). // Match list height
+			Height(m.list.Height() + listPadding).
 			Align(lipgloss.Center, lipgloss.Center).
 			Render("Select a password\nto view details")
 	}
@@ -462,7 +521,7 @@ func (m model) viewMain() string {
 		lipgloss.Center,
 		content,
 		lipgloss.WithWhitespaceChars(" "),
-		lipgloss.WithWhitespaceForeground(lipgloss.Color(dark)),
+		lipgloss.WithWhitespaceForeground(dark),
 	)
 }
 
@@ -472,47 +531,38 @@ func (m model) renderDetailPanel(entry passwordEntry, width int) string {
 	
 	// Entry name as title
 	entryTitle := lipgloss.NewStyle().
-		Foreground(lipgloss.Color(red)).
+		Foreground(red).
 		Bold(true).
 		Render(entry.name)
 	b.WriteString(entryTitle + "\n\n")
 	
 	// Username
-	labelStyle := lipgloss.NewStyle().
-		Foreground(lipgloss.Color(accent)).
-		Render("Username:")
-	b.WriteString(labelStyle + "\n")
+	b.WriteString(usernameLabel + "\n")
 	b.WriteString(lipgloss.NewStyle().
-		Foreground(lipgloss.Color(text)).
+		Foreground(text).
 		Render(entry.username) + "\n\n")
 	
 	// Password (masked)
-	passwordLabel := lipgloss.NewStyle().
-		Foreground(lipgloss.Color(accent)).
-		Render("Password:")
 	b.WriteString(passwordLabel + "\n")
 	
 	// Create masked password
-	maskedPassword := strings.Repeat("*", 12)
+	maskedPassword := strings.Repeat("*", maskedPasswordLength)
 	b.WriteString(lipgloss.NewStyle().
-		Foreground(lipgloss.Color(text)).
+		Foreground(text).
 		Render(maskedPassword) + "\n\n")
 	
 	// URL if exists
 	if entry.url != "" {
-		urlLabel := lipgloss.NewStyle().
-			Foreground(lipgloss.Color(accent)).
-			Render("URL:")
 		b.WriteString(urlLabel + "\n")
 		b.WriteString(lipgloss.NewStyle().
-			Foreground(lipgloss.Color(green)).
+			Foreground(green).
 			Render(entry.url) + "\n")
 	}
 	
 	// Render the panel with its own border
 	return detailPanelStyle.
 		Width(width).
-		Height(m.list.Height() + 4). // Match list height + padding
+		Height(m.list.Height() + listHeightPadding). // Match list height + padding
 		Render(b.String())
 }
 
@@ -521,23 +571,36 @@ func (m model) viewAdd() string {
 
 	var b strings.Builder
 
-	b.WriteString(normalStyle.Render("Service Name:") + "\n")
-	b.WriteString(inputStyle.Render(m.serviceInput.View()) + "\n\n")
+	// Service
+	serviceStyle := lipgloss.NewStyle().
+		Foreground(accent).
+		Render("Service Name:")
+	b.WriteString(serviceStyle+ "\n")
+	b.WriteString(m.serviceInput.View() + "\n\n")
 
-	b.WriteString(normalStyle.Render("Username/Email:") + "\n")
-	b.WriteString(inputStyle.Render(m.usernameInput.View()) + "\n\n")
+	// Username
+	b.WriteString(usernameLabel + "\n")
+	b.WriteString(m.usernameInput.View() + "\n\n")
 
-	b.WriteString(normalStyle.Render("Password:") + "\n")
-	b.WriteString(inputStyle.Render(m.passwordInput.View()) + "\n\n")
+	
+	// Password (masked)
+	b.WriteString(passwordLabel + "\n")
+	b.WriteString(m.passwordInput.View() + "\n\n")
+	
+	// URL if exists
+	b.WriteString(urlLabel + "\n")
+	b.WriteString(m.urlInput.View() + "\n")
 
-	b.WriteString(normalStyle.Render("URL (optional):") + "\n")
-	b.WriteString(inputStyle.Render(m.urlInput.View()) + "\n\n")
+	// Calculate proper width - use fixed width that works well
+	formWidth := defaultFormWidth
+	if m.width < formWidthThreshold {
+		formWidth = m.width - formWidthOffset
+	}
 
-	form := boxStyle.Width(m.width/2).Render(b.String())
-
-	key := lipgloss.NewStyle().Foreground(lipgloss.Color(text))
-	act := lipgloss.NewStyle().Foreground(lipgloss.Color(subtext))
-	sep := key.Render("\t")
+	form := boxStyle.
+		Width(formWidth).
+		Padding(1, 2).
+		Render(b.String())
 
 	help := helpStyle.Render(
 		key.Render("tab") + act.Render(" next/field") + sep +
@@ -561,7 +624,7 @@ func (m model) viewAdd() string {
 		lipgloss.Center,
 		content,
 		lipgloss.WithWhitespaceChars(" "),
-		lipgloss.WithWhitespaceForeground(lipgloss.Color(dark)),
+		lipgloss.WithWhitespaceForeground(dark),
 	)
 }
 
@@ -575,10 +638,10 @@ func (m model) viewEntry() string {
 
 	var b strings.Builder
 
-	b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(primary)).Render("Username/Email:") + "\n")
+	b.WriteString(usernameLabel + "\n")
 	b.WriteString(normalStyle.Render(e.username) + "\n\n")
 
-	b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(primary)).Render("Password:") + "\n")
+	b.WriteString(passwordLabel + "\n")
 	if m.showPassword {
 		b.WriteString(normalStyle.Render(e.password) + "\n")
 	} else {
@@ -587,16 +650,20 @@ func (m model) viewEntry() string {
 	b.WriteString("\n")
 
 	if e.url != "" {
-		b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(primary)).Render("URL:") + "\n")
+		b.WriteString(urlLabel + "\n")
 		b.WriteString(normalStyle.Render(e.url) + "\n\n")
 	}
 
-	details := boxStyle.Width(m.width/3).Render(b.String())
+	// Calculate proper width - use fixed width that works well
+	detailWidth := defaultDetailWidth
+	if m.width < detailWidthThreshold {
+		detailWidth = m.width - detailWidthOffset
+	}
 
-
-	key := lipgloss.NewStyle().Foreground(lipgloss.Color(text))
-	act := lipgloss.NewStyle().Foreground(lipgloss.Color(subtext))
-	sep := key.Render("\t")
+	details := boxStyle.
+		Width(detailWidth).
+		Padding(1, 2).
+		Render(b.String())
 
 	help := helpStyle.Render(
 		key.Render("s") + act.Render(" show/hide") + sep +
@@ -619,15 +686,8 @@ func (m model) viewEntry() string {
 		lipgloss.Center,
 		content,
 		lipgloss.WithWhitespaceChars(" "),
-		lipgloss.WithWhitespaceForeground(lipgloss.Color(dark)),
+		lipgloss.WithWhitespaceForeground(dark),
 	)
-}
-
-type keyMap struct {
-	Up    key.Binding
-	Down  key.Binding
-	Enter key.Binding
-	Quit  key.Binding
 }
 
 func main() {
@@ -636,4 +696,3 @@ func main() {
 		fmt.Printf("Error: %v", err)
 	}
 }
-
