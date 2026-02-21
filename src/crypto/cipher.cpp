@@ -1,7 +1,7 @@
+#include "crypto/cipher.h"
 #include <cstdlib>
 #include <iostream>
 #include <unordered_map>
-#include "crypto/cipher.h"
 using namespace std;
 
 // Initialize the global variables defined in the header
@@ -17,12 +17,10 @@ void fatal_error(string msg) {
 
 // Initialize the cipher table
 void init_cipher_table() {
-    cipherOptable = {
-        {"caesar", caesar},
-        {"vigenere", vigenere},
-        {"rot13", rot13},
-        {"rsa", rsa}
-    };
+    cipherOptable = {{"caesar", caesar},
+                     {"vigenere", vigenere},
+                     {"rot13", rot13},
+                     {"rsa", rsa}};
 }
 
 string caesar(const string &plaintext, const string &shift) {
@@ -73,6 +71,4 @@ string rot13(const string &plaintext, const string &unused) {
     return caesar(plaintext, "13");
 }
 
-string rsa(const string &plaintext, const string &unused) {
-    return "Buns.\n";
-}
+string rsa(const string &plaintext, const string &unused) { return "Buns.\n"; }

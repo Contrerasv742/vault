@@ -34,7 +34,7 @@ set(SOURCES
     src/ui/mainpage.cpp
     src/ui/loginScreen.cpp
     src/ui/encryptpage.cpp
-    src/tui/app.cpp
+    src/tui/main.go
 )
 
 set(HEADERS

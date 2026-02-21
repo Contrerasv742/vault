@@ -42,8 +42,7 @@ int rsaDebugTest() {
         try {
             // Encrypt
             string encrypted = rsa.encrypt(message);
-            cout << "Encrypted (space-separated blocks): " << encrypted
-                      << "\n";
+            cout << "Encrypted (space-separated blocks): " << encrypted << "\n";
 
             // Decrypt
             string decrypted = rsa.decrypt(encrypted);
@@ -51,11 +50,10 @@ int rsaDebugTest() {
 
             // Verify
             if (message == decrypted) {
-                cout
-                        << "✓ Test passed - successful encryption/decryption\n";
+                cout << "✓ Test passed - successful encryption/decryption\n";
             } else {
                 cout << "✗ Test failed - decrypted message doesn't match "
-                             "original\n";
+                        "original\n";
             }
 
         } catch (const exception& e) {

@@ -4,18 +4,14 @@
 using namespace std;
 
 string Password::decryptPassword() {
-    rsa_.get_e() =
-            cpp_int(password_json_["public_key"]["e"].get<string>());
-    rsa_.get_n() =
-            cpp_int(password_json_["public_key"]["n"].get<string>());
-    rsa_.get_d() =
-            cpp_int(password_json_["private_key"]["d"].get<string>());
+    rsa_.get_e() = cpp_int(password_json_["public_key"]["e"].get<string>());
+    rsa_.get_n() = cpp_int(password_json_["public_key"]["n"].get<string>());
+    rsa_.get_d() = cpp_int(password_json_["private_key"]["d"].get<string>());
 
     return rsa_.decrypt(password_json_["password"]);
 }
 
-PasswordManager::PasswordManager(const string filename)
-    : filename_(filename) {
+PasswordManager::PasswordManager(const string filename) : filename_(filename) {
     ifstream file(filename, ios::in | ios::out);
 
     if (!file.is_open()) {
@@ -29,8 +25,7 @@ PasswordManager::PasswordManager(const string filename)
     file.close();
 }
 
-Password::Password(string company, string username,
-                   string password) {
+Password::Password(string company, string username, string password) {
     rsa_ = RSA();
 
     // Create new password entry
