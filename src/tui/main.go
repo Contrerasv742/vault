@@ -8,6 +8,11 @@ import (
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
+
+	// Parsing the file
+    "encoding/json"
+    "log"
+    "os"
 )
 
 const (
@@ -185,24 +190,32 @@ type model struct {
 }
 
 func initialModel() model {
-	// Create sample password entries
-	entries := []list.Item{
-		passwordEntry{name: "GitHub", username: "user@example.com", url: "https://github.com", password: "secret123"},
-		passwordEntry{name: "Gmail", username: "myemail@gmail.com", url: "https://gmail.com", password: "pass456"},
-		passwordEntry{name: "AWS Console", username: "admin@company.com", url: "https://console.aws.amazon.com", password: "aws789"},
-		passwordEntry{name: "Stripe", username: "billing@company.com", url: "https://stripe.com", password: "stripe000"},
-		passwordEntry{name: "Database Server", username: "dbadmin", url: "", password: "db123456"},
-		passwordEntry{name: "GitHub", username: "user@example.com", url: "https://github.com", password: "secret123"},
-		passwordEntry{name: "GitHub", username: "user@example.com", url: "https://github.com", password: "secret123"},
-		passwordEntry{name: "Gmail", username: "myemail@gmail.com", url: "https://gmail.com", password: "pass456"},
-		passwordEntry{name: "AWS Console", username: "admin@company.com", url: "https://console.aws.amazon.com", password: "aws789"},
-		passwordEntry{name: "Stripe", username: "billing@company.com", url: "https://stripe.com", password: "stripe000"},
-		passwordEntry{name: "Database Server", username: "dbadmin", url: "", password: "db123456"},
-		passwordEntry{name: "Gmail", username: "myemail@gmail.com", url: "https://gmail.com", password: "pass456"},
-		passwordEntry{name: "AWS Console", username: "admin@company.com", url: "https://console.aws.amazon.com", password: "aws789"},
-		passwordEntry{name: "Stripe", username: "billing@company.com", url: "https://stripe.com", password: "stripe000"},
-		passwordEntry{name: "Database Server", username: "dbadmin", url: "", password: "db123456"},
-	}
+    filePath := "data.json"
+
+    content, err := os.ReadFile(filePath)
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    var data map[string]interface{}
+    err = json.Unmarshal(content, &data)
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+	entries := []list.Item{ }
+    passwords := data["passwords"].([]interface{})
+    for _, password := range passwords {
+        pass := password.(map[string]interface{})
+		entries = append(entries, passwordEntry{
+			name: pass["name"].(string),
+			username: pass["username"].(string),
+			url: pass["url"].(string),
+			password: pass["password"].(string),
+		})
+    }
 
 	// Set up list with custom passwordList
 	passwordList := list.NewDefaultDelegate()
