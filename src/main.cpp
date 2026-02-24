@@ -1,4 +1,3 @@
-#include "crypto/cipher.h"
 #include <QApplication>
 #include "test.h"
 #include "ui/app.h"
@@ -24,9 +23,11 @@ void setApplicationStyle(QApplication &app) {
 }
 
 int main(int argc, char *argv[]) {
+    // rsaDebugTest();
+    // return 0;
+    /*
     rsaDebugTest();
     return 0;
-    /*
      */
 
     QApplication app(argc, argv);

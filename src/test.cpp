@@ -16,12 +16,12 @@ int passwordManagerTest() {
     passwords.addPassword(google);
     passwords.addPassword(x);
 
-    print("{}", passwords.view()); 
+    cout << passwords.view() << endl;
 
     passwords.removePassword(google);
     passwords.removePassword(x);
 
-    println("{}", passwords.view()); 
+    cout << passwords.view() << endl;
 
     return 0;
 }
@@ -37,27 +37,28 @@ int rsaDebugTest() {
     };
 
     for (const auto& message : test_messages) {
-        println("\nTesting message: \"{}\"\n", message) ;
-        println("Message length: {}", message.length());
+        cout << "\nTesting message: \"" << message << "\"\n";
+        cout << "Message length: " << message.length() << "\n";
 
         try {
             // Encrypt
             string encrypted = rsa.encrypt(message);
-            println("Encrypted (space-separated blocks): {}", encrypted);
+            cout << "Encrypted (space-separated blocks): " << encrypted << "\n";
 
             // Decrypt
             string decrypted = rsa.decrypt(encrypted);
-            println("Decrypted: \"{}\"", decrypted); 
+            cout << "Decrypted: \"" << decrypted << "\"\n";
 
             // Verify
             if (message == decrypted) {
-                println("✓ Test passed - successful encryption/decryption");
+                cout << "✓ Test passed - successful encryption/decryption\n";
             } else {
-                println("✗ Test failed - decrypted message doesn't match original");
+                cout << "✗ Test failed - decrypted message doesn't match "
+                        "original\n";
             }
 
         } catch (const exception& e) {
-            println("✗ Test failed with error: {}", e.what()); 
+            cout << "✗ Test failed with error: " << e.what() << "\n";
         }
     }
 
