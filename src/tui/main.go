@@ -190,7 +190,7 @@ type model struct {
 }
 
 func initialModel() model {
-    filePath := "/home/panda/Projects/vault/test/data.json"
+    filePath := "/home/panda/Projects/personal/vault/test/data.json"
 
     content, err := os.ReadFile(filePath)
 
@@ -295,7 +295,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		// Split the width by splitRatio
 		listWidth := int(float64(usableWidth) * splitRatio)
 		
-		// Size the list to take up most of the available space
+		// Size the list to take up the available space
 		// Leave room for header, stats, and help text
 		listHeight := usableHeight - listHeightOffset
 		if listHeight < minListHeight {

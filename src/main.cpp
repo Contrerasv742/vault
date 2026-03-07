@@ -1,40 +1,55 @@
-#include <QApplication>
-#include "test.h"
-#include "ui/app.h"
+#include <sodium.h>
+#include <cstdlib>
+#include <iostream>
+#include <print>
+#include "crypto/encrypt.h"
+#include "passwordManager.h"
 
-void setApplicationStyle(QApplication &app) {
-    app.setStyleSheet(
-            "QWidget { background-color: #1E1E2E; color: white; }"
-            "QPlainTextEdit { background-color: #323547; color: white; }"
-            "QPushButton { background-color: #323547; color: white; border: "
-            "1px "
-            "solid #5c5c5c; padding: 5px; }"
-            "QPushButton:hover { background-color: #323547; }"
-            "QLineEdit { background-color: #323547; color: white; padding: "
-            "5px; }"
-            "QComboBox { background-color: #323547; color: white; border: 1px "
-            "solid "
-            "#5c5c5c; padding: 5px; }"
-            "QComboBox::drop-down { border: 0px; } "
-            "QComboBox::down-arrow { image: url(dropdown.png); width: 14px; "
-            "height: "
-            "14px; }"
-            "QTextEdit { background-color: #323547; color: white; }");
+using namespace std;
+
+int example() {
+    if (sodium_init() < 0) {
+        print("Failed to initialize libsodium\n");
+        return 1;
+    }
+
+    const char *password = "my_master_password";
+    const char *json = "{\"passwords\": [{\"site\": \"example.com\"}]}";
+
+    encrypted_data_t encrypted;
+
+    // Encrypt
+    if (encrypt(json, password, &encrypted) != 0) {
+        print("Encryption failed\n");
+        return 1;
+    }
+
+    print("Encrypted successfully\n");
+    cout << "Encrypted Data:\n\t{}" << encrypted.ciphertext << std::endl;
+
+    // Decrypt
+    char *decrypted = decrypt(&encrypted, password);
+    if (decrypted) {
+        print("Decrypted: {}\n", decrypted);
+        free(decrypted);
+    } else {
+        print("Decryption failed\n");
+    }
+
+    free(encrypted.ciphertext);
+    return 0;
 }
 
-int main(int argc, char *argv[]) {
-    // rsaDebugTest();
-    // return 0;
-    /*
-    rsaDebugTest();
-    return 0;
-     */
+int main(void) {
+    if (sodium_init() < 0) {
+        print("Failed to initialize libsodium\n");
+        return 1;
+    }
 
-    QApplication app(argc, argv);
-    setApplicationStyle(app);
+    const char *password = "my_master_password";
 
-    EncryptionApp window;
-    window.show();
+    PasswordManager pm{"password.json"};
+    Password amazon{"amazon", "goofy", "pants"};
 
-    return app.exec();
+    pm.addPassword(amazon);
 }

@@ -1,49 +1,18 @@
-#ifndef PASSWORD_MANAGER_H
-#define PASSWORD_MANAGER_H
-
-#include <nlohmann/json.hpp>
-#include <string>
-#include "crypto/rsa.h"
-
-using json = nlohmann::json;
-
 /**
  * @file passwordManager.h
  * @brief Header file for Password Manager implementation providing secure
  * password storage
  */
 
-/**
- * @class Password
- * @brief Represents a single password entry with encryption capabilities
- */
-class Password {
-private:
-    json password_json_;
-    RSA rsa_;
+#ifndef PASSWORD_MANAGER_H
+#define PASSWORD_MANAGER_H
 
-public:
-    /**
-     * @brief Constructor for creating a new password entry
-     * @param company The company/website name associated with the password
-     * @param username The username for this password entry
-     * @param password The plain text password to be encrypted
-     * @return A new Password object with encrypted password data
-     */
-    Password(std::string company, std::string username, std::string password);
+#include <nlohmann/json.hpp>
+#include <string>
+#include "crypto/rsa.h"
+#include "password.h"
 
-    /**
-     * @brief Returns the password entry as JSON
-     * @return json object containing the encrypted password and associated data
-     */
-    json readJSON() { return password_json_; };
-
-    /**
-     * @brief Decrypts and returns the stored password
-     * @return The decrypted password string
-     */
-    std::string decryptPassword();
-};
+using json = nlohmann::json;
 
 /**
  * @class PasswordManager

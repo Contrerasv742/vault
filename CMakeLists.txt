@@ -5,27 +5,28 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Fetch JSON
-include(FetchContent)
-FetchContent_Declare(
-    json
-    URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz
-    DOWNLOAD_EXTRACT_TIMESTAMP true
-)
-FetchContent_MakeAvailable(json)
+# Add cmake module path and include dependencies
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(cmake/Dependencies.cmake)
 
 # Build crypto as a shared library
 add_library(crypto SHARED
     src/crypto/cipher.cpp
-    src/crypto/rsa.cpp
+    src/crypto/encrypt.cpp
     src/crypto/random.cpp
+    src/crypto/rsa.cpp
     src/passwordManager.cpp
 )
 
 target_include_directories(crypto PUBLIC src)
-target_link_libraries(crypto PRIVATE nlohmann_json::nlohmann_json)
+target_link_libraries(crypto PUBLIC nlohmann_json::nlohmann_json)
+target_link_libraries(crypto PUBLIC sodium)
 
-# After building the shared lib, compile the Go TUI
+# Main Executable
+add_executable(test src/main.cpp)
+target_link_libraries(test PRIVATE crypto)
+
+# Compile the Go TUI
 add_custom_target(tui ALL
     COMMAND go build -o ${CMAKE_BINARY_DIR}/vault .
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/src/tui
