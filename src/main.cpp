@@ -1,9 +1,10 @@
+#include <cassert>
 #include <sodium.h>
 #include <cstdlib>
 #include <iostream>
 #include <print>
 #include "crypto/encrypt.h"
-#include "passwordManager.h"
+#include "password_manager.h"
 
 using namespace std;
 
@@ -42,7 +43,7 @@ int example() {
 
 int main(void) {
     if (sodium_init() < 0) {
-        print("Failed to initialize libsodium\n");
+        print(stderr, "Failed to initialize libsodium\n");
         return 1;
     }
 

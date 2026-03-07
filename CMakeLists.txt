@@ -15,7 +15,7 @@ add_library(crypto SHARED
     src/crypto/encrypt.cpp
     src/crypto/random.cpp
     src/crypto/rsa.cpp
-    src/passwordManager.cpp
+    src/password_manager.cpp
 )
 
 target_include_directories(crypto PUBLIC src)

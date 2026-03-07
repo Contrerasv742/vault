@@ -24,9 +24,13 @@ public:
      * @param company The company/website name associated with the password
      * @param username The username for this password entry
      * @param password The plain text password to be encrypted
-     * @return A new Password object with encrypted password data
+     * @return A new Password object with password data
      */
     Password(string company, string username, string password) {
+        // Initialize salt and nonce with random data
+        randombytes_buf(salt_, sizeof(salt_));
+        randombytes_buf(nonce_, sizeof(nonce_));
+
         // Create new password entry
         json_ = {
             {"company", company},
@@ -40,7 +44,7 @@ public:
 
     /**
      * @brief Returns the password entry as JSON
-     * @return json object containing the encrypted password and associated data
+     * @return json object containing the password and associated data
      */
     json readJSON() { return json_; };
 

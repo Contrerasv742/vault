@@ -23,7 +23,7 @@ RSA::RSA() {
     e = find_e(lambda_n);
 
     if (e == 0) {
-        std::runtime_error("Failed to find a suitable e.");
+        std::runtime_error("Failed to find a suitable e");
     }
 
     // V: determine d

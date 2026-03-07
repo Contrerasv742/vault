@@ -14,6 +14,13 @@
 
 using json = nlohmann::json;
 
+enum class PasswordManagerError {
+    SUCCESS = 0,
+    FILE_NOT_FOUND = -1,
+    JSON_ERROR = -2,
+    ALREADY_EXISTS = -3
+};
+
 /**
  * @class PasswordManager
  * @brief Manages a collection of encrypted passwords with file persistence
@@ -76,14 +83,14 @@ public:
      * @param filename Name of file to check
      * @return 1 if exists, 0 if not
      */
-    int passwordExists(std::string filename);
+    const int passwordExists(std::string filename);
 
     /**
      * @brief Checks if a password entry already exists
      * @param password Password object to check
      * @return 1 if exists, 0 if not
      */
-    int passwordExists(Password password);
+    const int passwordExists(Password password);
 
     /**
      * @brief Removes a password entry from storage

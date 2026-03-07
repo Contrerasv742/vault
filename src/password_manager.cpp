@@ -1,4 +1,5 @@
 #include "password_manager.h"
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <print>
@@ -8,17 +9,13 @@ PasswordManager::PasswordManager(const string filename) : filename_(filename) {
     ifstream file(filename, ios::in | ios::out);
 
     if (!file.is_open()) {
-        println("Creating file.");
+        println("Creating file");
         createPasswordFile();
     } else {
-        println("Grabbing old file information.");
+        println("File Exists: Retrieving existing data");
         readJSON();
     }
-
-    file.close();
 }
-
-;
 
 string PasswordManager::view() {
     try {
@@ -80,7 +77,8 @@ int PasswordManager::createKeyFile() {
         string master_file_name = filename_ + ".key";
         ofstream key_file(master_file_name);
 
-        if (key_file.good()) {
+        // Failed to open Key File
+        if (!key_file.is_open()) {
             return -1;
         }
 
@@ -115,7 +113,7 @@ int PasswordManager::updateFile(const json& data) {
                                   {"last_modified", time(nullptr)}};
         } else {
             // Update last modified timestamp
-            json_data_["metadata"]["last_modified"] = time(nullptr);
+            output["metadata"]["last_modified"] = time(nullptr);
         }
 
         file << output.dump(4);
@@ -136,7 +134,7 @@ int PasswordManager::addPassword(Password password) {
 
         // Ensure we don't add duplicates
         if (passwordExists(password) > 0) {
-            cerr << "Attempting to add existing password." << endl;
+            cerr << "Adding new password" << endl;
             return -1;
         }
 
@@ -153,7 +151,7 @@ int PasswordManager::addPassword(Password password) {
         // Add new password
         json_data_["passwords"].push_back(password.readJSON());
 
-        return updateFile(NULL);
+        return updateFile(json());
     } catch (const json::exception& e) {
         return -2;
     } catch (const exception& e) {
@@ -161,7 +159,7 @@ int PasswordManager::addPassword(Password password) {
     }
 }
 
-int PasswordManager::passwordExists(Password password) {
+const int PasswordManager::passwordExists(Password password) {
     auto& passwords = json_data_["passwords"];
     json entry_json = password.readJSON();  // Changed string to json
 
@@ -191,7 +189,7 @@ int PasswordManager::removePassword(Password password) {
                 });
 
         if (it == passwords.end()) {
-            cerr << "Password not in password manager." << endl;
+            cerr << "Password not in password manager" << endl;
             return -1;
         }
 
