@@ -37,16 +37,18 @@ In order to run Vault these must be installed::
 
 ```bash
 # Note: package manager and package names may differ on your system
-> yay -S qt6-base-dev go
+> yay -S ninja go
 ```
+
+_ninja_: Small build system with a focus on speed
 
 # Compilation
 Recommended:
 ```bash
 > mkdir -p build
 > cd build
-> cmake ..
-> make -j`nproc`
+> cmake -G Ninja .. -Wno-dev
+> ninja all
 ```
 
 
