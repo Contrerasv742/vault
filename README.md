@@ -1,7 +1,7 @@
 # Vault
 <p float="left">
-    <img src="imgs/main.png" width="auto" />
-    <img src="imgs/entry.png" width="auto" />
+    <img src="imgs/main.png" width="49%" />
+    <img src="imgs/entry.png" width="49%" />
 </p>
 
 # Purpose
