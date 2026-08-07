@@ -10,9 +10,9 @@ import (
 	"github.com/charmbracelet/lipgloss"
 
 	// Parsing the file
-    "encoding/json"
-    "log"
-    "os"
+	"encoding/json"
+	"log"
+	"os"
 )
 
 const (
@@ -165,8 +165,27 @@ type passwordEntry struct {
 }
 
 func (p passwordEntry) Title() string       { return p.name }
+
 func (p passwordEntry) Description() string { return fmt.Sprintf("  %s", p.username) }
+
 func (p passwordEntry) FilterValue() string { return p.name }
+
+func (p *passwordEntry) UnmarshalJSON(data []byte) error {
+	var aux struct {
+		Name     string `json:"name"`
+		Username string `json:"username"`
+		URL      string `json:"url"`
+		Password string `json:"password"`
+	}
+	if err := json.Unmarshal(data, &aux); err != nil {
+		return err
+	}
+	p.name = aux.Name
+	p.username = aux.Username
+	p.url = aux.URL
+	p.password = aux.Password
+	return nil
+}
 
 type model struct {
 	currentScreen screen
@@ -198,24 +217,16 @@ func initialModel() model {
         log.Fatal(err)
     }
 
-    var data map[string]interface{}
-    err = json.Unmarshal(content, &data)
+	var data []passwordEntry
+	if err := json.Unmarshal(content, &data); err != nil {
+		log.Fatal(err)
+	}
 
-    if err != nil {
-        log.Fatal(err)
-    }
+	entries := make([]list.Item, len(data))
+	for i, p := range data {
+		entries[i] = p
+	}
 
-	entries := []list.Item{ }
-    passwords := data["passwords"].([]interface{})
-    for _, password := range passwords {
-        pass := password.(map[string]interface{})
-		entries = append(entries, passwordEntry{
-			name: pass["name"].(string),
-			username: pass["username"].(string),
-			url: pass["url"].(string),
-			password: pass["password"].(string),
-		})
-    }
 
 	// Set up list with custom passwordList
 	passwordList := list.NewDefaultDelegate()
