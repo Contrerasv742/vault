@@ -1,8 +1,7 @@
 # Vault
-<p float="left">
-    <img src="imgs/main.png" width="49%" />
-    <img src="imgs/entry.png" width="49%" />
-</p>
+<img src="imgs/main.png" width="95%">
+
+<img src="imgs/entry.png" width="95%" />
 
 # Purpose
 *Vault* is a Hardware based Password Manager. Vault performs this by 
