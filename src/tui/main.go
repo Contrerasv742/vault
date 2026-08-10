@@ -209,7 +209,7 @@ type model struct {
 }
 
 func initialModel() model {
-    filePath := "/home/panda/Projects/personal/vault/test/data.json"
+    filePath := "/home/panda/Projects/vault/test/data.json"
 
     content, err := os.ReadFile(filePath)
 
